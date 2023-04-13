@@ -27,6 +27,8 @@ namespace WordAddIn1
             
 
             Globals.ThisAddIn.findAndReplace();
+            Globals.ThisAddIn.FindAndReplaceDates();
+            Globals.ThisAddIn.Capitalization();
         }
     }
 }

@@ -28,32 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnExecuteStyles = new System.Windows.Forms.Button();
+            this.lblCompliance = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // btnExecuteStyles
             // 
-            this.button1.Location = new System.Drawing.Point(71, 163);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnExecuteStyles.Location = new System.Drawing.Point(175, 370);
+            this.btnExecuteStyles.Name = "btnExecuteStyles";
+            this.btnExecuteStyles.Size = new System.Drawing.Size(138, 23);
+            this.btnExecuteStyles.TabIndex = 0;
+            this.btnExecuteStyles.Text = "Find and Replace";
+            this.btnExecuteStyles.UseVisualStyleBackColor = true;
+            this.btnExecuteStyles.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lblCompliance
+            // 
+            this.lblCompliance.AutoSize = true;
+            this.lblCompliance.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompliance.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblCompliance.Location = new System.Drawing.Point(79, 17);
+            this.lblCompliance.Name = "lblCompliance";
+            this.lblCompliance.Size = new System.Drawing.Size(319, 31);
+            this.lblCompliance.TabIndex = 1;
+            this.lblCompliance.Text = "Complaince Made Easy";
             // 
             // MyUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(42)))), ((int)(((byte)(79)))));
+            this.Controls.Add(this.lblCompliance);
+            this.Controls.Add(this.btnExecuteStyles);
             this.Name = "MyUserControl";
-            this.Size = new System.Drawing.Size(230, 253);
+            this.Size = new System.Drawing.Size(500, 500);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnExecuteStyles;
+        private System.Windows.Forms.Label lblCompliance;
     }
 }

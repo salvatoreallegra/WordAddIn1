@@ -13,34 +13,21 @@ namespace WordAddIn1
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
             myUserControl1 = new MyUserControl();
+            myUserControl1.Width = 500;
             myCustomTaskPane = Globals.ThisAddIn.CustomTaskPanes.Add(myUserControl1, "Compliance Made Easy");
+            myCustomTaskPane.Width = 650;
             myCustomTaskPane.Visible = false;
         }
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
         {
            
-            
-
-
-            /*myUserControl1 = new MyUserControl();
-               myCustomTaskPane = this.CustomTaskPanes.Add(myUserControl1, "Compliance Made Easy");
-               myCustomTaskPane.Visible = true;*/
+                      
         }
 
         private void toggleButton1_Click(object sender, RibbonControlEventArgs e)
         {
-            /*if (myCustomTaskPane.Visible == true)
-            {
-                myCustomTaskPane.Visible = false;
-
-            }
-            if (myCustomTaskPane.Visible == false)
-            {
-                myCustomTaskPane.Visible = true;
-            }*/
             myCustomTaskPane.Visible = ((RibbonToggleButton)sender).Checked;
-
         }
     }
 }

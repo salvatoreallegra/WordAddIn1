@@ -37,7 +37,6 @@ namespace WordAddIn1
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.button1 = this.Factory.CreateRibbonButton();
             this.toggleButton1 = this.Factory.CreateRibbonToggleButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
@@ -51,21 +50,17 @@ namespace WordAddIn1
             // 
             // group1
             // 
-            this.group1.Items.Add(this.button1);
             this.group1.Items.Add(this.toggleButton1);
             this.group1.Label = "Show/Hide CME Pane";
             this.group1.Name = "group1";
             // 
-            // button1
-            // 
-            this.button1.Label = "button1";
-            this.button1.Name = "button1";
-            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
-            // 
             // toggleButton1
             // 
-            this.toggleButton1.Label = "toggleButton1";
+            this.toggleButton1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.toggleButton1.Label = "lblToggleTaskPane";
             this.toggleButton1.Name = "toggleButton1";
+            this.toggleButton1.ShowImage = true;
+            this.toggleButton1.Tag = "";
             this.toggleButton1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.toggleButton1_Click);
             // 
             // Ribbon1
@@ -86,7 +81,6 @@ namespace WordAddIn1
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton toggleButton1;
     }
 
