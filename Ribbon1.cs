@@ -15,7 +15,7 @@ namespace WordAddIn1
             myUserControl1 = new MyUserControl();
             myUserControl1.Width = 500;
             myCustomTaskPane = Globals.ThisAddIn.CustomTaskPanes.Add(myUserControl1, "Compliance Made Easy");
-            myCustomTaskPane.Width = 650;
+            myCustomTaskPane.Width = 500;
             myCustomTaskPane.Visible = false;
         }
 

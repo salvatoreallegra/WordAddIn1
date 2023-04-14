@@ -35,6 +35,7 @@ namespace WordAddIn1
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.toggleButton1 = this.Factory.CreateRibbonToggleButton();
@@ -51,13 +52,14 @@ namespace WordAddIn1
             // group1
             // 
             this.group1.Items.Add(this.toggleButton1);
-            this.group1.Label = "Show/Hide CME Pane";
+            this.group1.Label = "CME Ribbon Functions";
             this.group1.Name = "group1";
             // 
             // toggleButton1
             // 
             this.toggleButton1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.toggleButton1.Label = "lblToggleTaskPane";
+            this.toggleButton1.Image = ((System.Drawing.Image)(resources.GetObject("toggleButton1.Image")));
+            this.toggleButton1.Label = "Toggle CME Task Pane";
             this.toggleButton1.Name = "toggleButton1";
             this.toggleButton1.ShowImage = true;
             this.toggleButton1.Tag = "";

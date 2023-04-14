@@ -28,18 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyUserControl));
             this.btnExecuteStyles = new System.Windows.Forms.Button();
             this.lblCompliance = new System.Windows.Forms.Label();
+            this.picMainImage = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picMainImage)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExecuteStyles
             // 
-            this.btnExecuteStyles.Location = new System.Drawing.Point(175, 370);
+            this.btnExecuteStyles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(214)))), ((int)(((byte)(233)))));
+            this.btnExecuteStyles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExecuteStyles.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExecuteStyles.Location = new System.Drawing.Point(171, 327);
             this.btnExecuteStyles.Name = "btnExecuteStyles";
-            this.btnExecuteStyles.Size = new System.Drawing.Size(138, 23);
+            this.btnExecuteStyles.Size = new System.Drawing.Size(138, 60);
             this.btnExecuteStyles.TabIndex = 0;
             this.btnExecuteStyles.Text = "Find and Replace";
-            this.btnExecuteStyles.UseVisualStyleBackColor = true;
+            this.btnExecuteStyles.UseVisualStyleBackColor = false;
             this.btnExecuteStyles.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblCompliance
@@ -47,21 +53,34 @@
             this.lblCompliance.AutoSize = true;
             this.lblCompliance.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompliance.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblCompliance.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblCompliance.Location = new System.Drawing.Point(79, 17);
             this.lblCompliance.Name = "lblCompliance";
             this.lblCompliance.Size = new System.Drawing.Size(319, 31);
             this.lblCompliance.TabIndex = 1;
             this.lblCompliance.Text = "Complaince Made Easy";
+            this.lblCompliance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // picMainImage
+            // 
+            this.picMainImage.Image = ((System.Drawing.Image)(resources.GetObject("picMainImage.Image")));
+            this.picMainImage.Location = new System.Drawing.Point(55, 129);
+            this.picMainImage.Name = "picMainImage";
+            this.picMainImage.Size = new System.Drawing.Size(354, 127);
+            this.picMainImage.TabIndex = 2;
+            this.picMainImage.TabStop = false;
             // 
             // MyUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(42)))), ((int)(((byte)(79)))));
+            this.Controls.Add(this.picMainImage);
             this.Controls.Add(this.lblCompliance);
             this.Controls.Add(this.btnExecuteStyles);
             this.Name = "MyUserControl";
-            this.Size = new System.Drawing.Size(500, 500);
+            this.Size = new System.Drawing.Size(494, 500);
+            ((System.ComponentModel.ISupportInitialize)(this.picMainImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -71,5 +90,6 @@
 
         private System.Windows.Forms.Button btnExecuteStyles;
         private System.Windows.Forms.Label lblCompliance;
+        private System.Windows.Forms.PictureBox picMainImage;
     }
 }

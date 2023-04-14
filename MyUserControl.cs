@@ -23,12 +23,10 @@ namespace WordAddIn1
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            
-
             Globals.ThisAddIn.findAndReplace();
             Globals.ThisAddIn.FindAndReplaceDates();
             Globals.ThisAddIn.Capitalization();
+            Globals.ThisAddIn.DateFormatting();
         }
     }
 }
