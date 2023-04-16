@@ -32,6 +32,7 @@
             this.btnExecuteStyles = new System.Windows.Forms.Button();
             this.lblCompliance = new System.Windows.Forms.Label();
             this.picMainImage = new System.Windows.Forms.PictureBox();
+            this.btnClearComments = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picMainImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,11 +71,25 @@
             this.picMainImage.TabIndex = 2;
             this.picMainImage.TabStop = false;
             // 
+            // btnClearComments
+            // 
+            this.btnClearComments.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(214)))), ((int)(((byte)(233)))));
+            this.btnClearComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearComments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearComments.Location = new System.Drawing.Point(171, 393);
+            this.btnClearComments.Name = "btnClearComments";
+            this.btnClearComments.Size = new System.Drawing.Size(138, 60);
+            this.btnClearComments.TabIndex = 3;
+            this.btnClearComments.Text = "Clear all Comments";
+            this.btnClearComments.UseVisualStyleBackColor = false;
+            this.btnClearComments.Click += new System.EventHandler(this.btnClearComments_Click);
+            // 
             // MyUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(42)))), ((int)(((byte)(79)))));
+            this.Controls.Add(this.btnClearComments);
             this.Controls.Add(this.picMainImage);
             this.Controls.Add(this.lblCompliance);
             this.Controls.Add(this.btnExecuteStyles);
@@ -91,5 +106,6 @@
         private System.Windows.Forms.Button btnExecuteStyles;
         private System.Windows.Forms.Label lblCompliance;
         private System.Windows.Forms.PictureBox picMainImage;
+        private System.Windows.Forms.Button btnClearComments;
     }
 }

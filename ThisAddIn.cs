@@ -90,7 +90,7 @@ namespace WordAddIn1
         }
         public void Capitalization()
         {
-            var capitalizationWords = new Dictionary<string, string>
+            var capitalizeWordsDictionary = new Dictionary<string, string>
             {
                 {"Internet", "internet" },
                 {"Intranet" ,"intranet" },
@@ -98,65 +98,36 @@ namespace WordAddIn1
                 {"Website", "website" },
                 {"BlackList","henderson" }
             };
-
-            /*foreach (var capitliaztionWord in capitalizationWords)
-                {
-                    Word.Document document = this.Application.ActiveDocument;
-                    Word.Range rng = document.Content;
-                    rng.Find.ClearFormatting();
-                    rng.Find.Forward = true;
-                    this.Application.ActiveDocument.Content.Select();
-                    Word.Find findObject = Application.Selection.Find;
-                    findObject.ClearFormatting();
-
-                    var textToChange = findObject.Text = capitliaztionWord.Key;
-                    findObject.Replacement.ClearFormatting();
-                    var textChangedTo = findObject.Replacement.Text = capitliaztionWord.Value;
-                    string x = Application.ActiveDocument.Range().Text;
-
-                    object replaceAll = Word.WdReplace.wdReplaceAll;
-                    findObject.Execute(ref missing, ref missing, ref missing, ref missing, ref missing,
-                        ref missing, ref missing, ref missing, ref missing, ref missing,
-                        ref replaceAll, ref missing, ref missing, ref missing, ref missing);
-
-                    object text = "Replaced " + textToChange + " with " + textChangedTo;
-
-                    this.Application.ActiveDocument.Comments.Add(
-                        Application.ActiveDocument.Range(), ref text);
-
-                }*/
+                   
 
 
-            foreach (var capitliaztionWord in capitalizationWords)
+            foreach (var capitilizedWord in capitalizeWordsDictionary)
             {
-
-
 
                 this.Application.ActiveDocument.Content.Select();
                 Word.Find findObject = Application.Selection.Find;
                 findObject.ClearFormatting();
-                findObject.Text = capitliaztionWord.Key;     //"Internet";
+                findObject.Text = capitilizedWord.Key;     //"Internet";
                 findObject.Replacement.ClearFormatting();
-                findObject.Replacement.Text = capitliaztionWord.Value;       //"giblet";
+                findObject.Replacement.Text = capitilizedWord.Value;       //"giblet";
 
                 object replaceAll = Word.WdReplace.wdReplaceAll;
                 object ignoreCase = true;
                 object wholeWord = true;
                 //object forward = true;
 
-                //object text = "Corrected Text";
-               /* this.Application.ActiveDocument.Comments.Add(
-                    Application.ActiveDocument.Range(), ref text);*/
-
+                 object text = "Replaced " + capitilizedWord.Key + " With" + capitilizedWord.Value;
+                 
+                this.Application.ActiveDocument.Comments.Add(
+                    Application.ActiveDocument.Range(), ref text);
+                //Application.ActiveDocumnet.Range()
 
                 findObject.Execute(ref missing, ref ignoreCase, ref wholeWord, ref missing, ref missing,
                         ref missing, ref missing, ref missing, ref missing, ref missing,
                         ref replaceAll, ref missing, ref missing, ref missing, ref missing);
 
 
-
-            }
-            
+            }            
 
         }
 
@@ -171,12 +142,63 @@ namespace WordAddIn1
 
             string result = myRegex.Match(dateToLookFor).ToString();
 
-            MessageBox.Show(result);
+            //MessageBox.Show(result);
+        }
+
+        public void ReplaceWithComments(string WordToReplace, string ReplacementWord)
+        {
+           
+            this.Application.ActiveDocument.Content.Select();
+            Word.Find findObject = Application.Selection.Find;
+
+           
+            
+            findObject.ClearFormatting();
+            findObject.Text = WordToReplace;
+            findObject.Replacement.ClearFormatting();
+            findObject.Replacement.Text = ReplacementWord;
+
+          
+
+            object replaceAll = Word.WdReplace.wdReplaceAll;
+            object ignoreCase = true;
+            object wholeWord = true;
+            //object forward = true;
+
+            
+                //object text = WordToReplace + " With " + ReplacementWord;
+
+                //this.Application.ActiveDocument.Comments.Add(
+                 //   Application.ActiveDocument.Range(), ref text);
+                //Application.ActiveDocumnet.Range()
+
+            
+            if(findObject.Execute(ref missing, ref ignoreCase, ref wholeWord, ref missing, ref missing,
+                        ref missing, ref missing, ref missing, ref missing, ref missing,
+                        ref replaceAll, ref missing, ref missing, ref missing, ref missing))
+            {
+                
+                object text = WordToReplace + " With " + ReplacementWord;
+
+                this.Application.ActiveDocument.Comments.Add(
+                    Application.ActiveDocument.Range(), ref text);
+            }            
+
+
         }
 
         public void DeleteAllComments()
         {
-
+            if (Application.ActiveDocument.Comments.Count != 0)
+            {
+                this.Application.ActiveDocument.DeleteAllComments();
+                MessageBox.Show("All Comments Have Been Cleared");
+            }
+            else
+            {
+                MessageBox.Show("There are No Comments to Delete");
+            }
+           
         }
 
 

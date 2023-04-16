@@ -25,8 +25,16 @@ namespace WordAddIn1
         {
             Globals.ThisAddIn.findAndReplace();
             Globals.ThisAddIn.FindAndReplaceDates();
-            Globals.ThisAddIn.Capitalization();
+            //Globals.ThisAddIn.Capitalization();
+            Globals.ThisAddIn.ReplaceWithComments("Internet","internet");
+            Globals.ThisAddIn.ReplaceWithComments("Web", "web");
+            
             Globals.ThisAddIn.DateFormatting();
+        }
+
+        private void btnClearComments_Click(object sender, EventArgs e)
+        {
+            Globals.ThisAddIn.DeleteAllComments();
         }
     }
 }
