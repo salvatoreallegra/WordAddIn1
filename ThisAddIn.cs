@@ -24,63 +24,7 @@ namespace WordAddIn1
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
         }
-        public void findAndReplace()
-        {
-            /* int intFound = 0;
-             Word.Document document = this.Application.ActiveDocument;
-             Word.Range rng = document.Content;
-
-             rng.Find.ClearFormatting();
-             rng.Find.Forward = true;
-             //object dateText = (@"\d{2}-\d{2}-\d{4}");
-             rng.Find.Text = "Find Me";
-
-             rng.Find.Execute(
-                 ref missing, ref missing, ref missing, ref missing, ref missing,
-                 ref missing, ref missing, ref missing, ref missing, ref missing,
-                 ref missing, ref missing, ref missing, ref missing, ref missing);*/
-
-
-            //Text can be a regular expression here 
-            // object text = "Comment here";
-
-            //Add Comments to each Text
-
-            /*while (rng.Find.Found)
-            {
-                intFound++;
-                rng.Find.Execute(
-                    ref missing, ref missing, ref missing, ref missing, ref missing,
-                    ref missing, ref missing, ref missing, ref missing, ref missing,
-                    ref missing, ref missing, ref missing, ref missing, ref missing);
-
-                this.Application.ActiveDocument.Comments.Add(
-                            Application.ActiveDocument.Range(), ref text);
-            }
-
-            MessageBox.Show("Strings found: " + intFound.ToString());
-*/
-
-
-
-            /*     this.Application.ActiveDocument.Content.Select();
-                 Word.Find findObject = Application.Selection.Find;
-                 findObject.ClearFormatting();
-                 findObject.Text = "find me";
-                 findObject.Replacement.ClearFormatting();
-                 findObject.Replacement.Text = "Found";
-                 string x = Application.ActiveDocument.Range().Text;
-
-                 object text = "Add a comment to the first paragraph.";
-                 this.Application.ActiveDocument.Comments.Add(
-                     Application.ActiveDocument.Range(), ref text);
-
-                 object replaceAll = Word.WdReplace.wdReplaceAll;
-                 findObject.Execute(ref missing, ref missing, ref missing, ref missing, ref missing,
-                     ref missing, ref missing, ref missing, ref missing, ref missing,
-                     ref replaceAll, ref missing, ref missing, ref missing, ref missing);*/
-
-        }
+        
 
         public void FindAndReplaceDates()
         {
@@ -88,103 +32,84 @@ namespace WordAddIn1
              string result = myRegex.Replace("Replaced");*/
 
         }
-        public void Capitalization()
-        {
-            var capitalizeWordsDictionary = new Dictionary<string, string>
-            {
-                {"Internet", "internet" },
-                {"Intranet" ,"intranet" },
-                {"Web", "web" },
-                {"Website", "website" },
-                {"BlackList","henderson" }
-            };
-                   
-
-
-            foreach (var capitilizedWord in capitalizeWordsDictionary)
-            {
-
-                this.Application.ActiveDocument.Content.Select();
-                Word.Find findObject = Application.Selection.Find;
-                findObject.ClearFormatting();
-                findObject.Text = capitilizedWord.Key;     //"Internet";
-                findObject.Replacement.ClearFormatting();
-                findObject.Replacement.Text = capitilizedWord.Value;       //"giblet";
-
-                object replaceAll = Word.WdReplace.wdReplaceAll;
-                object ignoreCase = true;
-                object wholeWord = true;
-                //object forward = true;
-
-                 object text = "Replaced " + capitilizedWord.Key + " With" + capitilizedWord.Value;
-                 
-                this.Application.ActiveDocument.Comments.Add(
-                    Application.ActiveDocument.Range(), ref text);
-                //Application.ActiveDocumnet.Range()
-
-                findObject.Execute(ref missing, ref ignoreCase, ref wholeWord, ref missing, ref missing,
-                        ref missing, ref missing, ref missing, ref missing, ref missing,
-                        ref replaceAll, ref missing, ref missing, ref missing, ref missing);
-
-
-            }            
-
-        }
-
+       
         public void DateFormatting()
         {
             //All Dates must be post Novenber 12, 2017,    *There must be a comma after the date
 
-            //[A-Z,a - z][th, st, nd, rd] of " + monthsArray(i), "the date should be written as DD(st / nd / rd / th) of " + monthsArray(i) + "(e.g. 11th of// November)"
-
-           string dateToLookFor = "Fourth of July";
-            var myRegex = new Regex((@"\w of July"), RegexOptions.IgnoreCase);
-
-            string result = myRegex.Match(dateToLookFor).ToString();
-
-            //MessageBox.Show(result);
+         
         }
 
         public void ReplaceWithComments(string WordToReplace, string ReplacementWord)
         {
-           
+
             this.Application.ActiveDocument.Content.Select();
             Word.Find findObject = Application.Selection.Find;
 
-           
-            
+
+
             findObject.ClearFormatting();
             findObject.Text = WordToReplace;
             findObject.Replacement.ClearFormatting();
             findObject.Replacement.Text = ReplacementWord;
 
-          
 
+
+            object replaceAll = Word.WdReplace.wdReplaceAll;
+            object ignoreCase = true;
+            object wholeWord = true;
+            //object forward = true;            
+
+            if (findObject.Execute(ref missing, ref ignoreCase, ref wholeWord, ref missing, ref missing,
+                        ref missing, ref missing, ref missing, ref missing, ref missing,
+                        ref replaceAll, ref missing, ref missing, ref missing, ref missing))
+            {
+
+                object text = "Replaced " + WordToReplace + " With " + ReplacementWord;
+
+                this.Application.ActiveDocument.Comments.Add(
+                    Application.ActiveDocument.Range(), ref text);
+            }
+
+
+        }
+
+        public void formatPhoneNumbers()
+        {
+            this.Application.ActiveDocument.Content.Select();
+            Word.Find findObject = Application.Selection.Find;
+
+
+
+            findObject.ClearFormatting();
+            findObject.Text = "([(])";
+            findObject.Replacement.ClearFormatting();
+            findObject.Replacement.Text = "";
+
+            object wildCard = true;
             object replaceAll = Word.WdReplace.wdReplaceAll;
             object ignoreCase = true;
             object wholeWord = true;
             //object forward = true;
 
-            
-                //object text = WordToReplace + " With " + ReplacementWord;
 
-                //this.Application.ActiveDocument.Comments.Add(
-                 //   Application.ActiveDocument.Range(), ref text);
-                //Application.ActiveDocumnet.Range()
 
-            
-            if(findObject.Execute(ref missing, ref ignoreCase, ref wholeWord, ref missing, ref missing,
+
+            if (findObject.Execute(ref missing, ref ignoreCase, ref wholeWord, ref wildCard, ref missing,
                         ref missing, ref missing, ref missing, ref missing, ref missing,
                         ref replaceAll, ref missing, ref missing, ref missing, ref missing))
             {
-                
-                object text = WordToReplace + " With " + ReplacementWord;
 
-                this.Application.ActiveDocument.Comments.Add(
-                    Application.ActiveDocument.Range(), ref text);
-            }            
+                //object text = "Replaced " + WordToReplace + " With " + ReplacementWord;
+
+               /* this.Application.ActiveDocument.Comments.Add(
+                    Application.ActiveDocument.Range(), ref text);*/
+            }
 
 
+
+
+            
         }
 
         public void DeleteAllComments()
@@ -198,7 +123,7 @@ namespace WordAddIn1
             {
                 MessageBox.Show("There are No Comments to Delete");
             }
-           
+
         }
 
 
