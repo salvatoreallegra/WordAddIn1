@@ -58,10 +58,10 @@ namespace WordAddIn1
             object replaceAll = Word.WdReplace.wdReplaceAll;
             object ignoreCase = true;
             object wholeWord = true;
-            //object forward = true;            
+            object forward = true;            
 
             if (findObject.Execute(ref missing, ref ignoreCase, ref wholeWord, ref missing, ref missing,
-                        ref missing, ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref forward, ref missing, ref missing, ref missing,
                         ref replaceAll, ref missing, ref missing, ref missing, ref missing))
             {
 
@@ -71,6 +71,42 @@ namespace WordAddIn1
                     Application.ActiveDocument.Range(), ref text);
             }
 
+
+        }
+
+        public void CommentWithoutReplace(string WordToComment)
+        {
+            int intFound = 0;
+            Word.Document document = this.Application.ActiveDocument;
+            Word.Range rng = document.Content;
+
+            rng.Find.ClearFormatting();
+            rng.Find.Forward = true;
+            rng.Find.Text = "Halibut";
+            object forward = true;
+
+            rng.Find.Execute(
+                ref missing, ref missing, ref missing, ref missing, ref missing,
+                ref missing, ref forward, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing);
+
+            while (rng.Find.Found)
+            {
+                intFound++;
+                rng.Find.Execute(
+                    ref missing, ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref forward, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing, ref missing);
+
+                object text = "Found " + rng.Find.Text;
+
+                this.Application.ActiveDocument.Comments.Add(
+                     Application.ActiveDocument.Range(), ref text);
+                
+
+            }
+
+            MessageBox.Show("Strings found: " + intFound.ToString());
 
         }
 

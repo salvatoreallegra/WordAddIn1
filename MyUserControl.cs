@@ -26,6 +26,7 @@ namespace WordAddIn1
            
             Globals.ThisAddIn.FindAndReplaceDates();
             //Globals.ThisAddIn.Capitalization();
+            Globals.ThisAddIn.CommentWithoutReplace("word");
             Globals.ThisAddIn.ReplaceWithComments("Internet","internet");
             Globals.ThisAddIn.ReplaceWithComments("Web", "web");
             Globals.ThisAddIn.formatPhoneNumbers();
