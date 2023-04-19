@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyUserControl));
-            this.btnExecuteStyles = new System.Windows.Forms.Button();
+            this.btn1 = new System.Windows.Forms.Button();
             this.lblCompliance = new System.Windows.Forms.Label();
             this.picMainImage = new System.Windows.Forms.PictureBox();
             this.btnClearComments = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picMainImage)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnExecuteStyles
+            // btn1
             // 
-            this.btnExecuteStyles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(214)))), ((int)(((byte)(233)))));
-            this.btnExecuteStyles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExecuteStyles.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExecuteStyles.Location = new System.Drawing.Point(171, 327);
-            this.btnExecuteStyles.Name = "btnExecuteStyles";
-            this.btnExecuteStyles.Size = new System.Drawing.Size(138, 60);
-            this.btnExecuteStyles.TabIndex = 0;
-            this.btnExecuteStyles.Text = "Find and Replace";
-            this.btnExecuteStyles.UseVisualStyleBackColor = false;
-            this.btnExecuteStyles.Click += new System.EventHandler(this.button1_Click);
+            this.btn1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(214)))), ((int)(((byte)(233)))));
+            this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn1.Location = new System.Drawing.Point(171, 327);
+            this.btn1.Name = "btn1";
+            this.btn1.Size = new System.Drawing.Size(138, 60);
+            this.btn1.TabIndex = 0;
+            this.btn1.Text = "Correct Document";
+            this.btn1.UseVisualStyleBackColor = false;
+            this.btn1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblCompliance
             // 
@@ -59,7 +59,7 @@
             this.lblCompliance.Name = "lblCompliance";
             this.lblCompliance.Size = new System.Drawing.Size(319, 31);
             this.lblCompliance.TabIndex = 1;
-            this.lblCompliance.Text = "Complaince Made Easy";
+            this.lblCompliance.Text = "Compliance Made Easy";
             this.lblCompliance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // picMainImage
@@ -92,7 +92,7 @@
             this.Controls.Add(this.btnClearComments);
             this.Controls.Add(this.picMainImage);
             this.Controls.Add(this.lblCompliance);
-            this.Controls.Add(this.btnExecuteStyles);
+            this.Controls.Add(this.btn1);
             this.Name = "MyUserControl";
             this.Size = new System.Drawing.Size(494, 500);
             ((System.ComponentModel.ISupportInitialize)(this.picMainImage)).EndInit();
@@ -103,7 +103,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnExecuteStyles;
+        private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.Label lblCompliance;
         private System.Windows.Forms.PictureBox picMainImage;
         private System.Windows.Forms.Button btnClearComments;

@@ -23,19 +23,33 @@ namespace WordAddIn1
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
-            Globals.ThisAddIn.FindAndReplaceDates();
-            //Globals.ThisAddIn.Capitalization();
-            Globals.ThisAddIn.CommentWithoutReplace("word");
-            Globals.ThisAddIn.ReplaceWithComments("Internet","internet");
+         
+
+            Globals.ThisAddIn.ReplaceWithComments("Internet", "internet");
+            Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet");
             Globals.ThisAddIn.ReplaceWithComments("Web", "web");
-            Globals.ThisAddIn.formatPhoneNumbers();
-            Globals.ThisAddIn.DateFormatting();
+            Globals.ThisAddIn.ReplaceWithComments("Website", "website");
+            Globals.ThisAddIn.CommentWithoutReplace("cosigners", "Should Say : other signatories");
+           // Globals.ThisAddIn.formatPhoneNumbers();
+           // Globals.ThisAddIn.DateFormatting();
         }
 
         private void btnClearComments_Click(object sender, EventArgs e)
         {
             Globals.ThisAddIn.DeleteAllComments();
+        }
+
+        private void btnCorrect_Click(object sender, EventArgs e)
+        {
+            //Globals.ThisAddIn.Capitalization();
+
+            Globals.ThisAddIn.ReplaceWithComments("Internet", "internet");
+            //  Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet");
+            //  Globals.ThisAddIn.ReplaceWithComments("Web", "web");
+            // Globals.ThisAddIn.ReplaceWithComments("Website", "website");
+            //Globals.ThisAddIn.CommentWithoutReplace("cosigners");
+            Globals.ThisAddIn.formatPhoneNumbers();
+            Globals.ThisAddIn.DateFormatting();
         }
     }
 }

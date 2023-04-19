@@ -25,13 +25,7 @@ namespace WordAddIn1
         {
         }
         
-
-        public void FindAndReplaceDates()
-        {
-            /* var myRegex = new Regex((@"\d{2}-\d{2}-\d{4}"), RegexOptions.IgnoreCase);
-             string result = myRegex.Replace("Replaced");*/
-
-        }
+             
        
         public void DateFormatting()
         {
@@ -40,54 +34,51 @@ namespace WordAddIn1
          
         }
 
-        public void ReplaceWithComments(string WordToReplace, string ReplacementWord)
+        public void ReplaceWithComments(string WordToReplace, string ReplacementWord)           
         {
-
             this.Application.ActiveDocument.Content.Select();
             Word.Find findObject = Application.Selection.Find;
-
-
-
             findObject.ClearFormatting();
             findObject.Text = WordToReplace;
             findObject.Replacement.ClearFormatting();
             findObject.Replacement.Text = ReplacementWord;
-
-
+            object matchWholeWord = true;
+            object matchCase = true;
 
             object replaceAll = Word.WdReplace.wdReplaceAll;
-            object ignoreCase = true;
-            object wholeWord = true;
-            object forward = true;            
+            findObject.Execute(ref missing, ref matchCase, ref matchWholeWord, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing,
+                ref replaceAll, ref missing, ref missing, ref missing, ref missing);
 
-            if (findObject.Execute(ref missing, ref ignoreCase, ref wholeWord, ref missing, ref missing,
-                        ref missing, ref forward, ref missing, ref missing, ref missing,
-                        ref replaceAll, ref missing, ref missing, ref missing, ref missing))
-            {
-
-                object text = "Replaced " + WordToReplace + " With " + ReplacementWord;
-
-                this.Application.ActiveDocument.Comments.Add(
+            object text = "Auto Corrected " + WordToReplace + " with" + ReplacementWord;
+            this.Application.ActiveDocument.Comments.Add(
                     Application.ActiveDocument.Range(), ref text);
-            }
 
 
         }
 
-        public void CommentWithoutReplace(string WordToComment)
+
+
+          
+
+        public void CommentWithoutReplace(string WordToComment, string message)
         {
+            if (Application.ActiveDocument.Comments.Count != 0)
+            {
+                this.Application.ActiveDocument.DeleteAllComments();
+                //MessageBox.Show("Re-Setting Comments prior to correction");
+            }
             int intFound = 0;
             Word.Document document = this.Application.ActiveDocument;
             Word.Range rng = document.Content;
 
             rng.Find.ClearFormatting();
             rng.Find.Forward = true;
-            rng.Find.Text = "Halibut";
-            object forward = true;
-
+            rng.Find.Text = WordToComment;
+            
             rng.Find.Execute(
                 ref missing, ref missing, ref missing, ref missing, ref missing,
-                ref missing, ref forward, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing,
                 ref missing, ref missing, ref missing, ref missing, ref missing);
 
             while (rng.Find.Found)
@@ -95,18 +86,21 @@ namespace WordAddIn1
                 intFound++;
                 rng.Find.Execute(
                     ref missing, ref missing, ref missing, ref missing, ref missing,
-                    ref missing, ref forward, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing, ref missing,
                     ref missing, ref missing, ref missing, ref missing, ref missing);
 
-                object text = "Found " + rng.Find.Text;
+                object text = message + rng.Find.Text + " -CME";
+                object start = rng.Start;
+                object end = rng.End;
 
-                this.Application.ActiveDocument.Comments.Add(
-                     Application.ActiveDocument.Range(), ref text);
+                //Word.Range commentRange = this.Range(ref start, ref end);
                 
 
+                this.Application.ActiveDocument.Comments.Add(
+                    Application.ActiveDocument.Range(rng.Start,rng.End), ref text);
             }
 
-            MessageBox.Show("Strings found: " + intFound.ToString());
+          
 
         }
 
@@ -114,9 +108,6 @@ namespace WordAddIn1
         {
             this.Application.ActiveDocument.Content.Select();
             Word.Find findObject = Application.Selection.Find;
-
-
-
             findObject.ClearFormatting();
             findObject.Text = "([(])";
             findObject.Replacement.ClearFormatting();
