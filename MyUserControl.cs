@@ -29,7 +29,7 @@ namespace WordAddIn1
             Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet");
             Globals.ThisAddIn.ReplaceWithComments("Web", "web");
             Globals.ThisAddIn.ReplaceWithComments("Website", "website");
-            Globals.ThisAddIn.CommentWithoutReplace("cosigners", "Should Say : other signatories");
+            Globals.ThisAddIn.CommentWithoutReplace("cosigners", "Should Say >>> <other signatories>");
            // Globals.ThisAddIn.formatPhoneNumbers();
            // Globals.ThisAddIn.DateFormatting();
         }

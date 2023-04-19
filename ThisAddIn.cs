@@ -17,6 +17,7 @@ namespace WordAddIn1
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
 
+            
 
         }
 
@@ -36,8 +37,11 @@ namespace WordAddIn1
 
         public void ReplaceWithComments(string WordToReplace, string ReplacementWord)           
         {
+            
+
             this.Application.ActiveDocument.Content.Select();
             Word.Find findObject = Application.Selection.Find;
+            
             findObject.ClearFormatting();
             findObject.Text = WordToReplace;
             findObject.Replacement.ClearFormatting();
@@ -46,13 +50,20 @@ namespace WordAddIn1
             object matchCase = true;
 
             object replaceAll = Word.WdReplace.wdReplaceAll;
+           
+            
+
             findObject.Execute(ref missing, ref matchCase, ref matchWholeWord, ref missing, ref missing,
                 ref missing, ref missing, ref missing, ref missing, ref missing,
                 ref replaceAll, ref missing, ref missing, ref missing, ref missing);
 
-            object text = "Auto Corrected " + WordToReplace + " with" + ReplacementWord;
+            //Add comments
+            Word.Document document = this.Application.ActiveDocument;
+            Word.Range rng = document.Content;
+            Object text = "Replaced " + WordToReplace + " With " + ReplacementWord;
             this.Application.ActiveDocument.Comments.Add(
-                    Application.ActiveDocument.Range(), ref text);
+                    Application.ActiveDocument.Range(rng.Start, rng.End), ref text);
+
 
 
         }
@@ -63,11 +74,12 @@ namespace WordAddIn1
 
         public void CommentWithoutReplace(string WordToComment, string message)
         {
-            if (Application.ActiveDocument.Comments.Count != 0)
+           
+         /*   if (Application.ActiveDocument.Comments.Count != 0)
             {
                 this.Application.ActiveDocument.DeleteAllComments();
                 //MessageBox.Show("Re-Setting Comments prior to correction");
-            }
+            } */ 
             int intFound = 0;
             Word.Document document = this.Application.ActiveDocument;
             Word.Range rng = document.Content;
@@ -89,7 +101,7 @@ namespace WordAddIn1
                     ref missing, ref missing, ref missing, ref missing, ref missing,
                     ref missing, ref missing, ref missing, ref missing, ref missing);
 
-                object text = message + rng.Find.Text + " -CME";
+                object text = WordToComment + " " + message + " -CME";
                 object start = rng.Start;
                 object end = rng.End;
 
