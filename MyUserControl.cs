@@ -23,12 +23,13 @@ namespace WordAddIn1
 
         private void button1_Click(object sender, EventArgs e)
         {
-         
 
-            Globals.ThisAddIn.ReplaceWithComments("Internet", "internet");
-            Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet");
-            Globals.ThisAddIn.ReplaceWithComments("Web", "web");
-            Globals.ThisAddIn.ReplaceWithComments("Website", "website");
+            Globals.ThisAddIn.ReplaceWithComments2("Internet", "internet", "Replaced Internet: Intenret should not be capitalized");
+            //Globals.ThisAddIn.ReplaceWithComments("Internet", "internet");
+           // Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet");
+            //Globals.ThisAddIn.ReplaceWithComments("Web", "web");
+            //Globals.ThisAddIn.ReplaceWithComments("07/04/2022", "4th of July, 2022");
+            //Globals.ThisAddIn.ReplaceWithComments("(702)-324-5587", "702-324-5587");
             Globals.ThisAddIn.CommentWithoutReplace("cosigners", "Should Say >>> <other signatories>");
            // Globals.ThisAddIn.formatPhoneNumbers();
            // Globals.ThisAddIn.DateFormatting();
@@ -39,17 +40,17 @@ namespace WordAddIn1
             Globals.ThisAddIn.DeleteAllComments();
         }
 
-        private void btnCorrect_Click(object sender, EventArgs e)
-        {
+        /*private void btnCorrect_Click(object sender, EventArgs e)
+        {*/
             //Globals.ThisAddIn.Capitalization();
 
-            Globals.ThisAddIn.ReplaceWithComments("Internet", "internet");
+            //Globals.ThisAddIn.ReplaceWithComments("Internet", "internet");
             //  Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet");
             //  Globals.ThisAddIn.ReplaceWithComments("Web", "web");
             // Globals.ThisAddIn.ReplaceWithComments("Website", "website");
             //Globals.ThisAddIn.CommentWithoutReplace("cosigners");
-            Globals.ThisAddIn.formatPhoneNumbers();
-            Globals.ThisAddIn.DateFormatting();
-        }
+            //Globals.ThisAddIn.formatPhoneNumbers();
+            //Globals.ThisAddIn.DateFormatting();
+        //}
     }
 }

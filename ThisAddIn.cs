@@ -17,7 +17,7 @@ namespace WordAddIn1
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
 
-            
+
 
         }
 
@@ -25,23 +25,23 @@ namespace WordAddIn1
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
         }
-        
-             
-       
+
+
+
         public void DateFormatting()
         {
             //All Dates must be post Novenber 12, 2017,    *There must be a comma after the date
 
-         
+
         }
 
-        public void ReplaceWithComments(string WordToReplace, string ReplacementWord)           
+        public void ReplaceWithComments(string WordToReplace, string ReplacementWord)
         {
-            
+
 
             this.Application.ActiveDocument.Content.Select();
             Word.Find findObject = Application.Selection.Find;
-            
+
             findObject.ClearFormatting();
             findObject.Text = WordToReplace;
             findObject.Replacement.ClearFormatting();
@@ -50,134 +50,244 @@ namespace WordAddIn1
             object matchCase = true;
 
             object replaceAll = Word.WdReplace.wdReplaceAll;
-           
-            
+
 
             findObject.Execute(ref missing, ref matchCase, ref matchWholeWord, ref missing, ref missing,
                 ref missing, ref missing, ref missing, ref missing, ref missing,
                 ref replaceAll, ref missing, ref missing, ref missing, ref missing);
 
             //Add comments
+            /* Word.Document document = this.Application.ActiveDocument;
+             Word.Range rng = document.Content;
+             Object text = "Replaced " + WordToReplace + " With " + ReplacementWord;
+             this.Application.ActiveDocument.Comments.Add(
+                     Application.ActiveDocument.Range(rng.Start, rng.End), ref text);*/
+
+            AddCommentOnReplace(WordToReplace, ReplacementWord);
+
+        }
+        public void ReplaceWithComments2(string TextToFind, string ReplacementText, string CommentText)
+        {
+            /*Word.Document document = this.Application.ActiveDocument;
+
+            Microsoft.Office.Interop.Word.Range wordRange = null;
+
+            wordRange = document.Content;
+
+            wordRange.Find.ClearFormatting();
+*/
+            // wordRange.Find.IgnoreSpace = true;
+
+            /* wordRange.Find.Execute(FindText: TextToFind, MatchCase: true, MatchWholeWord: true,Forward:true,Replace: Word.WdReplace.wdReplaceOne) ;
+             while (wordRange.Find.Found)
+             {
+
+                 object text = CommentText;
+                 wordRange.Text = ReplacementText;
+                 Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                 //I added this.
+                 //rng.Select();
+                 document.Comments.Add(
+                 rng, ref text);*/
+
+
+
+            // Next Find
+
+            //wordRange.Find.Execute(FindText: TextToFind, MatchWildcards: false, MatchWholeWord:true, MatchCase: true,Forward:true, Word.WdReplace.wdReplaceAll);
+            //WordRange.Find.Execute(FindText: TextToFind, MatchCase: true, MatchWholeWord: true, Forward: true, Replace: Word.WdReplace.wdReplaceOne);
+
+
+            //}
+            Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
-            Word.Range rng = document.Content;
-            Object text = "Replaced " + WordToReplace + " With " + ReplacementWord;
-            this.Application.ActiveDocument.Comments.Add(
-                    Application.ActiveDocument.Range(rng.Start, rng.End), ref text);
+
+            wordRange = document.Content;
+            wordRange.Find.ClearFormatting();
+            wordRange.Find.IgnoreSpace = true;
+
+
+
+            wordRange.Find.Execute(FindText: "Internet", MatchWildcards: false, Forward: true);
+
+
+
+            while (wordRange.Find.Found)
+            {
+                object text = "Internet should be lower case.";
+                if (wordRange.Text == TextToFind)
+                {
+                    wordRange.Text = "internet";
+                    Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                    document.Comments.Add(
+                    rng, ref text);
+                    //this.Application.ActiveDocument.Comments.Add(
+                    //    rng, ref text);
+
+
+                    wordRange.Find.ClearFormatting();
+                }
+                // Next Find
+                wordRange.Find.Execute(FindText: "Internet",  MatchWildcards: false, Forward: true);
+            }
+
+
+
+
+
+
+
+
+
 
 
 
         }
 
-
-
-          
-
-        public void CommentWithoutReplace(string WordToComment, string message)
-        {
-           
-         /*   if (Application.ActiveDocument.Comments.Count != 0)
+            public void AddCommentOnReplace(string WordToReplace, String Replacement)
             {
-                this.Application.ActiveDocument.DeleteAllComments();
-                //MessageBox.Show("Re-Setting Comments prior to correction");
-            } */ 
-            int intFound = 0;
-            Word.Document document = this.Application.ActiveDocument;
-            Word.Range rng = document.Content;
+                Word.Document document = this.Application.ActiveDocument;
+                Word.Range rng = document.Content;
 
-            rng.Find.ClearFormatting();
-            rng.Find.Forward = true;
-            rng.Find.Text = WordToComment;
-            
-            rng.Find.Execute(
-                ref missing, ref missing, ref missing, ref missing, ref missing,
-                ref missing, ref missing, ref missing, ref missing, ref missing,
-                ref missing, ref missing, ref missing, ref missing, ref missing);
+                rng.Find.ClearFormatting();
+                rng.Find.Forward = true;
+                rng.Find.Text = Replacement;
 
-            while (rng.Find.Found)
-            {
-                intFound++;
                 rng.Find.Execute(
                     ref missing, ref missing, ref missing, ref missing, ref missing,
                     ref missing, ref missing, ref missing, ref missing, ref missing,
                     ref missing, ref missing, ref missing, ref missing, ref missing);
 
-                object text = WordToComment + " " + message + " -CME";
-                object start = rng.Start;
-                object end = rng.End;
+                while (rng.Find.Found)
+                {
 
-                //Word.Range commentRange = this.Range(ref start, ref end);
-                
-
-                this.Application.ActiveDocument.Comments.Add(
-                    Application.ActiveDocument.Range(rng.Start,rng.End), ref text);
-            }
-
-          
-
-        }
-
-        public void formatPhoneNumbers()
-        {
-            this.Application.ActiveDocument.Content.Select();
-            Word.Find findObject = Application.Selection.Find;
-            findObject.ClearFormatting();
-            findObject.Text = "([(])";
-            findObject.Replacement.ClearFormatting();
-            findObject.Replacement.Text = "";
-
-            object wildCard = true;
-            object replaceAll = Word.WdReplace.wdReplaceAll;
-            object ignoreCase = true;
-            object wholeWord = true;
-            //object forward = true;
-
-
-
-
-            if (findObject.Execute(ref missing, ref ignoreCase, ref wholeWord, ref wildCard, ref missing,
+                    rng.Find.Execute(
                         ref missing, ref missing, ref missing, ref missing, ref missing,
-                        ref replaceAll, ref missing, ref missing, ref missing, ref missing))
+                        ref missing, ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing, ref missing, ref missing);
+
+                    object text = "Replaced " + WordToReplace + " with " + Replacement + " -CME";
+                    object start = rng.Start;
+                    object end = rng.End;
+
+                    //Word.Range commentRange = this.Range(ref start, ref end);
+
+
+                    this.Application.ActiveDocument.Comments.Add(
+                        Application.ActiveDocument.Range(rng.Start, rng.End), ref text);
+
+                }
+
+
+
+            }
+
+            public void CommentWithoutReplace(string WordToComment, string message)
             {
 
-                //object text = "Replaced " + WordToReplace + " With " + ReplacementWord;
+                /*   if (Application.ActiveDocument.Comments.Count != 0)
+                   {
+                       this.Application.ActiveDocument.DeleteAllComments();
+                       //MessageBox.Show("Re-Setting Comments prior to correction");
+                   } */
+            int intFound = 0;
+                Word.Document document = this.Application.ActiveDocument;
+                Word.Range rng = document.Content;
 
-               /* this.Application.ActiveDocument.Comments.Add(
-                    Application.ActiveDocument.Range(), ref text);*/
+                rng.Find.ClearFormatting();
+                rng.Find.Forward = true;
+                rng.Find.Text = WordToComment;
+
+                rng.Find.Execute(
+                    ref missing, ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing, ref missing);
+
+                while (rng.Find.Found)
+                {
+                    intFound++;
+                    rng.Find.Execute(
+                        ref missing, ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing, ref missing, ref missing);
+
+                    object text = WordToComment + " " + message + " -CME";
+                    object start = rng.Start;
+                    object end = rng.End;
+
+                    //Word.Range commentRange = this.Range(ref start, ref end);
+
+
+                    this.Application.ActiveDocument.Comments.Add(
+                        Application.ActiveDocument.Range(rng.Start, rng.End), ref text);
+                }
+
+
+
+            }
+
+            public void formatPhoneNumbers()
+            {
+                this.Application.ActiveDocument.Content.Select();
+                Word.Find findObject = Application.Selection.Find;
+                findObject.ClearFormatting();
+                findObject.Text = "([(])";
+                findObject.Replacement.ClearFormatting();
+                findObject.Replacement.Text = "";
+
+                object wildCard = true;
+                object replaceAll = Word.WdReplace.wdReplaceAll;
+                object ignoreCase = true;
+                object wholeWord = true;
+                //object forward = true;
+
+
+
+
+                if (findObject.Execute(ref missing, ref ignoreCase, ref wholeWord, ref wildCard, ref missing,
+                            ref missing, ref missing, ref missing, ref missing, ref missing,
+                            ref replaceAll, ref missing, ref missing, ref missing, ref missing))
+                {
+
+                    //object text = "Replaced " + WordToReplace + " With " + ReplacementWord;
+
+                    /* this.Application.ActiveDocument.Comments.Add(
+                         Application.ActiveDocument.Range(), ref text);*/
+                }
+
+
+
+
+
+            }
+
+            public void DeleteAllComments()
+            {
+                if (Application.ActiveDocument.Comments.Count != 0)
+                {
+                    this.Application.ActiveDocument.DeleteAllComments();
+                    MessageBox.Show("All Comments Have Been Cleared");
+                }
+                else
+                {
+                    MessageBox.Show("There are No Comments to Delete");
+                }
+
             }
 
 
+            #region VSTO generated code
 
-
-            
-        }
-
-        public void DeleteAllComments()
-        {
-            if (Application.ActiveDocument.Comments.Count != 0)
+            /// <summary>
+            /// Required method for Designer support - do not modify
+            /// the contents of this method with the code editor.
+            /// </summary>
+            private void InternalStartup()
             {
-                this.Application.ActiveDocument.DeleteAllComments();
-                MessageBox.Show("All Comments Have Been Cleared");
-            }
-            else
-            {
-                MessageBox.Show("There are No Comments to Delete");
+                this.Startup += new System.EventHandler(ThisAddIn_Startup);
+                this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
             }
 
+            #endregion
         }
-
-
-        #region VSTO generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InternalStartup()
-        {
-            this.Startup += new System.EventHandler(ThisAddIn_Startup);
-            this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
-        }
-
-        #endregion
     }
-}
