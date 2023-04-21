@@ -68,37 +68,7 @@ namespace WordAddIn1
         }
         public void ReplaceWithComments2(string TextToFind, string ReplacementText, string CommentText)
         {
-            /*Word.Document document = this.Application.ActiveDocument;
-
-            Microsoft.Office.Interop.Word.Range wordRange = null;
-
-            wordRange = document.Content;
-
-            wordRange.Find.ClearFormatting();
-*/
-            // wordRange.Find.IgnoreSpace = true;
-
-            /* wordRange.Find.Execute(FindText: TextToFind, MatchCase: true, MatchWholeWord: true,Forward:true,Replace: Word.WdReplace.wdReplaceOne) ;
-             while (wordRange.Find.Found)
-             {
-
-                 object text = CommentText;
-                 wordRange.Text = ReplacementText;
-                 Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
-                 //I added this.
-                 //rng.Select();
-                 document.Comments.Add(
-                 rng, ref text);*/
-
-
-
-            // Next Find
-
-            //wordRange.Find.Execute(FindText: TextToFind, MatchWildcards: false, MatchWholeWord:true, MatchCase: true,Forward:true, Word.WdReplace.wdReplaceAll);
-            //WordRange.Find.Execute(FindText: TextToFind, MatchCase: true, MatchWholeWord: true, Forward: true, Replace: Word.WdReplace.wdReplaceOne);
-
-
-            //}
+           
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
 
@@ -108,39 +78,25 @@ namespace WordAddIn1
 
 
 
-            wordRange.Find.Execute(FindText: "Internet", MatchWildcards: false, Forward: true);
+            wordRange.Find.Execute(FindText: TextToFind, MatchWildcards: false, Forward: true);
 
 
 
             while (wordRange.Find.Found)
             {
-                object text = "Internet should be lower case.";
+                object text = CommentText;
                 if (wordRange.Text == TextToFind)
                 {
-                    wordRange.Text = "internet";
+                    wordRange.Text = ReplacementText;
                     Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
                     document.Comments.Add(
                     rng, ref text);
-                    //this.Application.ActiveDocument.Comments.Add(
-                    //    rng, ref text);
-
-
+                   
                     wordRange.Find.ClearFormatting();
                 }
                 // Next Find
                 wordRange.Find.Execute(FindText: "Internet",  MatchWildcards: false, Forward: true);
             }
-
-
-
-
-
-
-
-
-
-
-
 
         }
 
