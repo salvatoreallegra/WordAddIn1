@@ -24,12 +24,13 @@ namespace WordAddIn1
         private void button1_Click(object sender, EventArgs e)
         {
 
-            Globals.ThisAddIn.ReplaceWithComments2("Internet", "internet", "Replaced Internet: Intenret should not be capitalized");
+            Globals.ThisAddIn.ReplaceWithComments2("Internet", "internet", "Replaced Internet: Internet should not be capitalized");
             Globals.ThisAddIn.ReplaceWithComments2("Intranet", "intranet", "Replaced Intranet: Intranet should not be capitalized");
             Globals.ThisAddIn.ReplaceWithComments2("Web", "web", "Replaced Web: Web should not be capitalized");
-            Globals.ThisAddIn.ReplaceWithComments2("07/04/2022", "4th of July, 2022", "Changed to Proper Date Format, Nth of Month, Year");
-            Globals.ThisAddIn.ReplaceWithComments2("(702)-324-5587", "702-324-5587", "Replaced (702)-324-5587: Formated Phone Number without Parenthesis ");
+            //Globals.ThisAddIn.ReplaceWithComments2("07/04/2022", "4th of July, 2022", "Changed to Proper Date Format, Nth of Month, Year");
+            //Globals.ThisAddIn.ReplaceWithComments2("(702)-324-5587", "702-324-5587", "Replaced (702)-324-5587: Formated Phone Number without Parenthesis ");
             Globals.ThisAddIn.CommentWithoutReplace("cosigners", "Should Say >>> <other signatories>");
+            Globals.ThisAddIn.CommentWithoutReplace("7028559999", "Phone Number should be in the format XXX-XXX-XXXX");
            // Globals.ThisAddIn.formatPhoneNumbers();
            // Globals.ThisAddIn.DateFormatting();
         }

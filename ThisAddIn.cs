@@ -78,7 +78,7 @@ namespace WordAddIn1
 
 
 
-            wordRange.Find.Execute(FindText: TextToFind, MatchWildcards: false, Forward: true);
+            wordRange.Find.Execute(FindText: TextToFind, MatchWholeWord: true,MatchWildcards: false, Forward: true);
 
 
 
@@ -95,7 +95,7 @@ namespace WordAddIn1
                     wordRange.Find.ClearFormatting();
                 }
                 // Next Find
-                wordRange.Find.Execute(FindText: "Internet",  MatchWildcards: false, Forward: true);
+                wordRange.Find.Execute(FindText: TextToFind, MatchWholeWord:true, MatchWildcards: false, Forward: true);
             }
 
         }
