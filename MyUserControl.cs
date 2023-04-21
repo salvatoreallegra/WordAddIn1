@@ -25,11 +25,10 @@ namespace WordAddIn1
         {
 
             Globals.ThisAddIn.ReplaceWithComments2("Internet", "internet", "Replaced Internet: Intenret should not be capitalized");
-            //Globals.ThisAddIn.ReplaceWithComments("Internet", "internet");
-           // Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet");
-            //Globals.ThisAddIn.ReplaceWithComments("Web", "web");
-            //Globals.ThisAddIn.ReplaceWithComments("07/04/2022", "4th of July, 2022");
-            //Globals.ThisAddIn.ReplaceWithComments("(702)-324-5587", "702-324-5587");
+            Globals.ThisAddIn.ReplaceWithComments2("Intranet", "intranet", "Replaced Intranet: Intranet should not be capitalized");
+            Globals.ThisAddIn.ReplaceWithComments2("Web", "web", "Replaced Web: Web should not be capitalized");
+            Globals.ThisAddIn.ReplaceWithComments2("07/04/2022", "4th of July, 2022", "Changed to Proper Date Format, Nth of Month, Year");
+            Globals.ThisAddIn.ReplaceWithComments2("(702)-324-5587", "702-324-5587", "Replaced (702)-324-5587: Formated Phone Number without Parenthesis ");
             Globals.ThisAddIn.CommentWithoutReplace("cosigners", "Should Say >>> <other signatories>");
            // Globals.ThisAddIn.formatPhoneNumbers();
            // Globals.ThisAddIn.DateFormatting();
