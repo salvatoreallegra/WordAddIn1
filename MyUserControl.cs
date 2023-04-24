@@ -23,7 +23,6 @@ namespace WordAddIn1
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             Globals.ThisAddIn.ReplaceWithComments2("Internet", "internet", "Replaced Internet: Internet should not be capitalized");
             Globals.ThisAddIn.ReplaceWithComments2("Intranet", "intranet", "Replaced Intranet: Intranet should not be capitalized");
             Globals.ThisAddIn.ReplaceWithComments2("Web", "web", "Replaced Web: Web should not be capitalized");
