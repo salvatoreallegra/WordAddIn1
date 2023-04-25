@@ -25,10 +25,11 @@ namespace WordAddIn1
         {
         }
 
-        public List<Tuple<int, string, string, string, string, string>> ProcessDocument(string documentContent)
+        public List<Tuple<int, string, string, string, string, string>> ProcessDocument()
         {
-            string textToSearch = documentContent;
-            // Item1 = method to use, Item2 = Regex, Item3 = Find search item, Item4 = replacement, Item5 = comments, Item6 = search items            
+            Word.Document document = this.Application.ActiveDocument;
+            string textToSearch = document.Content.Text;
+            // Item1 = method to use, Item2 = Regex, Item3 = Find search item, Item4 = replacement, Item5 = comments, Item6 = search settings, e.g. whole word          
             List<Tuple<int, string, string, string, string, string>> searchArray = BuildPatternArray();
 
             List<string> words = new List<string>();
@@ -75,14 +76,15 @@ namespace WordAddIn1
     
 
     private static List<Tuple<int, string, string, string, string, string>> BuildPatternArray()
-    {   // Item1 = method to use, Item2 = Regex, Item3 = Find search item, Item4 = replacement, Item5 = comments, Item6 = search items
-        //Method 1 - apply_changes_to_word_permutations
+    {   //The contents of the returned tuple e.g. Item 2 = regex, item1 is the method
+        //Item1  = method to use, Item2 = Regex, Item3 = Find search item, Item4 = replacement, Item5 = comments, Item6 = search settings, e.g. MatchWholeCase
+        //Method 1 - apply_changes_to_word_permutations //This doesn't exist, I must create according to VBA Code
         //Method 2 - comment_on_change_to_word_permutations
         //Method 3 - replace_with_comments
         //Method 4 - add_comments
         //Method 5 - phone number replace
-            List<Tuple<int, string, string, string, string, string>> styleArray = new List<Tuple<int, string, string, string, string, string>>();
-        styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "veteran", "veteran", "Veteran", "Veteran(s) should be capitalized", "True, False, False"));
+        List<Tuple<int, string, string, string, string, string>> styleArray = new List<Tuple<int, string, string, string, string, string>>();
+        styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "veteran", "veteran", "Veteran", "Veteran(s) should be capitalized", "true, false, false"));
         styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Department-Wide|[dD]epartment [wW]ide|department-[wW]ide", "Department-Wide,[dD]epartment [wW]ide,department-[wW]ide", " Department-wide", "Department-wide should be capitalized and have a hyphen", "False, True, False"));
         styleArray.Add(new Tuple<int, string, string, string, string, string>(3, @"\bnation\b", "nation", "Nation", "Nation should be capitalized", "True, False, True"));
         styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "congress", "congress", "Congress", "Congress / Congressional should be capitalized", "True, False, False"));
@@ -124,9 +126,16 @@ namespace WordAddIn1
         //Internet  Internet Internet = don't auto change    "American Internet Company"
         //, , ,, = auto change
         // comment without replace 
-        public void ReplaceWithComments(string TextToFind, string ReplacementText, string CommentText)
-        {        
-           
+        public void ReplaceWithComments(string TextToFind, string ReplacementText, string CommentText, string settings)
+        {
+
+            List<bool> optionValues = new List<bool>();
+            var functionsettings = settings.Split(',');
+            foreach(var x in functionsettings)
+            {
+                
+                optionValues.Add(Convert.ToBoolean(x));
+            }
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
 
@@ -140,8 +149,10 @@ namespace WordAddIn1
 
             wordRange = document.Content;
             wordRange.Find.ClearFormatting();
+            wordRange.Find.ClearAllFuzzyOptions();
+            wordRange.Find.Replacement.ClearFormatting();
             wordRange.Find.IgnoreSpace = true;
-            wordRange.Find.Execute(FindText: TextToFind, MatchWholeWord: true,MatchWildcards: false, Forward: true);
+            wordRange.Find.Execute(FindText: TextToFind, MatchWholeWord: optionValues[2], MatchCase: optionValues[0],MatchWildcards: optionValues[1], Forward: true);
 
             while (wordRange.Find.Found)
             {
@@ -156,7 +167,7 @@ namespace WordAddIn1
                     
                 }
                 // Next Find
-                wordRange.Find.Execute(FindText: TextToFind, MatchWholeWord:true, MatchWildcards: false, Forward: true);
+                wordRange.Find.Execute(FindText: TextToFind, MatchWholeWord: optionValues[2], MatchCase: optionValues[0], MatchWildcards: optionValues[1], Forward: true);
             }
 
         }

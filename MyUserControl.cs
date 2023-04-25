@@ -30,13 +30,41 @@ namespace WordAddIn1
 
         private void btnCorrectDocument_Click(object sender, EventArgs e)
         {
-            Globals.ThisAddIn.ReplaceWithComments("Internet", "internet", "Replaced Internet: Internet should not be capitalized");
-            Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet", "Replaced Intranet: Intranet should not be capitalized");
-            Globals.ThisAddIn.ReplaceWithComments("Web", "web", "Replaced Web: Web should not be capitalized");
+            /*Basic Process of Find and Replace/Comment from the Hacker Competition/VBA/Marjorie
+             * First step is process document function, this will return a list of tuples,
+             * the params of process document are....It searches the whole document and returns
+             * ONLY what needs to be processed.   ProcessArray calls build search array, it builds
+             * the tuple of the things we are looking for, this is where you add more search criteria
+             * .  Process array takes 
+             * 
+             * 
+             */
+
+            var returnValue = Globals.ThisAddIn.ProcessDocument();
+            foreach(var x in returnValue)
+            {
+                switch (x.Item1)
+                {
+                    case 1:
+                        break;
+                    case 3:
+                        Globals.ThisAddIn.ReplaceWithComments(x.Item3,x.Item4,x.Item5, x.Item6);
+                        break;
+                    default:
+                        
+                        break;
+                       
+
+                }
+
+            }
+            //Globals.ThisAddIn.ReplaceWithComments("Internet", "internet", "Replaced Internet: Internet should not be capitalized");
+            //Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet", "Replaced Intranet: Intranet should not be capitalized");
+            //Globals.ThisAddIn.ReplaceWithComments("Web", "web", "Replaced Web: Web should not be capitalized");
             //Globals.ThisAddIn.ReplaceWithComments2("07/04/2022", "4th of July, 2022", "Changed to Proper Date Format, Nth of Month, Year");
             //Globals.ThisAddIn.ReplaceWithComments2("(702)-324-5587", "702-324-5587", "Replaced (702)-324-5587: Formated Phone Number without Parenthesis ");
-            Globals.ThisAddIn.CommentWithoutReplace("cosigners", "Should Say >>> <other signatories>");
-            Globals.ThisAddIn.CommentWithoutReplace("7028559999", "Phone Number should be in the format XXX-XXX-XXXX");
+            //Globals.ThisAddIn.CommentWithoutReplace("cosigners", "Should Say >>> <other signatories>");
+            //Globals.ThisAddIn.CommentWithoutReplace("7028559999", "Phone Number should be in the format XXX-XXX-XXXX");
            
 
         }
