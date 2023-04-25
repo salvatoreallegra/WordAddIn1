@@ -19,16 +19,13 @@ namespace WordAddIn1
             myCustomTaskPane.Visible = false;
         }
 
-        private void button1_Click(object sender, RibbonControlEventArgs e)
-        {
-           
-                      
-        }
+
 
         private void toggleButton1_Click(object sender, RibbonControlEventArgs e)
         {
             myCustomTaskPane.Visible = ((RibbonToggleButton)sender).Checked;
         }
+
     }
 }
 

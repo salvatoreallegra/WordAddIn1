@@ -16,9 +16,6 @@ namespace WordAddIn1
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-
-
-
         }
 
 
@@ -31,56 +28,27 @@ namespace WordAddIn1
         public void DateFormatting()
         {
             //All Dates must be post Novenber 12, 2017,    *There must be a comma after the date
-
-
         }
 
-        public void ReplaceWithComments(string WordToReplace, string ReplacementWord)
-        {
-
-
-            this.Application.ActiveDocument.Content.Select();
-            Word.Find findObject = Application.Selection.Find;
-
-            findObject.ClearFormatting();
-            findObject.Text = WordToReplace;
-            findObject.Replacement.ClearFormatting();
-            findObject.Replacement.Text = ReplacementWord;
-            object matchWholeWord = true;
-            object matchCase = true;
-
-            object replaceAll = Word.WdReplace.wdReplaceAll;
-
-
-            findObject.Execute(ref missing, ref matchCase, ref matchWholeWord, ref missing, ref missing,
-                ref missing, ref missing, ref missing, ref missing, ref missing,
-                ref replaceAll, ref missing, ref missing, ref missing, ref missing);
-
-            //Add comments
-            /* Word.Document document = this.Application.ActiveDocument;
-             Word.Range rng = document.Content;
-             Object text = "Replaced " + WordToReplace + " With " + ReplacementWord;
-             this.Application.ActiveDocument.Comments.Add(
-                     Application.ActiveDocument.Range(rng.Start, rng.End), ref text);*/
-
-            AddCommentOnReplace(WordToReplace, ReplacementWord);
-
-        }
-        public void ReplaceWithComments2(string TextToFind, string ReplacementText, string CommentText)
-        {
+        //Internet  Internet Internet = don't auto change    "American Internet Company"
+        //, , ,, = auto change
+        // comment without replace 
+        public void ReplaceWithComments(string TextToFind, string ReplacementText, string CommentText)
+        {        
            
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
 
+            //Turn off Revisions just so we won't enter the infinite loop.
+            if(document.TrackRevisions == true)
+            {
+                document.TrackRevisions = false;
+            }
+
             wordRange = document.Content;
             wordRange.Find.ClearFormatting();
             wordRange.Find.IgnoreSpace = true;
-
-
-
             wordRange.Find.Execute(FindText: TextToFind, MatchWholeWord: true,MatchWildcards: false, Forward: true);
-
-
 
             while (wordRange.Find.Found)
             {
@@ -90,8 +58,7 @@ namespace WordAddIn1
                     wordRange.Text = ReplacementText;
                     Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
                     document.Comments.Add(
-                    rng, ref text);
-                   
+                    rng, ref text);                   
                     wordRange.Find.ClearFormatting();
                 }
                 // Next Find
@@ -100,53 +67,11 @@ namespace WordAddIn1
 
         }
 
-            public void AddCommentOnReplace(string WordToReplace, String Replacement)
-            {
-                Word.Document document = this.Application.ActiveDocument;
-                Word.Range rng = document.Content;
-
-                rng.Find.ClearFormatting();
-                rng.Find.Forward = true;
-                rng.Find.Text = Replacement;
-
-                rng.Find.Execute(
-                    ref missing, ref missing, ref missing, ref missing, ref missing,
-                    ref missing, ref missing, ref missing, ref missing, ref missing,
-                    ref missing, ref missing, ref missing, ref missing, ref missing);
-
-                while (rng.Find.Found)
-                {
-
-                    rng.Find.Execute(
-                        ref missing, ref missing, ref missing, ref missing, ref missing,
-                        ref missing, ref missing, ref missing, ref missing, ref missing,
-                        ref missing, ref missing, ref missing, ref missing, ref missing);
-
-                    object text = "Replaced " + WordToReplace + " with " + Replacement + " -CME";
-                    object start = rng.Start;
-                    object end = rng.End;
-
-                    //Word.Range commentRange = this.Range(ref start, ref end);
-
-
-                    this.Application.ActiveDocument.Comments.Add(
-                        Application.ActiveDocument.Range(rng.Start, rng.End), ref text);
-
-                }
-
-
-
-            }
+            
 
             public void CommentWithoutReplace(string WordToComment, string message)
-            {
-
-                /*   if (Application.ActiveDocument.Comments.Count != 0)
-                   {
-                       this.Application.ActiveDocument.DeleteAllComments();
-                       //MessageBox.Show("Re-Setting Comments prior to correction");
-                   } */
-            int intFound = 0;
+            {              
+               
                 Word.Document document = this.Application.ActiveDocument;
                 Word.Range rng = document.Content;
 
@@ -161,7 +86,7 @@ namespace WordAddIn1
 
                 while (rng.Find.Found)
                 {
-                    intFound++;
+                   
                     rng.Find.Execute(
                         ref missing, ref missing, ref missing, ref missing, ref missing,
                         ref missing, ref missing, ref missing, ref missing, ref missing,
@@ -170,15 +95,10 @@ namespace WordAddIn1
                     object text = WordToComment + " " + message + " -CME";
                     object start = rng.Start;
                     object end = rng.End;
-
-                    //Word.Range commentRange = this.Range(ref start, ref end);
-
-
+                                    
                     this.Application.ActiveDocument.Comments.Add(
                         Application.ActiveDocument.Range(rng.Start, rng.End), ref text);
                 }
-
-
 
             }
 
@@ -205,10 +125,6 @@ namespace WordAddIn1
                             ref replaceAll, ref missing, ref missing, ref missing, ref missing))
                 {
 
-                    //object text = "Replaced " + WordToReplace + " With " + ReplacementWord;
-
-                    /* this.Application.ActiveDocument.Comments.Add(
-                         Application.ActiveDocument.Range(), ref text);*/
                 }
 
 
