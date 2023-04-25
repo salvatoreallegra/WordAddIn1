@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyUserControl));
-            this.btn1 = new System.Windows.Forms.Button();
+            this.btnCorrectDocument = new System.Windows.Forms.Button();
             this.lblCompliance = new System.Windows.Forms.Label();
             this.picMainImage = new System.Windows.Forms.PictureBox();
             this.btnClearComments = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picMainImage)).BeginInit();
             this.SuspendLayout();
             // 
-            // btn1
+            // btnCorrectDocument
             // 
-            this.btn1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(214)))), ((int)(((byte)(233)))));
-            this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn1.Location = new System.Drawing.Point(171, 327);
-            this.btn1.Name = "btn1";
-            this.btn1.Size = new System.Drawing.Size(138, 60);
-            this.btn1.TabIndex = 0;
-            this.btn1.Text = "Correct Document";
-            this.btn1.UseVisualStyleBackColor = false;
-            this.btn1.Click += new System.EventHandler(this.button1_Click);
+            this.btnCorrectDocument.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(214)))), ((int)(((byte)(233)))));
+            this.btnCorrectDocument.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCorrectDocument.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCorrectDocument.Location = new System.Drawing.Point(171, 327);
+            this.btnCorrectDocument.Name = "btnCorrectDocument";
+            this.btnCorrectDocument.Size = new System.Drawing.Size(138, 60);
+            this.btnCorrectDocument.TabIndex = 0;
+            this.btnCorrectDocument.Text = "Correct Document";
+            this.btnCorrectDocument.UseVisualStyleBackColor = false;
+            this.btnCorrectDocument.Click += new System.EventHandler(this.btnCorrectDocument_Click);
             // 
             // lblCompliance
             // 
@@ -92,9 +92,9 @@
             this.Controls.Add(this.btnClearComments);
             this.Controls.Add(this.picMainImage);
             this.Controls.Add(this.lblCompliance);
-            this.Controls.Add(this.btn1);
+            this.Controls.Add(this.btnCorrectDocument);
             this.Name = "MyUserControl";
-            this.Size = new System.Drawing.Size(494, 500);
+            this.Size = new System.Drawing.Size(494, 590);
             ((System.ComponentModel.ISupportInitialize)(this.picMainImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -103,7 +103,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn1;
+        private System.Windows.Forms.Button btnCorrectDocument;
         private System.Windows.Forms.Label lblCompliance;
         private System.Windows.Forms.PictureBox picMainImage;
         private System.Windows.Forms.Button btnClearComments;
