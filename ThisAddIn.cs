@@ -16,6 +16,8 @@ namespace WordAddIn1
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            var formReviewAndAccept = new ReviewAndAccept();
+           
         }
 
 
@@ -39,6 +41,8 @@ namespace WordAddIn1
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
 
+           
+
             //Turn off Revisions just so we won't enter the infinite loop.
             if(document.TrackRevisions == true)
             {
@@ -60,6 +64,7 @@ namespace WordAddIn1
                     document.Comments.Add(
                     rng, ref text);                   
                     wordRange.Find.ClearFormatting();
+                    
                 }
                 // Next Find
                 wordRange.Find.Execute(FindText: TextToFind, MatchWholeWord:true, MatchWildcards: false, Forward: true);

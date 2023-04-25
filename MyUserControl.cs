@@ -25,6 +25,7 @@ namespace WordAddIn1
         private void btnClearComments_Click(object sender, EventArgs e)
         {
             Globals.ThisAddIn.DeleteAllComments();
+            
         }
 
         private void btnCorrectDocument_Click(object sender, EventArgs e)
@@ -35,8 +36,11 @@ namespace WordAddIn1
             //Globals.ThisAddIn.ReplaceWithComments2("07/04/2022", "4th of July, 2022", "Changed to Proper Date Format, Nth of Month, Year");
             //Globals.ThisAddIn.ReplaceWithComments2("(702)-324-5587", "702-324-5587", "Replaced (702)-324-5587: Formated Phone Number without Parenthesis ");
             Globals.ThisAddIn.CommentWithoutReplace("cosigners", "Should Say >>> <other signatories>");
-            Globals.ThisAddIn.CommentWithoutReplace("7028559999", "Phone Number should be in the format XXX-XXX-XXXX"); 
+            Globals.ThisAddIn.CommentWithoutReplace("7028559999", "Phone Number should be in the format XXX-XXX-XXXX");
+           
 
         }
+
+       
     }
 }
