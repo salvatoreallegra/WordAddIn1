@@ -200,9 +200,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ReviewAndAccept.resx">
-      <DependentUpon>ReviewAndAccept.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Ribbon1.resx">
       <DependentUpon>Ribbon1.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,12 +210,6 @@
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="ReviewAndAccept.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ReviewAndAccept.Designer.cs">
-      <DependentUpon>ReviewAndAccept.cs</DependentUpon>
     </Compile>
     <Compile Include="Ribbon1.cs">
       <SubType>Component</SubType>

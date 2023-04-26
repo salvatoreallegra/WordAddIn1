@@ -16,8 +16,7 @@ namespace WordAddIn1
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            var formReviewAndAccept = new ReviewAndAccept();
-           
+                      
         }
 
 
@@ -37,7 +36,6 @@ namespace WordAddIn1
             foreach (var item in searchArray)
             {
                 words.Add(item.Item2);
-
             }
             // Join all the regex in the array into a string
             string pattern = string.Join("|", words);
@@ -66,7 +64,6 @@ namespace WordAddIn1
                     }
 
                 }
-
 
             }
 
