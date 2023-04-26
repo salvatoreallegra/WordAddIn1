@@ -46,15 +46,14 @@ namespace WordAddIn1
                 switch (x.Item1)
                 {
                     case 1:
+                        Globals.ThisAddIn.apply_changes_to_word_permutations(x.Item3, x.Item4, x.Item5, x.Item6);
                         break;
                     case 3:
                         Globals.ThisAddIn.ReplaceWithComments(x.Item3,x.Item4,x.Item5, x.Item6);
                         break;
-                    default:
-                        
+                    default:                        
                         break;
                        
-
                 }
 
             }

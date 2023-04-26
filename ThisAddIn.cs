@@ -115,17 +115,12 @@ namespace WordAddIn1
         return styleArray;
     }
 
-    public void DateFormatting()
-        {
-            //All Dates must be post Novenber 12, 2017,    *There must be a comma after the date
-        }
+   
 
-        //Internet  Internet Internet = don't auto change    "American Internet Company"
-        //, , ,, = auto change
-        // comment without replace 
+        
         public void ReplaceWithComments(string TextToFind, string ReplacementText, string CommentText, string settings)
         {
-
+            //var found = false;
             List<bool> optionValues = new List<bool>();
             var functionsettings = settings.Split(',');
             foreach(var x in functionsettings)
@@ -139,32 +134,39 @@ namespace WordAddIn1
            
 
             //Turn off Revisions just so we won't enter the infinite loop.
-            if(document.TrackRevisions == true)
+            /*if(document.TrackRevisions == true)
             {
                 document.TrackRevisions = false;
-            }
+            }*/
 
             wordRange = document.Content;
             wordRange.Find.ClearFormatting();
             wordRange.Find.ClearAllFuzzyOptions();
             wordRange.Find.Replacement.ClearFormatting();
             wordRange.Find.IgnoreSpace = true;
-            wordRange.Find.Execute(FindText: TextToFind, MatchWholeWord: optionValues[2], MatchCase: optionValues[0],MatchWildcards: optionValues[1], Forward: true);
-
+            wordRange.Find.MatchCase = false;
+            //wordRange.Find.MatchWholeWord = optionValues[2];
+            wordRange.Find.MatchWildcards = true;
+            wordRange.Find.Text = TextToFind;
+            wordRange.Find.Execute();
+            Regex reg = new Regex(TextToFind);
             while (wordRange.Find.Found)
             {
+                Match matchedItem = reg.Match(wordRange.Text);
                 object text = CommentText;
-                if (wordRange.Text == TextToFind)
+                if (matchedItem.Success)
                 {
-                    wordRange.Text = ReplacementText;
+                    //wordRange.Text = ReplacementText;
                     Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                    rng.Text = ReplacementText;
                     document.Comments.Add(
-                    rng, ref text);                   
+                    rng, ref text);
                     wordRange.Find.ClearFormatting();
-                    
                 }
+              
+                
                 // Next Find
-                wordRange.Find.Execute(FindText: TextToFind, MatchWholeWord: optionValues[2], MatchCase: optionValues[0], MatchWildcards: optionValues[1], Forward: true);
+                wordRange.Find.Execute(FindText: TextToFind,  MatchCase: false, MatchWildcards: true);
             }
 
         }
@@ -204,35 +206,14 @@ namespace WordAddIn1
 
             }
 
-            public void formatPhoneNumbers()
+           
+            public void apply_changes_to_word_permutations(string TextToFind, string ReplacementText, string CommentText, string settings)
             {
-                this.Application.ActiveDocument.Content.Select();
-                Word.Find findObject = Application.Selection.Find;
-                findObject.ClearFormatting();
-                findObject.Text = "([(])";
-                findObject.Replacement.ClearFormatting();
-                findObject.Replacement.Text = "";
-
-                object wildCard = true;
-                object replaceAll = Word.WdReplace.wdReplaceAll;
-                object ignoreCase = true;
-                object wholeWord = true;
-                //object forward = true;
-
-
-
-
-                if (findObject.Execute(ref missing, ref ignoreCase, ref wholeWord, ref wildCard, ref missing,
-                            ref missing, ref missing, ref missing, ref missing, ref missing,
-                            ref replaceAll, ref missing, ref missing, ref missing, ref missing))
-                {
-
-                }
-
-
-
-
-
+            var textToFindArray = TextToFind.Split(',');
+            foreach(var text in textToFindArray)
+            {
+                ReplaceWithComments(text, ReplacementText, CommentText, settings);
+            }
             }
 
             public void DeleteAllComments()
