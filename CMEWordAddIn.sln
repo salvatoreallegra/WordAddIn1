@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.33423.256
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMEWordAddIn", "CMEWordAddIn.csproj", "{97927BF5-69F2-469B-8B81-6EC99E5FA512}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CMESetup", "..\CMESetup\CMESetup.vdproj", "{EAF75634-6E27-45AD-AA1C-0965A66312EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{97927BF5-69F2-469B-8B81-6EC99E5FA512}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97927BF5-69F2-469B-8B81-6EC99E5FA512}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97927BF5-69F2-469B-8B81-6EC99E5FA512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAF75634-6E27-45AD-AA1C-0965A66312EA}.Debug|Any CPU.ActiveCfg = Debug
+		{EAF75634-6E27-45AD-AA1C-0965A66312EA}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
