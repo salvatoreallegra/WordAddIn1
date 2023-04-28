@@ -113,7 +113,42 @@ namespace WordAddIn1
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, @"[mM]edical [cC]enter", "[mM]edical [cC]enter", null, "Medical center should be capitalized if preceded by the formal name of the facility", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "cosigners", "cosigners", null, "Should be other signatories", null));
 
+            //Format time
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9]{1,2}:[0-9]{2}[AamM.]{2,4}[ -]{1,3}[0-9]{1,2}:[0-9]{2}[AamM.]{2,4}", "[0-9]{1,2}:[0-9]{2}[AamM.]{2,4}[ -]{1,3}[0-9]{1,2}:[0-9]{2}[AamM.]{2,4}", null, "if time range are both in am, time should be written as X:XX-X:XX a.m. (e.g. 10:15-11:30 a.m. or 8-9 a.m.)", null));
 
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9]{1,2}:[0-9]{2}[PpmM.]{2,4}[ -]{1,3}[0-9]{1,2}:[0-9]{2}[PpmM.]{2,4}", "[0-9]{1,2}:[0-9]{2}[PpmM.]{2,4}[ -]{1,3}[0-9]{1,2}:[0-9]{2}[PpmM.]{2,4}", null, "if time range are both in pm, time should be written as X:XX-X:XX p.m. (e.g. 1:15-2:30 p.m. or 4-6 p.m.)", null));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, " [0-9]{1,2} [AamM.]{2,4}[ -]{1,3}[0-9]{1,2} [AamM.]{2,4}", " [0-9]{1,2} [AamM.]{2,4}[ -]{1,3}[0-9]{1,2} [AamM.]{2,4}", null, "if time range are both in am, time should be written as X-X a.m. (e.g. 10:15-11:30 a.m. or 8-9 a.m.)", null));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, " [0-9]{1,2} [PpmM.]{2,4}[ -]{1,3}[0-9]{1,2} [PpmM.]{2,4}", " [0-9]{1,2} [PpmM.]{2,4}[ -]{1,3}[0-9]{1,2} [PpmM.]{2,4}", null, "if time range are both in pm, time should be written as X-X p.m. (e.g. 1:15-2:30 p.m. or 4-6 p.m.)", null));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, " [0-9]{1,2}[AamM.]{2,4}[ -]{1,3}[0-9]{1,2}[AamM.]{2,4}", " [0-9]{1,2}[AamM.]{2,4}[ -]{1,3}[0-9]{1,2}[AamM.]{2,4}", null, "if time range are both in am, time should be written as X-X a.m. (e.g. 10:15-11:30 a.m. or 8-9 a.m.)", null));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, " [0-9]{1,2}[PpmM.]{2,4}[ -]{1,3}[0-9]{1,2}[PpmM.]{2,4}", " [0-9]{1,2}[PpmM.]{2,4}[ -]{1,3}[0-9]{1,2}[PpmM.]{2,4}", null, "if time range are both in pm, time should be written as X-X p.m. (e.g. 1:15-2:30 p.m. or 4-6 p.m.)", null));
+
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "12 [aA].[mM].|12 [aA][mM]|12 [aA].[mM]|12:00 [aA].[mM].|12:00 [aA][mM]|12:00 [aA].[mM]", "12 [aA].[mM].,12 [aA][mM],12 [aA].[mM],12:00 [aA].[mM].,12:00 [aA][mM],12:00 [aA].[mM]", " midnight", "midnight should be used instead of 12 a.m.", "False, True, False"));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "12 [pP].[mM].|12 [pP][mM]|12 [pP].[mM]|12:00 [pP].[mM].|12:00 [pP][mM]|12:00 [pP].[mM]", "12 [pP].[mM].,12 [pP][mM],12 [pP].[mM],12:00 [pP].[mM].,12:00 [pP][mM],12:00 [pP].[mM]", " noon", "midnight should be used instead of 12 a.m.", "False, True, False"));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9]{1,2} [pPaA][mM]", "[0-9]{1,2} [pPaA][mM]", null, "time should use lowercase a.m./p.m. with periods in between (e.g. 8 a.m.)", null));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9]{1,2} [pPaA][mM]", "[0-9]{1,2} [pPaA][mM]", null, "time should use lowercase a.m./p.m. with periods in between (e.g. 8 a.m.)", null));
+
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9]{1,2}[pPaA][mM]", "[0-9]{1,2}[pPaA][mM]", null, "time should be in format: XX:XX a.m./p.m. with a space between the digit and a.m./p.m. suffix (e.g. 8 a.m.)", null));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9]{1,2}[PpaA].[Mm].", "[0-9]{1,2}[PpaA].[Mm].", null, "time should be in format: XX:XX a.m./p.m. with a space between the digit and a.m./p.m. suffix(e.g. 8 a.m.)", null));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, " 0[0-9]", " 0[0-9]", null, "time should be written without a preceding zero (e.g. 7:15 a.m.)", null));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(3, ":00", ":00", " ", "time written without minutes should be written as hours only (e.g. 11 a.m.)", "False, False, True"));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9,.] - [0-9]", "[0-9,.] - [0-9]", null, "a time range should use a hyphen without surrounding spaces (e.g. 8-9 a.m.)", null));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9,.]- [0-9]", "[0-9,.]- [0-9]", null, "a time range should use a hyphen without surrounding spaces (e.g. 8-9 a.m.)", null));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9,.] -[0-9]", "[0-9,.] -[0-9]", null, "a time range should use a hyphen without surrounding spaces (e.g. 8-9 a.m.)", null));
             return styleArray;
         }
 
