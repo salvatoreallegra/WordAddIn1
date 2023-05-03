@@ -87,7 +87,7 @@ namespace WordAddIn1
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Department-Wide|[dD]epartment [wW]ide|department-[wW]ide", "Department-Wide,[dD]epartment [wW]ide,department-[wW]ide", " Department-wide", "Department-wide should be capitalized and have a hyphen", "False, True, False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(3, @"\bnation\b", "nation", "Nation", "Nation should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "congress", "congress", "Congress", "Congress / Congressional should be capitalized", "True, False, False"));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(5, "[0-9]{10}", "[0-9]{10}", null, "phone number should be in the format XXX-XXX-XXXX", null));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "[0-9]{10}|([0-9]{3})-[0-9]{3}-[0-9]{4}", "[0-9]{10},([0-9]{3})-[0-9]{3}-[0-9]{4}", null, "phone number should be in the format XXX-XXX-XXXX", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "service member|[sS]ervice Member", "service member,[sS]ervice Member", " Service member", "Service member(s) should be capitalized", "False, True, False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "members of congress|Members of congress|members of Congress", "members of congress,Members of congress,members of Congress", " Members of Congress", "Members of Congress should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "coworkers|Coworkers|Co workers|co-workers|co workers", "coworkers,Coworkers,Co workers,co-workers,co workers", " Co-workers", " Co-workers should be capitalized", "True, False, True"));
@@ -268,6 +268,7 @@ namespace WordAddIn1
 
             rng.Find.ClearFormatting();
             rng.Find.Forward = true;
+            rng.Find.MatchWildcards = true;  //This was just added 5/3/2022, may need to remove
             rng.Find.Text = WordToComment;
 
             rng.Find.Execute(
@@ -277,13 +278,14 @@ namespace WordAddIn1
 
             while (rng.Find.Found)
             {
-
+                rng.Find.MatchWildcards = true;   //This was just added, may need to delete 5/3/2023
                 rng.Find.Execute(
                     ref missing, ref missing, ref missing, ref missing, ref missing,
                     ref missing, ref missing, ref missing, ref missing, ref missing,
                     ref missing, ref missing, ref missing, ref missing, ref missing);
 
-                object text = WordToComment + " " + message + " -CME";
+                //object text = WordToComment + " " + message + " -CME";
+                object text = message + " -CME";
                 object start = rng.Start;
                 object end = rng.End;
 
@@ -321,6 +323,22 @@ namespace WordAddIn1
             {
                 CommentWithoutReplace("[A-Z,a-z][th, st, nd, rd] of " + x, "the date should be written as DD(st/nd/rd/th) of " + x + " (e.g. 11th of November)");
                 CommentWithoutReplace(x + " [0-9]{1,2}[A-Za-z]{2}", "the date should be written as " + x + " DD (e.g May 1)");
+
+            }
+
+
+        }
+        public void FormatNumbersUnder10()
+        {
+            string[] numbersArray = new string[] { "zero","one","two","three",
+            "four", "five", "six","seven", "eight","nine"};
+
+            int[] digitsArray = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+
+            foreach (var x in digitsArray)
+            {
+                CommentWithoutReplace(" " + x + " ", "numbers under ten should be written out in words (when describing amounts of objects e.g. nine Veterans)");
 
             }
 
