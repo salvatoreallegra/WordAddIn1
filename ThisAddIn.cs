@@ -126,7 +126,6 @@ namespace WordAddIn1
 
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, " [0-9]{1,2}[PpmM.]{2,4}[ -]{1,3}[0-9]{1,2}[PpmM.]{2,4}", " [0-9]{1,2}[PpmM.]{2,4}[ -]{1,3}[0-9]{1,2}[PpmM.]{2,4}", null, "if time range are both in pm, time should be written as X-X p.m. (e.g. 1:15-2:30 p.m. or 4-6 p.m.)", null));
 
-
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "12 [aA].[mM].|12 [aA][mM]|12 [aA].[mM]|12:00 [aA].[mM].|12:00 [aA][mM]|12:00 [aA].[mM]", "12 [aA].[mM].,12 [aA][mM],12 [aA].[mM],12:00 [aA].[mM].,12:00 [aA][mM],12:00 [aA].[mM]", " midnight", "midnight should be used instead of 12 a.m.", "False, True, False"));
 
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "12 [pP].[mM].|12 [pP][mM]|12 [pP].[mM]|12:00 [pP].[mM].|12:00 [pP][mM]|12:00 [pP].[mM]", "12 [pP].[mM].,12 [pP][mM],12 [pP].[mM],12:00 [pP].[mM].,12:00 [pP][mM],12:00 [pP].[mM]", " noon", "midnight should be used instead of 12 a.m.", "False, True, False"));
@@ -134,7 +133,6 @@ namespace WordAddIn1
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9]{1,2} [pPaA][mM]", "[0-9]{1,2} [pPaA][mM]", null, "time should use lowercase a.m./p.m. with periods in between (e.g. 8 a.m.)", null));
 
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9]{1,2} [pPaA][mM]", "[0-9]{1,2} [pPaA][mM]", null, "time should use lowercase a.m./p.m. with periods in between (e.g. 8 a.m.)", null));
-
 
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9]{1,2}[pPaA][mM]", "[0-9]{1,2}[pPaA][mM]", null, "time should be in format: XX:XX a.m./p.m. with a space between the digit and a.m./p.m. suffix (e.g. 8 a.m.)", null));
 
@@ -149,6 +147,13 @@ namespace WordAddIn1
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9,.]- [0-9]", "[0-9,.]- [0-9]", null, "a time range should use a hyphen without surrounding spaces (e.g. 8-9 a.m.)", null));
 
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[0-9,.] -[0-9]", "[0-9,.] -[0-9]", null, "a time range should use a hyphen without surrounding spaces (e.g. 8-9 a.m.)", null));
+
+            //Conjuntions
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(3, ", and", ", and", " and", "When using commas to separate elements of a series, do not put a comma before the conjunction.'", "True"));
+
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "  ", "  ", " ", "There were two spaces here and it's now one space.", "True"));
+
+
             return styleArray;
         }
 
@@ -248,7 +253,6 @@ namespace WordAddIn1
                     wordRange.Find.ClearFormatting();
                 }
 
-
                 // Next Find
                 wordRange.Find.Execute(FindText: TextToFind, MatchCase: false, MatchWildcards: true);
             }
@@ -306,6 +310,21 @@ namespace WordAddIn1
             {
                 AddComments(text, ReplacementText, CommentText, settings);
             }
+        }
+
+        public void FormatDate()
+        {
+            string[] monthsArray = new string[] { "January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October","November", "December"};
+
+            foreach(var x in monthsArray)
+            {
+                CommentWithoutReplace("[A-Z,a-z][th, st, nd, rd] of " + x, "the date should be written as DD(st/nd/rd/th) of " + x + " (e.g. 11th of November)");
+                CommentWithoutReplace(x + " [0-9]{1,2}[A-Za-z]{2}", "the date should be written as " + x + " DD (e.g May 1)");
+
+            }
+
+
         }
 
         public void DeleteAllComments()
