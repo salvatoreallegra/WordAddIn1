@@ -64,7 +64,8 @@ namespace WordAddIn1
 
             }
             Globals.ThisAddIn.FormatDate();
-            Globals.ThisAddIn.FormatNumbersUnder10(); 
+            Globals.ThisAddIn.FormatNumbersUnder10();
+            Globals.ThisAddIn.DollarSymbolFollowedByDigits();
             //Globals.ThisAddIn.ReplaceWithComments("Internet", "internet", "Replaced Internet: Internet should not be capitalized");
             //Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet", "Replaced Intranet: Intranet should not be capitalized");
             //Globals.ThisAddIn.ReplaceWithComments("Web", "web", "Replaced Web: Web should not be capitalized");

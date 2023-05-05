@@ -347,7 +347,13 @@ namespace WordAddIn1
 
         public void DollarSymbolFollowedByDigits()
         {
+            string[] numbers = new string[] { "zero","one","two","three",
+            "four", "five", "six","seven", "eight","nine"};
+            int[] digitsArray = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            for (int i = 0; i <= numbers.Length; i++)
 
+                ReplaceWithComments("$" + numbers[i], "$" + digitsArray[i], "$ signs should be written as digits", ""); 
+            
         }
 
         public void DeleteAllComments()
