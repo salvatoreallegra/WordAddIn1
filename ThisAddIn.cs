@@ -407,6 +407,11 @@ namespace WordAddIn1
             }
 
         }
+        //comment_symbol_should_be_preceeded_by_digits
+        public void SymbolShouldBePreceededByDigitis()
+        {
+
+        }
 
         public void DeleteAllComments()
         {
