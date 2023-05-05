@@ -345,6 +345,11 @@ namespace WordAddIn1
 
         }
 
+        public void DollarSymbolFollowedByDigits()
+        {
+
+        }
+
         public void DeleteAllComments()
         {
             if (Application.ActiveDocument.Comments.Count != 0)

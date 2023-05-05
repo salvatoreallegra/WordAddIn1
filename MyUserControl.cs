@@ -37,7 +37,7 @@ namespace WordAddIn1
              * the tuple of the things we are looking for, this is where you add more search criteria
              * .  Process array takes 
              * 
-             * 
+             *  P
              */
 
             var returnValue = Globals.ThisAddIn.ProcessDocument();
