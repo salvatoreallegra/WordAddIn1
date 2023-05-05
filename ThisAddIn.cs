@@ -212,6 +212,53 @@ namespace WordAddIn1
             }
 
         }
+
+        public void ReplaceWithCommentsNonStyleArray(string TextToFind, string ReplacementText, string CommentText)
+        {
+            //var found = false;
+            
+            Microsoft.Office.Interop.Word.Range wordRange = null;
+            Word.Document document = this.Application.ActiveDocument;
+
+
+
+            //Turn off Revisions just so we won't enter the infinite loop.
+            /*if(document.TrackRevisions == true)
+            {
+                document.TrackRevisions = false;
+            }*/
+
+            wordRange = document.Content;
+            wordRange.Find.ClearFormatting();
+            wordRange.Find.ClearAllFuzzyOptions();
+            wordRange.Find.Replacement.ClearFormatting();
+            wordRange.Find.IgnoreSpace = true;
+            wordRange.Find.MatchCase = false;
+            //wordRange.Find.MatchWholeWord = optionValues[2];
+            wordRange.Find.MatchWildcards = true;
+            wordRange.Find.Text = TextToFind;
+            wordRange.Find.Execute();
+            //Regex reg = new Regex(TextToFind);
+            while (wordRange.Find.Found)
+            {
+                //Match matchedItem = reg.Match(wordRange.Text);
+                object text = CommentText;
+                //if (matchedItem.Success)
+                //{
+                    //wordRange.Text = ReplacementText;
+                    Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                    rng.Text = ReplacementText;
+                    document.Comments.Add(
+                    rng, ref text);
+                    wordRange.Find.ClearFormatting();
+                //}
+
+
+                // Next Find
+                wordRange.Find.Execute(FindText: TextToFind, MatchCase: false, MatchWildcards: true);
+            }
+
+        }
         public void AddComments(string TextToFind, string ReplacementText, string CommentText, string settings)
         {
             //var found = false;
@@ -350,10 +397,15 @@ namespace WordAddIn1
             string[] numbers = new string[] { "zero","one","two","three",
             "four", "five", "six","seven", "eight","nine"};
             int[] digitsArray = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            for (int i = 0; i <= numbers.Length; i++)
+            for (int i = 0; i < numbers.Length; i++)
+            {
 
-                ReplaceWithComments("$" + numbers[i], "$" + digitsArray[i], "$ signs should be written as digits", ""); 
-            
+                ReplaceWithCommentsNonStyleArray("$" + numbers[i], "$" + digitsArray[i], "$ signs should be written as digits");
+                //replace_with_comments num(i) + " dollars", "$" + digit(i), " dollar amounts should be written as digits", False
+                ReplaceWithCommentsNonStyleArray(numbers[i] + " dollars", "$" + digitsArray[i], "$ signs should be written as digits");
+
+            }
+
         }
 
         public void DeleteAllComments()
