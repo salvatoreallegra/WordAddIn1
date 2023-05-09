@@ -410,7 +410,34 @@ namespace WordAddIn1
         //comment_symbol_should_be_preceeded_by_digits
         public void SymbolShouldBePreceededByDigitis()
         {
+            //numericSymbolsPreceededByNumber = Split(" percent,%, cent, years old, degrees Fahrenheit, degrees Celsius,°F,°C,-", ",")
+            //numbers = Split("zero one two three four five six seven eight nine")
+            //SymbolsPreecedByNumber = Split("%,%,¢, years old,°F,°C,°F,°C,-", ",")
+            //numbersdigits = Split("0 1 2 3 4 5 6 7 8 9") 
 
+            /*string[] numbericSymbolsPreceededByNumber = new string[]
+            {
+                " percent","%","cent","years old","degrees Fahrenheit","degrees Celsius", "°F","°C",",")
+            };*/
+            string[] numericSymbolsPreceededByNumber = { " percent", "%", "cent", "years old", "degrees Fahrenheit", "degrees Celsius", "°F", "°C", "-\"",","};
+            string[] numbers = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+            //SymbolsPreecedByNumber = Split("%,%,¢, years old,°F,°C,°F,°C,-", ",")
+            string[] symbolsPreceededByNumber = { "%", "%", "¢", "years old", "°F", "°C", "°F", "°C", "-\"",","};
+
+            /*  Dim found As Boolean
+              Dim i As Integer
+              Dim j As Integer
+
+              For i = LBound(symbols) To UBound(symbols)
+
+                  For j = LBound(num) To UBound(num)'
+
+
+                     replace_with_comments num(j) +symbols(i), digit(j) + symbolform(i), symbols(i) + " should be preceded by a digit", False
+
+                 Next j
+
+             Next i*/
 
         }
 
