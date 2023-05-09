@@ -411,6 +411,7 @@ namespace WordAddIn1
         public void SymbolShouldBePreceededByDigitis()
         {
 
+
         }
 
         public void DeleteAllComments()
