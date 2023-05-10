@@ -423,7 +423,26 @@ namespace WordAddIn1
             string[] numbers = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
             //SymbolsPreecedByNumber = Split("%,%,¢, years old,°F,°C,°F,°C,-", ",")
             string[] symbolsPreceededByNumber = { "%", "%", "¢", "years old", "°F", "°C", "°F", "°C", "-\"",","};
+            string[] numbersDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
+            //method signature
+            //comment_symbol_should_be_preceeded_by_digits(symbols() As String, num() As String, symbolform() As String, digit() As String)
+
+            //Method call
+            //comment_symbol_should_be_preceeded_by_digits numericSymbolsPreceededByNumber, numbers, SymbolsPreecedByNumber, numbersdigits
+
+            for (int i = 0; i < numericSymbolsPreceededByNumber.Length; i++)
+            {
+                for(int j = 0; j < numbers.Length; j++)
+                {
+                    ReplaceWithCommentsNonStyleArray(numbers[j] + numericSymbolsPreceededByNumber[i],numbersDigits[i] + symbolsPreceededByNumber[i],
+                        numericSymbolsPreceededByNumber[i] + " should be preceded by a digit");
+                }
+            }
+            
+            
+            
+            
             /*  Dim found As Boolean
               Dim i As Integer
               Dim j As Integer
