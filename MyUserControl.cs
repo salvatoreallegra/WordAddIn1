@@ -40,6 +40,8 @@ namespace WordAddIn1
              *  P
              */
 
+            cmeProgress.Value = 0;
+
             var returnValue = Globals.ThisAddIn.ProcessDocument();
             foreach(var x in returnValue)
             {
@@ -63,9 +65,16 @@ namespace WordAddIn1
                 }
 
             }
+            cmeProgress.Value = 10;
+
             Globals.ThisAddIn.FormatDate();
+
+            cmeProgress.Value = 50;
             Globals.ThisAddIn.FormatNumbersUnder10();
+
             Globals.ThisAddIn.DollarSymbolFollowedByDigits();
+
+            cmeProgress.Value = 100;
             //Globals.ThisAddIn.ReplaceWithComments("Internet", "internet", "Replaced Internet: Internet should not be capitalized");
             //Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet", "Replaced Intranet: Intranet should not be capitalized");
             //Globals.ThisAddIn.ReplaceWithComments("Web", "web", "Replaced Web: Web should not be capitalized");
@@ -76,6 +85,10 @@ namespace WordAddIn1
            
 
         }
-       
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
