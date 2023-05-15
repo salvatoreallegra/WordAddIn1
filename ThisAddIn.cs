@@ -73,7 +73,8 @@ namespace WordAddIn1
 
 
         private static List<Tuple<int, string, string, string, string, string>> BuildPatternArray()
-        {   //The contents of the returned tuple e.g. Item 2 = regex, item1 is the method
+        {  
+            //The contents of the returned tuple e.g. Item 2 = regex, item1 is the method
             //Item1  = method to use, Item2 = Regex, Item3 = Find search item, Item4 = replacement, Item5 = comments, Item6 = search settings, e.g. MatchWholeCase
             //Method 1 - apply_changes_to_word_permutations //This doesn't exist, I must create according to VBA Code
             //Method 2 - comment_on_change_to_word_permutations
@@ -83,6 +84,7 @@ namespace WordAddIn1
 
             //This is Marjories Code, it returns a list of tuples with all the things we need to search for
             List<Tuple<int, string, string, string, string, string>> styleArray = new List<Tuple<int, string, string, string, string, string>>();
+
             styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "veteran", "veteran", "Veteran", "Veteran(s) should be capitalized", "true, false, false"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Department-Wide|[dD]epartment [wW]ide|department-[wW]ide", "Department-Wide,[dD]epartment [wW]ide,department-[wW]ide", " Department-wide", "Department-wide should be capitalized and have a hyphen", "False, True, False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(3, @"\bnation\b", "nation", "Nation", "Nation should be capitalized", "True, False, True"));
