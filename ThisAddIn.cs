@@ -461,9 +461,9 @@ namespace WordAddIn1
             }
 
         }
-        public int getItemsFound()
+        public string getItemsFound()
         {
-            return this.itemsFound;
+            return this.itemsFound.ToString();
         }
 
 

@@ -16,6 +16,9 @@ namespace WordAddIn1
 {
     public partial class MyUserControl : UserControl
     {
+
+        /*int numberOfWords = 0;
+        int progressIncrement = 0;*/
         public MyUserControl()
         {
             InitializeComponent();
@@ -39,12 +42,27 @@ namespace WordAddIn1
              * 
              *  P
              */
+            /*cmeTimer.Enabled = true;
+            Word.Range rng = Globals.ThisAddIn.Application.ActiveDocument.Content;
+            rng.Select();
+            
+            numberOfWords = Globals.ThisAddIn.Application.ActiveDocument.Words.Count;*/
 
+            lblProcessingUpdates.Text = "";
+
+            //cmeTimer.Start;
+            //cmeTimer.Enabled = true;
             cmeProgress.Value = 0;
+            lblProcessingUpdates.Text = "Processing, Please Be Patient and Don't Close Word";
+            int progressIncrement = 0;
 
             var returnValue = Globals.ThisAddIn.ProcessDocument();
             foreach(var x in returnValue)
             {
+                progressIncrement = 80 / returnValue.Count;
+                cmeProgress.Value += progressIncrement;
+                lblProcessingUpdates.Text = cmeProgress.Value + "% Complete";
+
                 switch (x.Item1)
                 {
                     case 1:
@@ -65,16 +83,29 @@ namespace WordAddIn1
                 }
 
             }
-            cmeProgress.Value = 10;
+            int remainingProgress = 100 - cmeProgress.Value;
+            cmeProgress.Value = remainingProgress + 10;
+            lblProcessingUpdates.Text = cmeProgress.Value + "% Complete";
+
 
             Globals.ThisAddIn.FormatDate();
 
-            cmeProgress.Value = 50;
+            cmeProgress.Value = cmeProgress.Value + 10;
+            lblProcessingUpdates.Text = cmeProgress.Value + "% Complete";
+
+
             Globals.ThisAddIn.FormatNumbersUnder10();
+
+            cmeProgress.Value = 95;
+            lblProcessingUpdates.Text = cmeProgress.Value + "% Complete";
 
             Globals.ThisAddIn.DollarSymbolFollowedByDigits();
 
             cmeProgress.Value = 100;
+            lblProcessingUpdates.Text = "100% complete";
+
+
+            //Delete later
             //Globals.ThisAddIn.ReplaceWithComments("Internet", "internet", "Replaced Internet: Internet should not be capitalized");
             //Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet", "Replaced Intranet: Intranet should not be capitalized");
             //Globals.ThisAddIn.ReplaceWithComments("Web", "web", "Replaced Web: Web should not be capitalized");
@@ -82,13 +113,21 @@ namespace WordAddIn1
             //Globals.ThisAddIn.ReplaceWithComments2("(702)-324-5587", "702-324-5587", "Replaced (702)-324-5587: Formated Phone Number without Parenthesis ");
             //Globals.ThisAddIn.CommentWithoutReplace("cosigners", "Should Say >>> <other signatories>");
             //Globals.ThisAddIn.CommentWithoutReplace("7028559999", "Phone Number should be in the format XXX-XXX-XXXX");
-           
-
+            
         }
 
         private void progressBar1_Click(object sender, EventArgs e)
         {
             
+        }
+
+        //Probably won't end up using the timer.
+        private void cmeTimer_Tick(object sender, EventArgs e)
+        {
+           /* if (cmeProgress.Value < 100)
+            {
+                cmeProgress.Value += progressIncrement + 10;
+            }*/
         }
     }
 }
