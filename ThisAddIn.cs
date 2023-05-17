@@ -13,7 +13,7 @@ namespace WordAddIn1
 {
     public partial class ThisAddIn
     {
-       
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
 
@@ -73,7 +73,7 @@ namespace WordAddIn1
 
 
         private static List<Tuple<int, string, string, string, string, string>> BuildPatternArray()
-        {  
+        {
             //The contents of the returned tuple e.g. Item 2 = regex, item1 is the method
             //Item1  = method to use, Item2 = Regex, Item3 = Find search item, Item4 = replacement, Item5 = comments, Item6 = search settings, e.g. MatchWholeCase
             //Method 1 - apply_changes_to_word_permutations //This doesn't exist, I must create according to VBA Code
@@ -164,7 +164,7 @@ namespace WordAddIn1
 
         public void ReplaceWithComments(string TextToFind, string ReplacementText, string CommentText, string settings)
         {
-            
+
             //var found = false;
             List<bool> optionValues = new List<bool>();
             var functionsettings = settings.Split(',');
@@ -247,12 +247,12 @@ namespace WordAddIn1
                 object text = CommentText;
                 //if (matchedItem.Success)
                 //{
-                    //wordRange.Text = ReplacementText;
-                    Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
-                    rng.Text = ReplacementText;
-                    document.Comments.Add(
-                    rng, ref text);
-                    wordRange.Find.ClearFormatting();
+                //wordRange.Text = ReplacementText;
+                Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                rng.Text = ReplacementText;
+                document.Comments.Add(
+                rng, ref text);
+                wordRange.Find.ClearFormatting();
                 //}
 
 
@@ -267,8 +267,6 @@ namespace WordAddIn1
 
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
-
-
 
             //Turn off Revisions just so we won't enter the infinite loop.
             /*if(document.TrackRevisions == true)
@@ -366,7 +364,7 @@ namespace WordAddIn1
             string[] monthsArray = new string[] { "January", "February", "March", "April", "May", "June", "July",
             "August", "September", "October","November", "December"};
 
-            foreach(var x in monthsArray)
+            foreach (var x in monthsArray)
             {
                 CommentWithoutReplace("[A-Z,a-z][th, st, nd, rd] of " + x, "the date should be written as DD(st/nd/rd/th) of " + x + " (e.g. 11th of November)");
                 CommentWithoutReplace(x + " [0-9]{1,2}[A-Za-z]{2}", "the date should be written as " + x + " DD (e.g May 1)");
@@ -410,45 +408,28 @@ namespace WordAddIn1
         //comment_symbol_should_be_preceeded_by_digits
         public void SymbolShouldBePreceededByDigitis()
         {
-            //numericSymbolsPreceededByNumber = Split(" percent,%, cent, years old, degrees Fahrenheit, degrees Celsius,°F,°C,-", ",")
-            //numbers = Split("zero one two three four five six seven eight nine")
-            //SymbolsPreecedByNumber = Split("%,%,¢, years old,°F,°C,°F,°C,-", ",")
-            //numbersdigits = Split("0 1 2 3 4 5 6 7 8 9") 
 
-            /*string[] numbericSymbolsPreceededByNumber = new string[]
-            {
-                " percent","%","cent","years old","degrees Fahrenheit","degrees Celsius", "°F","°C",",")
-            };*/
-            string[] numericSymbolsPreceededByNumber = { " percent", "%", "cent", "years old", "degrees Fahrenheit", "degrees Celsius", "°F", "°C", "-\"",","};
+            string[] numericSymbolsPreceededByNumber = { " percent", "%", "cent", "years old", "degrees Fahrenheit", "degrees Celsius", "°F", "°C", "-\"", "," };
             string[] numbers = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
             //SymbolsPreecedByNumber = Split("%,%,¢, years old,°F,°C,°F,°C,-", ",")
-            string[] symbolsPreceededByNumber = { "%", "%", "¢", "years old", "°F", "°C", "°F", "°C", "-\"",","};
+            string[] symbolsPreceededByNumber = { "%", "%", "¢", "years old", "°F", "°C", "°F", "°C", "-\"", "," };
             string[] numbersDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-            //method signature
-            //comment_symbol_should_be_preceeded_by_digits(symbols() As String, num() As String, symbolform() As String, digit() As String)
-
-            //Method call
-            //comment_symbol_should_be_preceeded_by_digits numericSymbolsPreceededByNumber, numbers, SymbolsPreecedByNumber, numbersdigits
 
             for (int i = 0; i < numericSymbolsPreceededByNumber.Length; i++)
             {
-                for(int j = 0; j < numbers.Length; j++)
+                for (int j = 0; j < numbers.Length; j++)
                 {
-                    ReplaceWithCommentsNonStyleArray(numbers[j] + numericSymbolsPreceededByNumber[i],numbersDigits[i] + symbolsPreceededByNumber[i],
+                    ReplaceWithCommentsNonStyleArray(numbers[j] + numericSymbolsPreceededByNumber[i], numbersDigits[i] + symbolsPreceededByNumber[i],
                         numericSymbolsPreceededByNumber[i] + " should be preceded by a digit");
                 }
             }
-            
-                   
-           
-
         }
 
         public void DeleteAllComments()
         {
             if (Application.ActiveDocument.Comments.Count != 0)
-            { 
+            {
                 this.Application.ActiveDocument.DeleteAllComments();
                 MessageBox.Show("All Comments Have Been Cleared");
             }
@@ -458,7 +439,7 @@ namespace WordAddIn1
             }
 
         }
-      
+
 
 
         #region VSTO generated code

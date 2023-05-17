@@ -28,6 +28,8 @@ namespace WordAddIn1
         private void btnClearComments_Click(object sender, EventArgs e)
         {
             Globals.ThisAddIn.DeleteAllComments();
+            lblProcessingUpdates.Text = "";
+            cmeProgress.Value = 0;
             
         }
 
@@ -53,7 +55,7 @@ namespace WordAddIn1
             //cmeTimer.Start;
             //cmeTimer.Enabled = true;
             cmeProgress.Value = 0;
-            lblProcessingUpdates.Text = "Processing, Please Be Patient and Don't Close Word";
+            
             int progressIncrement = 0;
 
             var returnValue = Globals.ThisAddIn.ProcessDocument();
@@ -61,7 +63,7 @@ namespace WordAddIn1
             {
                 progressIncrement = 80 / returnValue.Count;
                 cmeProgress.Value += progressIncrement;
-                lblProcessingUpdates.Text = cmeProgress.Value + "% Complete";
+                
 
                 switch (x.Item1)
                 {
@@ -90,35 +92,28 @@ namespace WordAddIn1
                 remainingProgress = 80;
             }
 
-           // cmeProgress.Value = remainingProgress + 10;
-            lblProcessingUpdates.Text = cmeProgress.Value + "% Complete";
+           
+          
 
 
             Globals.ThisAddIn.FormatDate();
 
             cmeProgress.Value = cmeProgress.Value + 5;
-            lblProcessingUpdates.Text = cmeProgress.Value + "% Complete";
+            
 
 
             Globals.ThisAddIn.FormatNumbersUnder10();
 
             cmeProgress.Value = cmeProgress.Value + 5;
-            lblProcessingUpdates.Text = cmeProgress.Value + "% Complete";
+           
 
             Globals.ThisAddIn.DollarSymbolFollowedByDigits();
               
             cmeProgress.Value = 100;
-            lblProcessingUpdates.Text = "100% complete";
+            //lblProcessingUpdates.Text = "100% complete";
 
 
-            //Delete later
-            //Globals.ThisAddIn.ReplaceWithComments("Internet", "internet", "Replaced Internet: Internet should not be capitalized");
-            //Globals.ThisAddIn.ReplaceWithComments("Intranet", "intranet", "Replaced Intranet: Intranet should not be capitalized");
-            //Globals.ThisAddIn.ReplaceWithComments("Web", "web", "Replaced Web: Web should not be capitalized");
-            //Globals.ThisAddIn.ReplaceWithComments2("07/04/2022", "4th of July, 2022", "Changed to Proper Date Format, Nth of Month, Year");
-            //Globals.ThisAddIn.ReplaceWithComments2("(702)-324-5587", "702-324-5587", "Replaced (702)-324-5587: Formated Phone Number without Parenthesis ");
-            //Globals.ThisAddIn.CommentWithoutReplace("cosigners", "Should Say >>> <other signatories>");
-            //Globals.ThisAddIn.CommentWithoutReplace("7028559999", "Phone Number should be in the format XXX-XXX-XXXX");
+           
             
         }
 
