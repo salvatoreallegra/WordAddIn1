@@ -83,24 +83,30 @@ namespace WordAddIn1
                 }
 
             }
+            
             int remainingProgress = 100 - cmeProgress.Value;
-            cmeProgress.Value = remainingProgress + 10;
+            if(remainingProgress != 80)
+            {
+                remainingProgress = 80;
+            }
+
+           // cmeProgress.Value = remainingProgress + 10;
             lblProcessingUpdates.Text = cmeProgress.Value + "% Complete";
 
 
             Globals.ThisAddIn.FormatDate();
 
-            cmeProgress.Value = cmeProgress.Value + 10;
+            cmeProgress.Value = cmeProgress.Value + 5;
             lblProcessingUpdates.Text = cmeProgress.Value + "% Complete";
 
 
             Globals.ThisAddIn.FormatNumbersUnder10();
 
-            cmeProgress.Value = 95;
+            cmeProgress.Value = cmeProgress.Value + 5;
             lblProcessingUpdates.Text = cmeProgress.Value + "% Complete";
 
             Globals.ThisAddIn.DollarSymbolFollowedByDigits();
-
+              
             cmeProgress.Value = 100;
             lblProcessingUpdates.Text = "100% complete";
 
