@@ -13,7 +13,7 @@ namespace WordAddIn1
 {
     public partial class ThisAddIn
     {
-        private int itemsFound = 0;
+       
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
 
@@ -164,7 +164,7 @@ namespace WordAddIn1
 
         public void ReplaceWithComments(string TextToFind, string ReplacementText, string CommentText, string settings)
         {
-            itemsFound++;
+            
             //var found = false;
             List<bool> optionValues = new List<bool>();
             var functionsettings = settings.Split(',');
@@ -219,7 +219,6 @@ namespace WordAddIn1
         public void ReplaceWithCommentsNonStyleArray(string TextToFind, string ReplacementText, string CommentText)
         {
             //var found = false;
-            itemsFound++;
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
 
@@ -266,7 +265,6 @@ namespace WordAddIn1
         {
             //var found = false;
 
-            itemsFound++;
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
 
@@ -312,7 +310,6 @@ namespace WordAddIn1
 
         public void CommentWithoutReplace(string WordToComment, string message)
         {
-            itemsFound++;
             Word.Document document = this.Application.ActiveDocument;
             Word.Range rng = document.Content;
 
@@ -461,10 +458,7 @@ namespace WordAddIn1
             }
 
         }
-        public string getItemsFound()
-        {
-            return this.itemsFound.ToString();
-        }
+      
 
 
         #region VSTO generated code
