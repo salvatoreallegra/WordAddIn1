@@ -176,6 +176,9 @@ namespace WordAddIn1
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
 
+           
+
+            
 
 
             //Turn off Revisions just so we won't enter the infinite loop.
@@ -222,7 +225,12 @@ namespace WordAddIn1
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
 
+            if (document.Revisions.Count >= 1)
+            {
+                document.Revisions.AcceptAll();
+            }
 
+            document.TrackRevisions = false;
 
             //Turn off Revisions just so we won't enter the infinite loop.
             /*if(document.TrackRevisions == true)
@@ -267,6 +275,13 @@ namespace WordAddIn1
 
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
+
+            if (document.Revisions.Count >= 1)
+            {
+                document.Revisions.AcceptAll();
+            }
+
+            document.TrackRevisions = false;
 
             //Turn off Revisions just so we won't enter the infinite loop.
             /*if(document.TrackRevisions == true)
@@ -426,16 +441,23 @@ namespace WordAddIn1
             }
         }
 
-        public void DeleteAllComments()
+        public void DeleteAllComments(bool showMessageBox)
         {
             if (Application.ActiveDocument.Comments.Count != 0)
             {
                 this.Application.ActiveDocument.DeleteAllComments();
-                MessageBox.Show("All Comments Have Been Cleared");
+                if (showMessageBox)
+                {
+                    MessageBox.Show("All Comments Have Been Cleared");
+                }
             }
             else
             {
-                MessageBox.Show("There are No Comments to Delete");
+                if (showMessageBox)
+                {
+                    MessageBox.Show("There are No Comments to Delete");
+                }
+
             }
 
         }

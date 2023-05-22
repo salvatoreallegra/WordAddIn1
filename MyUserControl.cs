@@ -27,7 +27,7 @@ namespace WordAddIn1
 
         private void btnClearComments_Click(object sender, EventArgs e)
         {
-            Globals.ThisAddIn.DeleteAllComments();
+            Globals.ThisAddIn.DeleteAllComments(true);
             lblProcessingUpdates.Text = "";
             cmeProgress.Value = 0;
             
@@ -49,6 +49,20 @@ namespace WordAddIn1
             rng.Select();
             
             numberOfWords = Globals.ThisAddIn.Application.ActiveDocument.Words.Count;*/
+
+            if (Globals.ThisAddIn.Application.ActiveDocument.Revisions.Count >= 1)
+            {
+                Globals.ThisAddIn.Application.ActiveDocument.Revisions.AcceptAll();
+            }
+
+            Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = false;
+
+
+
+            Globals.ThisAddIn.DeleteAllComments(false);
+
+
+
 
             lblProcessingUpdates.Text = "";
 
