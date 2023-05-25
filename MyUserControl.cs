@@ -113,7 +113,7 @@ namespace WordAddIn1
             Globals.ThisAddIn.FormatDate();
 
             cmeProgress.Value = cmeProgress.Value + 5;
-            
+            Globals.ThisAddIn.FindAndReplaceSpacesAroundHyphens();
 
 
             Globals.ThisAddIn.FormatNumbersUnder10();
@@ -122,6 +122,7 @@ namespace WordAddIn1
            
 
             Globals.ThisAddIn.DollarSymbolFollowedByDigits();
+            
               
             cmeProgress.Value = 100;
             //lblProcessingUpdates.Text = "100% complete";

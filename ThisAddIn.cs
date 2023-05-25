@@ -24,6 +24,41 @@ namespace WordAddIn1
         {
         }
 
+        public void FindAndReplaceSpacesAroundHyphens()
+        {
+            Microsoft.Office.Interop.Word.Range wordRange = null;
+            Word.Document document = this.Application.ActiveDocument;
+            wordRange = document.Content;
+            wordRange.Find.ClearFormatting();
+            wordRange.Find.ClearAllFuzzyOptions();
+            wordRange.Find.Replacement.ClearFormatting();
+            wordRange.Find.IgnoreSpace = true;
+            wordRange.Find.MatchCase = false;
+            //wordRange.Find.MatchWholeWord = optionValues[2];
+            wordRange.Find.MatchWildcards = true;
+            wordRange.Find.Text = " - ";
+            wordRange.Find.Execute();
+            //Regex reg = new Regex(TextToFind);
+            while (wordRange.Find.Found)
+            {
+                //Match matchedItem = reg.Match(wordRange.Text);
+                object text = "No Hypens";
+                //if (matchedItem.Success)
+                //{
+                //wordRange.Text = ReplacementText;
+                Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                rng.Text = "-";
+                document.Comments.Add(
+                rng, ref text);
+                wordRange.Find.ClearFormatting();
+                //}
+
+
+                // Next Find
+                wordRange.Find.Execute(FindText: " - ", MatchCase: false, MatchWildcards: false);
+            }
+        }
+
         public List<Tuple<int, string, string, string, string, string>> ProcessDocument()
         {
             Word.Document document = this.Application.ActiveDocument;
@@ -181,11 +216,7 @@ namespace WordAddIn1
             
 
 
-            //Turn off Revisions just so we won't enter the infinite loop.
-            /*if(document.TrackRevisions == true)
-            {
-                document.TrackRevisions = false;
-            }*/
+          
 
             wordRange = document.Content;
             wordRange.Find.ClearFormatting();
@@ -221,23 +252,8 @@ namespace WordAddIn1
 
         public void ReplaceWithCommentsNonStyleArray(string TextToFind, string ReplacementText, string CommentText)
         {
-            //var found = false;
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
-
-            if (document.Revisions.Count >= 1)
-            {
-                document.Revisions.AcceptAll();
-            }
-
-            document.TrackRevisions = false;
-
-            //Turn off Revisions just so we won't enter the infinite loop.
-            /*if(document.TrackRevisions == true)
-            {
-                document.TrackRevisions = false;
-            }*/
-
             wordRange = document.Content;
             wordRange.Find.ClearFormatting();
             wordRange.Find.ClearAllFuzzyOptions();
@@ -275,20 +291,6 @@ namespace WordAddIn1
 
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
-
-            if (document.Revisions.Count >= 1)
-            {
-                document.Revisions.AcceptAll();
-            }
-
-            document.TrackRevisions = false;
-
-            //Turn off Revisions just so we won't enter the infinite loop.
-            /*if(document.TrackRevisions == true)
-            {
-                document.TrackRevisions = false;
-            }*/
-
             wordRange = document.Content;
             wordRange.Find.ClearFormatting();
             wordRange.Find.ClearAllFuzzyOptions();
