@@ -114,6 +114,7 @@ namespace WordAddIn1
 
             cmeProgress.Value = cmeProgress.Value + 5;
             Globals.ThisAddIn.FindAndReplaceSpacesAroundHyphens();
+            //Globals.ThisAddIn.FindAndReplaceWildcardPlayGround();
 
 
             Globals.ThisAddIn.FormatNumbersUnder10();

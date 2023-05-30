@@ -59,6 +59,48 @@ namespace WordAddIn1
             }
         }
 
+        public void FindAndReplaceWildcardPlayGround()
+        {
+            Microsoft.Office.Interop.Word.Range wordRange = null;
+            Word.Document document = this.Application.ActiveDocument;
+            wordRange = document.Content;
+
+            /*Regex reg = new Regex(@"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}", RegexOptions.IgnoreCase);
+            Match match;
+
+            List<string> results = new List<string>();
+            for (match = reg.Match(wordRange.Text); match.Success; match = match.NextMatch())
+            {
+                // if (!(results.Contains(match.Value)))
+                //     results.Add(match.Value);
+                MessageBox.Show(match.ToString());
+            }
+*/
+            wordRange.Find.ClearFormatting();
+            wordRange.Find.ClearAllFuzzyOptions();
+            wordRange.Find.Replacement.ClearFormatting();
+            wordRange.Find.IgnoreSpace = true;
+            wordRange.Find.MatchCase = false;
+            wordRange.Find.MatchWildcards = true;
+            wordRange.Find.Text = "[abc]";
+            wordRange.Find.Execute();
+            while (wordRange.Find.Found)
+            {
+                object commentText = "No Hypens";
+                
+                Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                string whatsInRange = rng.Text;
+                //MessageBox.Show(whatsInRange);
+                rng.Text = "[\\1]";
+                document.Comments.Add(
+                rng, ref commentText);
+                wordRange.Find.ClearFormatting();
+                
+                // Next Find
+                wordRange.Find.Execute(FindText: "[abc]", MatchCase: false, MatchWildcards: true);
+            }
+        }
+
         public List<Tuple<int, string, string, string, string, string>> ProcessDocument()
         {
             Word.Document document = this.Application.ActiveDocument;
@@ -209,14 +251,7 @@ namespace WordAddIn1
                 optionValues.Add(Convert.ToBoolean(x));
             }
             Microsoft.Office.Interop.Word.Range wordRange = null;
-            Word.Document document = this.Application.ActiveDocument;
-
-           
-
-            
-
-
-          
+            Word.Document document = this.Application.ActiveDocument;            
 
             wordRange = document.Content;
             wordRange.Find.ClearFormatting();
