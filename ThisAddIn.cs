@@ -58,14 +58,7 @@ namespace WordAddIn1
                 wordRange.Find.Execute(FindText: " - ", MatchCase: false, MatchWildcards: false);
             }
         }
-
-        public void FindAndReplaceWildcardPlayGround()
-        {
-            Microsoft.Office.Interop.Word.Range wordRange = null;
-            Word.Document document = this.Application.ActiveDocument;
-            wordRange = document.Content;
-
-            /*Regex reg = new Regex(@"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}", RegexOptions.IgnoreCase);
+        /*Regex reg = new Regex(@"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}", RegexOptions.IgnoreCase);
             Match match;
 
             List<string> results = new List<string>();
@@ -76,28 +69,30 @@ namespace WordAddIn1
                 MessageBox.Show(match.ToString());
             }
 */
+        public void FindAndReplaceWildcardPlayGround(string wildCardText, string replacementText, string commentMessage)
+        {
+            Microsoft.Office.Interop.Word.Range wordRange = null;
+            Word.Document document = this.Application.ActiveDocument;
+            wordRange = document.Content;            
             wordRange.Find.ClearFormatting();
             wordRange.Find.ClearAllFuzzyOptions();
             wordRange.Find.Replacement.ClearFormatting();
             wordRange.Find.IgnoreSpace = true;
             wordRange.Find.MatchCase = false;
             wordRange.Find.MatchWildcards = true;
-            wordRange.Find.Text = "[abc]";
+            wordRange.Find.Text = wildCardText;
             wordRange.Find.Execute();
             while (wordRange.Find.Found)
             {
-                object commentText = "No Hypens";
-                
+                object commentText = commentMessage;                
                 Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
-                string whatsInRange = rng.Text;
-                //MessageBox.Show(whatsInRange);
-                rng.Text = "[\\1]";
+                rng.Text = replacementText;
                 document.Comments.Add(
                 rng, ref commentText);
                 wordRange.Find.ClearFormatting();
                 
                 // Next Find
-                wordRange.Find.Execute(FindText: "[abc]", MatchCase: false, MatchWildcards: true);
+                wordRange.Find.Execute(FindText: wildCardText, MatchCase: false, MatchWildcards: true);
             }
         }
 

@@ -104,18 +104,14 @@ namespace WordAddIn1
             if(remainingProgress != 80)
             {
                 remainingProgress = 80;
-            }
-
-           
-          
+            }        
 
 
             Globals.ThisAddIn.FormatDate();
 
             cmeProgress.Value = cmeProgress.Value + 5;
             Globals.ThisAddIn.FindAndReplaceSpacesAroundHyphens();
-            //Globals.ThisAddIn.FindAndReplaceWildcardPlayGround();
-
+            Globals.ThisAddIn.FindAndReplaceWildcardPlayGround("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3/\\1/\\2", "Replaced with U.K. Date Format");
 
             Globals.ThisAddIn.FormatNumbersUnder10();
 
@@ -126,10 +122,7 @@ namespace WordAddIn1
             
               
             cmeProgress.Value = 100;
-            //lblProcessingUpdates.Text = "100% complete";
-
-
-           
+            //lblProcessingUpdates.Text = "100% complete";           
             
         }
 
