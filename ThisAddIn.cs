@@ -13,7 +13,7 @@ namespace WordAddIn1
 {
     public partial class ThisAddIn
     {
-
+        private int numberCounter = 0;
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
 
@@ -144,6 +144,7 @@ namespace WordAddIn1
 
 
 
+
         private static List<Tuple<int, string, string, string, string, string>> BuildPatternArray()
         {
             //The contents of the returned tuple e.g. Item 2 = regex, item1 is the method
@@ -170,7 +171,7 @@ namespace WordAddIn1
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Intranet", "Intranet", null, "intranet should not be capitalized", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Web", "<Web>", null, "web should not be capitalized", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Armed forces|armed [fF]orces", "armed [fF]orces,Armed forces", " Armed Forces", "Armed Forces should be capitalized", "False, True, False"));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "[eE]-mail|Email", "[Ee]-mail,Email", null, "email should not be capitalized nor have a hyphen", null));
+            //styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "[eE]-mail|Email", "[Ee]-mail,Email", null, "email should not be capitalized nor have a hyphen", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, @"Alzheimer's Disease|alzheimer's disease|alzheimer's Disease|Alzheimer'sdisease|alzheimer'sdisease|alzheimer'sDisease", @"Alzheimer's Disease,alzheimer's disease,alzheimer's Disease,Alzheimer'sdisease,alzheimer'sdisease,alzheimer'sDisease", @" Alzheimer's disease", "Alzheimer's should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "governmentWide|governmentwide", "governmentWide,governmentwide", " Governmentwide", "Governmentwide should be capitalized", "False, True, False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Veterans integrated service network|veterans integrated service network", "Veterans integrated service network", " Veterans Integrated Service Network", " Veterans Integrated Service Network should be capitalized", "True, False, True"));
@@ -290,31 +291,61 @@ namespace WordAddIn1
             wordRange.Find.Replacement.ClearFormatting();
             wordRange.Find.IgnoreSpace = true;
             wordRange.Find.MatchCase = false;
-            //wordRange.Find.MatchWholeWord = optionValues[2];
             wordRange.Find.MatchWildcards = true;
             wordRange.Find.Text = TextToFind;
             wordRange.Find.Execute();
-            //Regex reg = new Regex(TextToFind);
             while (wordRange.Find.Found)
             {
-                //Match matchedItem = reg.Match(wordRange.Text);
                 object text = CommentText;
-                //if (matchedItem.Success)
-                //{
-                //wordRange.Text = ReplacementText;
                 Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
                 rng.Text = ReplacementText;
                 document.Comments.Add(
                 rng, ref text);
                 wordRange.Find.ClearFormatting();
-                //}
+               
+                // Next Find
+                wordRange.Find.Execute(FindText: TextToFind, MatchCase: false, MatchWildcards: true);
+            }
 
+        }
+
+        public void ReplaceWithCommentsLoopThroughSentences(string TextToFind, string ReplacementText, string CommentText)
+        {
+            Microsoft.Office.Interop.Word.Range wordRange = null;
+            Word.Document document = this.Application.ActiveDocument;
+            var sentenceCount = document.Sentences.Count;
+            for(int i = 1; i <= sentenceCount; i++)
+            {
+                wordRange = this.Application.ActiveDocument.Sentences[i];
+               // MessageBox.Show(wordRange.Text);
+            }
+           
+            wordRange = document.Content;
+            wordRange.Find.ClearFormatting();
+            wordRange.Find.ClearAllFuzzyOptions();
+            wordRange.Find.Replacement.ClearFormatting();
+            wordRange.Find.IgnoreSpace = true;
+            wordRange.Find.MatchCase = false;
+            wordRange.Find.MatchWildcards = true;
+            wordRange.Find.Text = TextToFind;
+            wordRange.Find.Execute();
+            while (wordRange.Find.Found)
+            {
+                object text = CommentText;
+                Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                rng.Text = ReplacementText;
+                document.Comments.Add(
+                rng, ref text);
+                wordRange.Find.ClearFormatting();
 
                 // Next Find
                 wordRange.Find.Execute(FindText: TextToFind, MatchCase: false, MatchWildcards: true);
             }
 
         }
+
+
+
         public void AddComments(string TextToFind, string ReplacementText, string CommentText, string settings)
         {
             //var found = false;
@@ -387,6 +418,58 @@ namespace WordAddIn1
 
         }
 
+        
+        public void CommentWithoutReplaceCheckSentence(string WordToComment, string message)
+        {
+           
+            Word.Document document = this.Application.ActiveDocument;
+            Word.Range rng = document.Content;
+
+            var sentenceCount = document.Sentences.Count;
+            for (int i = 1; i <= sentenceCount; i++)
+            {
+                rng = this.Application.ActiveDocument.Sentences[i];
+                rng.Find.ClearFormatting();
+                rng.Find.Forward = true;
+                rng.Find.MatchWildcards = true;  //This was just added 5/3/2022, may need to remove
+                rng.Find.Text = WordToComment;
+
+                rng.Find.Execute(
+                    ref missing, ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing, ref missing);
+                if (rng.Find.Found)
+                {
+                    numberCounter++;
+                }
+                if (numberCounter == 1)
+                {
+                    while (rng.Find.Found)
+                    {
+                        rng.Find.MatchWildcards = true;   //This was just added, may need to delete 5/3/2023
+                        rng.Find.Execute(
+                            ref missing, ref missing, ref missing, ref missing, ref missing,
+                            ref missing, ref missing, ref missing, ref missing, ref missing,
+                            ref missing, ref missing, ref missing, ref missing, ref missing);
+
+                        //object text = WordToComment + " " + message + " -CME";
+                        object text = message + " -CME";
+                        object start = rng.Start;
+                        object end = rng.End;
+
+                        this.Application.ActiveDocument.Comments.Add(
+                            Application.ActiveDocument.Range(rng.Start, rng.End), ref text);
+                    }
+                }
+               
+
+            }
+            
+            MessageBox.Show(numberCounter.ToString());
+            numberCounter = 0;
+
+
+        }
 
         public void apply_changes_to_word_permutations(string TextToFind, string ReplacementText, string CommentText, string settings)
         {
@@ -430,8 +513,9 @@ namespace WordAddIn1
 
             foreach (var x in digitsArray)
             {
-                CommentWithoutReplace(" " + x + " ", "numbers under ten should be written out in words (when describing amounts of objects e.g. nine Veterans)");
-
+                //CommentWithoutReplace(" " + x + " ", "numbers under ten should be written out in words (when describing amounts of objects e.g. nine Veterans)");
+                //CommentWithoutReplace(x.ToString(), "numbers under ten should be written out in words (when describing amounts of objects e.g. nine Veterans)");
+                CommentWithoutReplaceCheckSentence(x.ToString(), "Numbers under ten...");
             }
 
 

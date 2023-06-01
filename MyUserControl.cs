@@ -123,6 +123,14 @@ namespace WordAddIn1
               
             cmeProgress.Value = 100;
             //lblProcessingUpdates.Text = "100% complete";           
+
+            //Replace with Comments on Email Permutations, We can uncomment the va code just to comment
+            string[] emailPermutations = new string[] { "[eE]-mail", "Email", "[Ee]-mail", "Email" };
+            foreach(var email in emailPermutations)
+            {
+                Globals.ThisAddIn.ReplaceWithCommentsNonStyleArray(email, "email", "howdy");
+            }
+            Globals.ThisAddIn.ReplaceWithCommentsLoopThroughSentences("bill", "gem", "Howdy");
             
         }
 
