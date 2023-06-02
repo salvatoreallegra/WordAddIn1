@@ -661,6 +661,7 @@ namespace WordAddIn1
                 this.Application.ActiveDocument.DeleteAllComments();
                 if (showMessageBox)
                 {
+                    ShowAllComments();
                     MessageBox.Show("All Comments Have Been Cleared");
                 }
             }
@@ -674,10 +675,15 @@ namespace WordAddIn1
             }
 
         }
-        public void ShowAllComments()
+       /* public void ShowAllComments()
         {
-            //this.Application.ActiveDocument.Comments
-        }
+            foreach(var comment in this.Application.ActiveDocument.Comments)
+            {
+                MessageBox.Show(comment.ToString());
+                
+            }
+            
+        }*/
 
 
 
