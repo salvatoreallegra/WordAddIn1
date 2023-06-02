@@ -122,7 +122,9 @@ namespace WordAddIn1
             
               
             cmeProgress.Value = 100;
-            //lblProcessingUpdates.Text = "100% complete";           
+            //lblProcessingUpdates.Text = "100% complete";
+            //
+            Globals.ThisAddIn.FindReplaceAndCommentWithWildCards("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3\\1\\2", "Replaced with U.K. Date Format");
 
             //Replace with Comments on Email Permutations, We can uncomment the va code just to comment
             string[] emailPermutations = new string[] { "[eE]-mail", "Email", "[Ee]-mail", "Email" };
