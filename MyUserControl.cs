@@ -111,9 +111,9 @@ namespace WordAddIn1
 
             cmeProgress.Value = cmeProgress.Value + 5;
             Globals.ThisAddIn.FindAndReplaceSpacesAroundHyphens();
-            Globals.ThisAddIn.FindAndReplaceWildcardPlayGround("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3/\\1/\\2", "Replaced with U.K. Date Format");
+            //Globals.ThisAddIn.FindAndReplaceWildcardPlayGround("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3/\\1/\\2", "Replaced with U.K. Date Format");
 
-            Globals.ThisAddIn.FormatNumbersUnder10();
+            //Globals.ThisAddIn.FormatNumbersUnder10();
 
             cmeProgress.Value = cmeProgress.Value + 5;
            
@@ -124,7 +124,8 @@ namespace WordAddIn1
             cmeProgress.Value = 100;
             //lblProcessingUpdates.Text = "100% complete";
             //
-            Globals.ThisAddIn.FindReplaceAndCommentWithWildCards("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3\\1\\2", "Replaced with U.K. Date Format");
+            Globals.ThisAddIn.FindReplaceAndCommentWithWildCards("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3/\\1/\\2", "Replaced with U.K. Date Format");
+            Globals.ThisAddIn.FindAndCommentWithWildCards("Copland", "Wha a great movie");
 
             //Replace with Comments on Email Permutations, We can uncomment the va code just to comment
             string[] emailPermutations = new string[] { "[eE]-mail", "Email", "[Ee]-mail", "Email" };

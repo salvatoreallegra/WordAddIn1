@@ -72,6 +72,55 @@ namespace WordAddIn1
 
             ur.EndCustomRecord();
         }
+
+        /******************************************
+         * This is going to be the main Find and Comment
+         * with Wildcards function for the entire app.
+         * There is no replace here, just a wildcard find
+         * and adding a comment to the found range
+         * ****************************************/
+
+        public void FindAndCommentWithWildCards(string wildCardText, string commentMessage)
+        {
+            //do this, it only takes one step when undo
+            Microsoft.Office.Interop.Word.UndoRecord ur = this.Application.UndoRecord;
+            ur.StartCustomRecord("FindReplaceAndCommentWithWildCards");
+
+            Microsoft.Office.Interop.Word.Range wordRange = null;
+            Word.Document document = this.Application.ActiveDocument;
+            wordRange = document.Content;
+            wordRange.Find.ClearFormatting();
+            wordRange.Find.ClearAllFuzzyOptions();
+            wordRange.Find.Replacement.ClearFormatting();
+            wordRange.Find.IgnoreSpace = true;
+            wordRange.Find.MatchCase = false;
+            //wordRange.Find.MatchWildcards = true;
+            wordRange.Find.Text = wildCardText;
+
+            //wordRange.Find.Replacement.Text = replacementText;//that's the right way to write
+            wordRange.Find.Forward = true;
+            wordRange.Find.Wrap = WdFindWrap.wdFindStop;
+
+            //don't forget the Replace argument
+            wordRange.Find.Execute(MatchWildcards: true);//Just set the argument MatchWildcards here!! like you wrote in this line : wordRange.Find.Execute(FindText: wildCardText, MatchCase: false, MatchWildcards: true);
+            while (wordRange.Find.Found)
+            {
+                object commentText = commentMessage;
+                Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                //rng.Text = replacementText;//This is wrong!! refer to above
+                document.Comments.Add(rng, ref commentText);
+                wordRange.Find.ClearFormatting();
+
+                // Next Find
+                //don't forget to reset the range wordRange
+                wordRange.SetRange(wordRange.End, wordRange.Document.Content.End);
+
+                //wordRange.Find.Execute(FindText: wildCardText, MatchCase: false, MatchWildcards: true);
+                wordRange.Find.Execute(MatchWildcards: true);
+            }
+
+            ur.EndCustomRecord();
+        }
         public void FindAndReplaceSpacesAroundHyphens()
         {
             Microsoft.Office.Interop.Word.Range wordRange = null;
@@ -624,6 +673,10 @@ namespace WordAddIn1
 
             }
 
+        }
+        public void ShowAllComments()
+        {
+            //this.Application.ActiveDocument.Comments
         }
 
 
