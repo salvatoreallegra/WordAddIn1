@@ -539,7 +539,7 @@ namespace WordAddIn1
                 {
                     numberCounter++;
                 }
-                if (numberCounter == 1)
+                if (numberCounter >=3)
                 {
                     while (rng.Find.Found)
                     {
@@ -637,10 +637,10 @@ namespace WordAddIn1
         public void SymbolShouldBePreceededByDigitis()
         {
 
-            string[] numericSymbolsPreceededByNumber = { " percent", "%", "cent", "years old", "degrees Fahrenheit", "degrees Celsius", "°F", "°C", "-\"", "," };
+            string[] numericSymbolsPreceededByNumber = { " percent", " %", " cent", " years old", " degrees Fahrenheit", " degrees Celsius", "°F", "°C", "-\"", "," };
             string[] numbers = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
             //SymbolsPreecedByNumber = Split("%,%,¢, years old,°F,°C,°F,°C,-", ",")
-            string[] symbolsPreceededByNumber = { "%", "%", "¢", "years old", "°F", "°C", "°F", "°C", "-\"", "," };
+            string[] symbolsPreceededByNumber = { "%", "%", "¢", " years old", "°F", "°C", "°F", "°C", "-\"", "," };
             string[] numbersDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 
@@ -661,7 +661,7 @@ namespace WordAddIn1
                 this.Application.ActiveDocument.DeleteAllComments();
                 if (showMessageBox)
                 {
-                    ShowAllComments();
+                   // ShowAllComments();
                     MessageBox.Show("All Comments Have Been Cleared");
                 }
             }
@@ -675,14 +675,14 @@ namespace WordAddIn1
             }
 
         }
-       /* public void ShowAllComments()
+        /*public void ShowAllComments()
         {
-            foreach(var comment in this.Application.ActiveDocument.Comments)
+            foreach (var comment in this.Application.ActiveDocument.Comments)
             {
-                MessageBox.Show(comment.ToString());
-                
+                MessageBox.Show();
+
             }
-            
+
         }*/
 
 

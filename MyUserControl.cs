@@ -133,6 +133,7 @@ namespace WordAddIn1
             {
                 Globals.ThisAddIn.ReplaceWithCommentsNonStyleArray(email, "email", "howdy");
             }
+
             Globals.ThisAddIn.ReplaceWithCommentsLoopThroughSentences("bill", "gem", "Howdy");
             
         }
