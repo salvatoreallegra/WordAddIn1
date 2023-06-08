@@ -140,7 +140,9 @@ namespace WordAddIn1
               {
                   Globals.ThisAddIn.IsDigitInSentence(i.ToString());
               }*/
-            Globals.ThisAddIn.processSentences();
+            //Globals.ThisAddIn.processSentences();
+            //Globals.ThisAddIn.FindAndCommentWithWildCards("<([0-9]@)>", "Dice Man");
+            Globals.ThisAddIn.FindAndCommentInSentence("<([0-9]@)>", "I'm going to kill myself");
         }
 
         private void progressBar1_Click(object sender, EventArgs e)

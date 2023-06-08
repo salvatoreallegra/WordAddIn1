@@ -131,61 +131,62 @@ namespace WordAddIn1
         * and adding a comment to the found range
         * ****************************************/
 
-        /*   public void FindAndCommentInSentence(string digit, string comment)
-           {
-               //do this, it only takes one step when undo
-               Microsoft.Office.Interop.Word.UndoRecord ur = this.Application.UndoRecord;
-               ur.StartCustomRecord("FindAndCommentInSentence");
+        public void FindAndCommentInSentence(string wildCardText, string comment)
+        {
+            //do this, it only takes one step when undo
+            Microsoft.Office.Interop.Word.UndoRecord ur = this.Application.UndoRecord;
+            ur.StartCustomRecord("FindAndCommentInSentence");
 
-               Microsoft.Office.Interop.Word.Range wordRange = null;
-               Word.Document document = this.Application.ActiveDocument;
+            Microsoft.Office.Interop.Word.Range wordRange = null;
+            Word.Document document = this.Application.ActiveDocument;
 
-               var sentenceCount = document.Sentences.Count;
-               for (int i = 1; i <= sentenceCount; i++)
-               {
+            var sentenceCount = document.Sentences.Count;
+            for (int i = 1; i <= sentenceCount; i++)
+            {
 
-                   wordRange = this.Application.ActiveDocument.Sentences[i];
-                   wordRange.Bold = 1;
-                   wordRange.Find.ClearFormatting();
-                   wordRange.Find.ClearAllFuzzyOptions();
-                   wordRange.Find.Replacement.ClearFormatting();
-                   wordRange.Find.IgnoreSpace = true;
-                   wordRange.Find.MatchCase = false;
-                   wordRange.Find.MatchWildcards = true;
-                   wordRange.Find.Text = digit;
-                   wordRange.Find.Replacement.Text = replacementText;//that's the right way to write
-                   wordRange.Find.Forward = true;
-                   wordRange.Find.Wrap = WdFindWrap.wdFindStop;
+                wordRange = this.Application.ActiveDocument.Sentences[i];
+                wordRange.Bold = 1;
+                wordRange.Find.ClearFormatting();
+                wordRange.Find.ClearAllFuzzyOptions();
+                wordRange.Find.Replacement.ClearFormatting();
+                wordRange.Find.IgnoreSpace = true;
+                wordRange.Find.MatchCase = false;
+                wordRange.Find.MatchWildcards = true;
+                wordRange.Find.Text = wildCardText;
+               // wordRange.Find.Replacement.Text = replacementText;//that's the right way to write
+                wordRange.Find.Forward = true;
+                wordRange.Find.Wrap = WdFindWrap.wdFindStop;
 
-                   //don't forget the Replace argument
-                   wordRange.Find.Execute(MatchWildcards: true);//Just set the argument MatchWildcards here!! like you wrote in this line : wordRange.Find.Execute(FindText: wildCardText, MatchCase: false, MatchWildcards: true);
-                   while (wordRange.Find.Found)
-                   {
-                       MessageBox.Show("Found 0-9");
+                //don't forget the Replace argument
+                wordRange.Find.Execute(MatchWildcards: true);//Just set the argument MatchWildcards here!! like you wrote in this line : wordRange.Find.Execute(FindText: wildCardText, MatchCase: false, MatchWildcards: true);
+                while (wordRange.Find.Found)
+                {
+                    MessageBox.Show(wordRange.Text);
 
-                       bool foundZeroThroughNime = true;
-                       break;
+                  //   bool foundZeroThroughNime = true;
+                   
 
-                       *//* object commentText = commentMessage;
-                       Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
-                       //rng.Text = replacementText;//This is wrong!! refer to above
-                       document.Comments.Add(rng, ref commentText);
-                       wordRange.Find.ClearFormatting();
-                       break;
-   *//*
-                       // Next Find
-                       //don't forget to reset the range wordRange
-                      // wordRange.SetRange(wordRange.End, wordRange.Document.Content.End);
+                    object commentText = comment;
+                    Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                    //rng.Text = replacementText;//This is wrong!! refer to above
+                    document.Comments.Add(rng, ref commentText);
+                    wordRange.Find.ClearFormatting();
 
-                       //wordRange.Find.Execute(FindText: wildCardText, MatchCase: false, MatchWildcards: true);
-                      //  wordRange.Find.Execute(MatchWildcards: true);
-                   } 
-               }           
 
-               ur.EndCustomRecord();
-           }*/
+                    // Next Find
+                    //don't forget to reset the range wordRange
+                    wordRange.SetRange(wordRange.End, wordRange.Document.Content.End);
+                    //wordRange.SetRange(wordRange.Sentences[i]);
 
-        
+                    //wordRange.Find.Execute(FindText: wildCardText, MatchCase: false, MatchWildcards: true);
+                       wordRange.Find.Execute(MatchWildcards: true);
+                }
+            }
+
+            ur.EndCustomRecord();
+        }
+
+
         public void processSentences()
         {
             int j = 0;
@@ -207,7 +208,7 @@ namespace WordAddIn1
 
                 //split each word into tokens by ' ' and place it into an array
                 string[] tokens = sentenceString.Split(' ');
-                tokens = tokens.Take(tokens.Length).ToArray(); //We need this to strip the last element of the array.
+                //tokens = tokens.Take(tokens.Length).ToArray(); //We need this to strip the last element of the array.
                 /*for (int k = 0; k < tokens.Length; k++)
                 {
                     tokensNoLastCharacter[k] = tokens[k];
@@ -235,9 +236,13 @@ namespace WordAddIn1
                     }
                     //j = 0;
                 }
-                if(nineAndLower && tenAndHigher)
+                if(nineAndLower == true && tenAndHigher == false)
                 {
-                    MessageBox.Show("Goodie");
+                    object text = "Digits need to be spelled out - cme";
+                    Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                    //rng.Text = ReplacementText;
+                    document.Comments.Add(
+                    rng, ref text);
                 }
                 
             }
