@@ -134,8 +134,13 @@ namespace WordAddIn1
                 Globals.ThisAddIn.ReplaceWithCommentsNonStyleArray(email, "email", "howdy");
             }
 
-            Globals.ThisAddIn.ReplaceWithCommentsLoopThroughSentences("bill", "gem", "Howdy");
-            
+            //Globals.ThisAddIn.FindAndCommentWithWildCards("[1-9]?[0-9]", "Test Gimme");
+            //Globals.ThisAddIn.ReplaceWithCommentsLoopThroughSentences("bill", "gem", "Howdy");
+            /*  for (int i = 0; i <= 9; i++)
+              {
+                  Globals.ThisAddIn.IsDigitInSentence(i.ToString());
+              }*/
+            Globals.ThisAddIn.processSentences();
         }
 
         private void progressBar1_Click(object sender, EventArgs e)
