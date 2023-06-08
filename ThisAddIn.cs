@@ -190,25 +190,54 @@ namespace WordAddIn1
         {
             int j = 0;
 
-           // bool nineAndLower;
-           // bool tenAndHigher;
+            bool nineAndLower = false;
+            bool tenAndHigher = false;
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Word.Document document = this.Application.ActiveDocument;
             var sentenceCount = document.Sentences.Count;
+
+            //Begin looping through each sentence in the document
             for (int i = 1; i <= sentenceCount; i++)
             {
                 
                 
                 wordRange = this.Application.ActiveDocument.Sentences[i];
                 string sentenceString = wordRange.Text;
-                MessageBox.Show(sentenceString);
+                //MessageBox.Show(sentenceString);
+
+                //split each word into tokens by ' ' and place it into an array
                 string[] tokens = sentenceString.Split(' ');
-                foreach(var token in tokens)
+                tokens = tokens.Take(tokens.Length).ToArray(); //We need this to strip the last element of the array.
+                /*for (int k = 0; k < tokens.Length; k++)
+                {
+                    tokensNoLastCharacter[k] = tokens[k];
+                }*/
+
+
+                foreach (var token in tokens)
                 {
                     
-                    bool result = int.TryParse(token, out j); //i now = 108
-                    MessageBox.Show(result.ToString());
-                    j = 0;
+                    bool result = int.TryParse(token, out j); //out parameter J will be turned into an integer if it can be parsed.
+                   
+                    //7,10.7
+                    if(j < 10)
+                    {
+                        //MessageBox.Show(j.ToString());
+                        nineAndLower = true;
+                        
+                        MessageBox.Show(j.ToString());
+                        
+                    }
+                    if(j >= 10)
+                    {
+                        tenAndHigher = true;
+                        MessageBox.Show(j.ToString());
+                    }
+                    //j = 0;
+                }
+                if(nineAndLower && tenAndHigher)
+                {
+                    MessageBox.Show("Goodie");
                 }
                 
             }
