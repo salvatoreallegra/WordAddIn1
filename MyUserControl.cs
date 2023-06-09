@@ -142,7 +142,7 @@ namespace WordAddIn1
               }*/
             //Globals.ThisAddIn.processSentences();
             //Globals.ThisAddIn.FindAndCommentWithWildCards("<([0-9]@)>", "Dice Man");
-            Globals.ThisAddIn.FindAndCommentInSentence("<([0-9]@)>", "I'm going to kill myself");
+            Globals.ThisAddIn.FindAndCommentInSentence("<([0-9]@)>", "Comment Here...will be changed");
         }
 
         private void progressBar1_Click(object sender, EventArgs e)

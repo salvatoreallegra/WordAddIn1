@@ -161,7 +161,7 @@ namespace WordAddIn1
                 wordRange.Find.Execute(MatchWildcards: true);//Just set the argument MatchWildcards here!! like you wrote in this line : wordRange.Find.Execute(FindText: wildCardText, MatchCase: false, MatchWildcards: true);
                 while (wordRange.Find.Found)
                 {
-                    MessageBox.Show(wordRange.Text);
+                   // MessageBox.Show(wordRange.Text);
 
                   //   bool foundZeroThroughNime = true;
                    
@@ -226,13 +226,13 @@ namespace WordAddIn1
                         //MessageBox.Show(j.ToString());
                         nineAndLower = true;
                         
-                        MessageBox.Show(j.ToString());
+                       // MessageBox.Show(j.ToString());
                         
                     }
                     if(j >= 10)
                     {
                         tenAndHigher = true;
-                        MessageBox.Show(j.ToString());
+                        //MessageBox.Show(j.ToString());
                     }
                     //j = 0;
                 }
