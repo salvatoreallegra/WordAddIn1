@@ -145,7 +145,7 @@ namespace WordAddIn1
             {
 
                 wordRange = this.Application.ActiveDocument.Sentences[i];
-                wordRange.Bold = 1;
+                //wordRange.Bold = 1;
                 wordRange.Find.ClearFormatting();
                 wordRange.Find.ClearAllFuzzyOptions();
                 wordRange.Find.Replacement.ClearFormatting();
@@ -191,9 +191,15 @@ namespace WordAddIn1
         {
             int j = 0;
 
+            string[] wordsZeroThrough9 = new string[] {"zero","one","two","three","four","five","six","seven","eight","nine"};
+
             bool nineAndLower = false;
             bool tenAndHigher = false;
+            bool spelledOutWordsUnder10 = false;
+
             Microsoft.Office.Interop.Word.Range wordRange = null;
+            Microsoft.Office.Interop.Word.Range wordRange1 = null;
+            Microsoft.Office.Interop.Word.Range wordRange2 = null;
             Word.Document document = this.Application.ActiveDocument;
             var sentenceCount = document.Sentences.Count;
 
@@ -203,40 +209,54 @@ namespace WordAddIn1
                 
                 
                 wordRange = this.Application.ActiveDocument.Sentences[i];
+                wordRange1 = this.Application.ActiveDocument.Sentences[i];
+                wordRange2 = this.Application.ActiveDocument.Sentences[i];
                 string sentenceString = wordRange.Text;
                 //MessageBox.Show(sentenceString);
 
-                //split each word into tokens by ' ' and place it into an array
-                string[] tokens = sentenceString.Split(' ');
-                //tokens = tokens.Take(tokens.Length).ToArray(); //We need this to strip the last element of the array.
-                /*for (int k = 0; k < tokens.Length; k++)
-                {
-                    tokensNoLastCharacter[k] = tokens[k];
-                }*/
+                wordRange.Find.Text = "<[0-9]{1}>";
 
+                wordRange.Find.Forward = true;
+                wordRange.Find.Wrap = WdFindWrap.wdFindStop;
 
-                foreach (var token in tokens)
+                //don't forget the Replace argument
+                wordRange.Find.Execute(MatchWildcards: true);
+
+                if (wordRange.Find.Found)
                 {
-                    
-                    bool result = int.TryParse(token, out j); //out parameter J will be turned into an integer if it can be parsed.
-                   
-                    //7,10.7
-                    if(j < 10)
-                    {
-                        //MessageBox.Show(j.ToString());
-                        nineAndLower = true;
-                        
-                       // MessageBox.Show(j.ToString());
-                        
-                    }
-                    if(j >= 10)
-                    {
-                        tenAndHigher = true;
-                        //MessageBox.Show(j.ToString());
-                    }
-                    //j = 0;
+                    nineAndLower = true;
+                   // MessageBox.Show("9 and Lower Find");
                 }
-                if(nineAndLower == true && tenAndHigher == false)
+
+                wordRange1.Find.Text = "<[0-9]{2,10}>";
+
+                //wordRange.Find.Replacement.Text = replacementText;//that's the right way to write
+                wordRange1.Find.Forward = true;
+                wordRange1.Find.Wrap = WdFindWrap.wdFindStop;
+
+                //don't forget the Replace argument
+                wordRange1.Find.Execute(MatchWildcards: true);
+
+                if (wordRange1.Find.Found)
+                {
+                    tenAndHigher = true;
+                   // MessageBox.Show("Ten and Higher True");
+                }
+                foreach(var word in wordsZeroThrough9)
+                {
+                    wordRange2.Find.Text = word;
+                    wordRange2.Find.Forward = true;
+                    wordRange2.Find.Wrap = WdFindWrap.wdFindStop;
+                    wordRange2.Find.Execute(MatchCase:false);
+                    if (wordRange2.Find.Found)
+                    {
+                        MessageBox.Show("Found a spelled out word");
+                        spelledOutWordsUnder10 = true;
+                        break;
+                    }
+                }
+              
+                if (nineAndLower == true && tenAndHigher == false)
                 {
                     object text = "Digits need to be spelled out - cme";
                     Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
@@ -244,7 +264,15 @@ namespace WordAddIn1
                     document.Comments.Add(
                     rng, ref text);
                 }
-                
+                if(spelledOutWordsUnder10 == true && tenAndHigher == true)
+                {
+                    object text = "Digits shouldn't be spelled out if there are numbers > 9 - cme";
+                    Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                    //rng.Text = ReplacementText;
+                    document.Comments.Add(
+                    rng, ref text);
+                }
+
             }
         }
         public void FindAndReplaceSpacesAroundHyphens()

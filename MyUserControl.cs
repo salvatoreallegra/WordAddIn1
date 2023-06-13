@@ -124,8 +124,8 @@ namespace WordAddIn1
             cmeProgress.Value = 100;
             //lblProcessingUpdates.Text = "100% complete";
             //
-            Globals.ThisAddIn.FindReplaceAndCommentWithWildCards("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3/\\1/\\2", "Replaced with U.K. Date Format");
-            Globals.ThisAddIn.FindAndCommentWithWildCards("Copland", "Wha a great movie");
+            //Globals.ThisAddIn.FindReplaceAndCommentWithWildCards("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3/\\1/\\2", "Replaced with U.K. Date Format");
+            //Globals.ThisAddIn.FindAndCommentWithWildCards("Copland", "Wha a great movie");
 
             //Replace with Comments on Email Permutations, We can uncomment the va code just to comment
             string[] emailPermutations = new string[] { "[eE]-mail", "Email", "[Ee]-mail", "Email" };
@@ -140,9 +140,9 @@ namespace WordAddIn1
               {
                   Globals.ThisAddIn.IsDigitInSentence(i.ToString());
               }*/
-            //Globals.ThisAddIn.processSentences();
+            Globals.ThisAddIn.processSentences();
             //Globals.ThisAddIn.FindAndCommentWithWildCards("<([0-9]@)>", "Dice Man");
-            Globals.ThisAddIn.FindAndCommentInSentence("<([0-9]@)>", "Comment Here...will be changed");
+            //Globals.ThisAddIn.FindAndCommentInSentence("<([0-9]@)>", "Comment Here...will be changed");
         }
 
         private void progressBar1_Click(object sender, EventArgs e)
