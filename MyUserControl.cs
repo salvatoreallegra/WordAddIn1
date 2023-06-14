@@ -147,6 +147,8 @@ namespace WordAddIn1
             Globals.ThisAddIn.processSentences();
 
             Globals.ThisAddIn.replaceVeteranInstances();
+            Globals.ThisAddIn.replaceFederalInstances();
+            Globals.ThisAddIn.replaceCongressInstances();
           
         }
 
