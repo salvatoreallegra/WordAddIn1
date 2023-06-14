@@ -145,6 +145,8 @@ namespace WordAddIn1
              * numbers under 10 style rule
              * *****************************/
             Globals.ThisAddIn.processSentences();
+
+            Globals.ThisAddIn.replaceVeteranInstances();
           
         }
 

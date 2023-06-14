@@ -26,8 +26,7 @@ namespace WordAddIn1
         }
         /******************************************
          * This is going to be the main Find and Replace
-         * with Wildcards function for the entire app.
-         * 
+         * with Wildcards function for the entire app.        
          *
          * ****************************************/
 
@@ -186,7 +185,44 @@ namespace WordAddIn1
             ur.EndCustomRecord();
         }
 
+        /**********************************
+         * 
+         * 
+         * 
+         * ******************************/
+        public void replaceVeteranInstances()
+        {
+            //  "Veteran-Owned,Veteran [oO]wned,veteran [oO]wned,veteran-[oO]wned"," Veteran-owned", "Veteran-owned should be capitalized and have a hyphen", False, True, False
+            // "Veterans [iI]ntegrated [sS]ervice network,veterans [iI]ntegrated [sS]ervice [nN]etwork,Veterans integrated [sS]ervice Network,Veterans [iI]ntegrated service Network"), " Veterans Integrated Service Network", " Veterans Integrated Service Network should be capitalized", False, True, False
 
+
+           // "veteran>,veterans>", "Veteran", "Veteran(s) should be capitalized", True, False, False
+            apply_changes_to_word_permutations("Veteran-Owned,Veteran [oO]wned,veteran [oO]wned,veteran-[oO]wned", " Veteran-owned", "Veteran-owned should be capitalized and have a hyphen", "False, True, False");
+            apply_changes_to_word_permutations("Veterans [iI]ntegrated [sS]ervice network,veterans [iI]ntegrated [sS]ervice [nN]etwork,Veterans integrated [sS]ervice Network,Veterans [iI]ntegrated service Network", " Veterans Integrated Service Network", " Veterans Integrated Service Network should be capitalized", "False, True, False");
+            //apply_changes_to_word_permutations("veteran,veterans","Veteran","Veterans(s) should be capitalized","True,False,False");
+            FindReplaceAndCommentWithWildCards("veteran", "Veteran" ,"Veterans(s) should be capitalized");
+            
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+        /**************************
+         * This method is used for rule finding
+         * numbers under 10 in a sentence....
+         * it's coupled with the method call
+         * in the button click handler in
+         * myUserControl.cs
+         * 
+         * ***********************/
         public void processSentences()
         {
             int j = 0;
@@ -402,7 +438,7 @@ namespace WordAddIn1
             //This is Marjories Code, it returns a list of tuples with all the things we need to search for
             List<Tuple<int, string, string, string, string, string>> styleArray = new List<Tuple<int, string, string, string, string, string>>();
 
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "veteran", "veteran", "Veteran", "Veteran(s) should be capitalized", "true, false, false"));
+           // styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "veteran", "veteran", "Veteran", "Veteran(s) should be capitalized", "true, false, false"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Department-Wide|[dD]epartment [wW]ide|department-[wW]ide", "Department-Wide,[dD]epartment [wW]ide,department-[wW]ide", " Department-wide", "Department-wide should be capitalized and have a hyphen", "False, True, False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(3, @"\bnation\b", "nation", "Nation", "Nation should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "congress", "congress", "Congress", "Congress / Congressional should be capitalized", "True, False, False"));
@@ -418,7 +454,7 @@ namespace WordAddIn1
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "[eE]-mail|Email", "[Ee]-mail,Email", null, "email should not be capitalized nor have a hyphen", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, @"Alzheimer's Disease|alzheimer's disease|alzheimer's Disease|Alzheimer'sdisease|alzheimer'sdisease|alzheimer'sDisease", @"Alzheimer's Disease,alzheimer's disease,alzheimer's Disease,Alzheimer'sdisease,alzheimer'sdisease,alzheimer'sDisease", @" Alzheimer's disease", "Alzheimer's should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "governmentWide|governmentwide", "governmentWide,governmentwide", " Governmentwide", "Governmentwide should be capitalized", "False, True, False"));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Veterans integrated service network|veterans integrated service network", "Veterans integrated service network", " Veterans Integrated Service Network", " Veterans Integrated Service Network should be capitalized", "True, False, True"));
+            //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Veterans integrated service network|veterans integrated service network", "Veterans integrated service network", " Veterans Integrated Service Network", " Veterans Integrated Service Network should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "Hepatitis [cC]|hepatitis c", "Hepatitis [cC],hepatitis c", null, "hepatitis C should not be capitalized", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "Website|[wW]eb site", "Website,[wW]eb site", null, "website(s) should not be capitalized nor written as two words", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "health Care|Health [cC]are|[hH]ealthcare", "health Care,Health [cC]are,[hH]ealthcare", null, "health care should not be capitalized", null));
@@ -427,7 +463,7 @@ namespace WordAddIn1
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Central office|central [oO]ffice", "Central office, central [oO]ffice", " Central Office", "Central Office should be capitalized", "False, True, False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "federal", "federal", "Federal", "Federal should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, @"\bfederal\b(?!\W+[gG]overnment\b)", "Federal government", "Federal Government", "Federal Government should be capitalized", "True, False, True"));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Veteran-Owned|[vV]eteran [oO]wned|veteran-[oO]wned", "Veteran-Owned,[vV]eteran [oO]wned,veteran-[oO]wned", " Veteran-owned", "Veteran-owned should be capitalized and have a hyphen", "True, False, True"));
+          //  styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Veteran-Owned|[vV]eteran [oO]wned|veteran-[oO]wned", "Veteran-Owned,[vV]eteran [oO]wned,veteran-[oO]wned", " Veteran-owned", "Veteran-owned should be capitalized and have a hyphen", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, @"[eE]xecutive [oO]rder", "[eE]xecutive [oO]rder", null, "Executive Order should be capitalized when using EO number", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, @"[mM]edical [cC]enter", "[mM]edical [cC]enter", null, "Medical center should be capitalized if preceded by the formal name of the facility", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "cosigners", "cosigners", null, "Should be other signatories", null));
