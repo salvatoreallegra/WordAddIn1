@@ -590,7 +590,7 @@ namespace WordAddIn1
 
 
 
-        public void AddComments(string TextToFind, string ReplacementText, string CommentText, string settings)
+        public void AddComments(string regexTextToFind,string TextToFind, string ReplacementText, string CommentText, string settings)
         {
             //var found = false;
 
@@ -606,7 +606,7 @@ namespace WordAddIn1
             wordRange.Find.MatchWildcards = true;
             wordRange.Find.Text = TextToFind;
             wordRange.Find.Execute();
-            Regex reg = new Regex(TextToFind);
+            Regex reg = new Regex(regexTextToFind);
             while (wordRange.Find.Found)
             {
                 Match matchedItem = reg.Match(wordRange.Text);
@@ -724,12 +724,12 @@ namespace WordAddIn1
             }
         }
 
-        public void comment_changes_to_word_permutations(string TextToFind, string ReplacementText, string CommentText, string settings)
+        public void comment_changes_to_word_permutations(string regexTextToFind, string TextToFind, string ReplacementText, string CommentText, string settings)
         {
             var textToFindArray = TextToFind.Split(',');
             foreach (var text in textToFindArray)
             {
-                AddComments(text, ReplacementText, CommentText, settings);
+                AddComments(regexTextToFind, text, ReplacementText, CommentText, settings);
             }
         }
 

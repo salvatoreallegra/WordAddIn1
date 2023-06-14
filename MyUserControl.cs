@@ -85,13 +85,13 @@ namespace WordAddIn1
                         Globals.ThisAddIn.apply_changes_to_word_permutations(x.Item3, x.Item4, x.Item5, x.Item6);
                         break;
                     case 2:
-                        Globals.ThisAddIn.comment_changes_to_word_permutations(x.Item3, x.Item4, x.Item5, x.Item6);
+                        Globals.ThisAddIn.comment_changes_to_word_permutations(x.Item2,x.Item3, x.Item4, x.Item5, x.Item6);
                         break;
                     case 3:
                         Globals.ThisAddIn.ReplaceWithComments(x.Item3,x.Item4,x.Item5, x.Item6);
                         break;
                     case 4:
-                        Globals.ThisAddIn.AddComments(x.Item3, x.Item4, x.Item5, x.Item6);
+                        Globals.ThisAddIn.AddComments(x.Item2,x.Item3, x.Item4, x.Item5, x.Item6);
                         break;
                     default:                        
                         break;
