@@ -206,8 +206,11 @@ namespace WordAddIn1
             //Begin looping through each sentence in the document
             for (int i = 1; i <= sentenceCount; i++)
             {
-                
-                
+
+                 nineAndLower = false;
+                 tenAndHigher = false;
+                 spelledOutWordsUnder10 = false;
+
                 wordRange = this.Application.ActiveDocument.Sentences[i];
                 wordRange1 = this.Application.ActiveDocument.Sentences[i];
                 wordRange2 = this.Application.ActiveDocument.Sentences[i];
@@ -250,7 +253,7 @@ namespace WordAddIn1
                     wordRange2.Find.Execute(MatchCase:false);
                     if (wordRange2.Find.Found)
                     {
-                        MessageBox.Show("Found a spelled out word");
+                        //MessageBox.Show("Found a spelled out word");
                         spelledOutWordsUnder10 = true;
                         break;
                     }
@@ -403,7 +406,7 @@ namespace WordAddIn1
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Department-Wide|[dD]epartment [wW]ide|department-[wW]ide", "Department-Wide,[dD]epartment [wW]ide,department-[wW]ide", " Department-wide", "Department-wide should be capitalized and have a hyphen", "False, True, False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(3, @"\bnation\b", "nation", "Nation", "Nation should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "congress", "congress", "Congress", "Congress / Congressional should be capitalized", "True, False, False"));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "[0-9]{10}|([0-9]{3})-[0-9]{3}-[0-9]{4}", "[0-9]{10},([0-9]{3})-[0-9]{3}-[0-9]{4}", null, "phone number should be in the format XXX-XXX-XXXX", null));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "[0-9]{10}|[(][1-9]{3}[)][1-9]{3}-[1-9]{4}|[(][1-9]{3}[)]-[1-9]{3}-[1-9]{4}|[1-9]{3}.[1-9]{3}.[1-9]{4}", "[0-9]{10},[(][1-9]{3}[)][1-9]{3}-[1-9]{4},[(][1-9]{3}[)]-[1-9]{3}-[1-9]{4},[1-9]{3}.[1-9]{3}.[1-9]{4}", null, "phone number should be in the format XXX-XXX-XXXX", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "service member|[sS]ervice Member", "service member,[sS]ervice Member", " Service member", "Service member(s) should be capitalized", "False, True, False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "members of congress|Members of congress|members of Congress", "members of congress,Members of congress,members of Congress", " Members of Congress", "Members of Congress should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "coworkers|Coworkers|Co workers|co-workers|co workers", "coworkers,Coworkers,Co workers,co-workers,co workers", " Co-workers", " Co-workers should be capitalized", "True, False, True"));
@@ -504,7 +507,7 @@ namespace WordAddIn1
             while (wordRange.Find.Found)
             {
                 Match matchedItem = reg.Match(wordRange.Text);
-                object text = CommentText;
+                object text = "[REPLACED]: " + CommentText + " -CME";
                 if (matchedItem.Success)
                 {
                     //wordRange.Text = ReplacementText;
@@ -537,7 +540,7 @@ namespace WordAddIn1
             wordRange.Find.Execute();
             while (wordRange.Find.Found)
             {
-                object text = CommentText;
+                object text = "[REPLACED]: " + CommentText + " -CME";
                 Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
                 rng.Text = ReplacementText;
                 document.Comments.Add(
@@ -607,7 +610,7 @@ namespace WordAddIn1
             while (wordRange.Find.Found)
             {
                 Match matchedItem = reg.Match(wordRange.Text);
-                object text = CommentText;
+                object text = CommentText + " -CME";
                 if (matchedItem.Success)
                 {
                     //wordRange.Text = ReplacementText;
