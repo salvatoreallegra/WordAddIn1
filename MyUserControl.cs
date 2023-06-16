@@ -149,6 +149,7 @@ namespace WordAddIn1
             Globals.ThisAddIn.replaceVeteranInstances();
             Globals.ThisAddIn.replaceFederalInstances();
             Globals.ThisAddIn.replaceCongressInstances();
+            Globals.ThisAddIn.commentWebInstances();
           
         }
 
