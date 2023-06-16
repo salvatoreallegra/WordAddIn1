@@ -58,10 +58,7 @@ namespace WordAddIn1
             Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = false;
 
 
-
             Globals.ThisAddIn.DeleteAllComments(false);
-
-
 
 
             lblProcessingUpdates.Text = "";

@@ -493,7 +493,8 @@ namespace WordAddIn1
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Internet", "Internet", null, "internet should not be capitalized", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Fiscal [yY]ear|[fF]iscal Year", "Fiscal [yY]ear", null, "fiscal year should not be capitalized.", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Intranet", "Intranet", null, "intranet should not be capitalized", null));
-           // styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Web", "<Web>", null, "web should not be capitalized", null));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[A-Z,a-z]{1,15} years old", "[A-Z,a-z]{1,15} years old", null, "Ages should be preceded by a digit.", null));
+            // styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Web", "<Web>", null, "web should not be capitalized", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Armed forces|armed [fF]orces", "armed [fF]orces,Armed forces", " Armed Forces", "Armed Forces should be capitalized", "False, True, False"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "[eE]-mail|Email", "[Ee]-mail,Email", null, "email should not be capitalized nor have a hyphen", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, @"Alzheimer's Disease|alzheimer's disease|alzheimer's Disease|Alzheimer'sdisease|alzheimer'sdisease|alzheimer'sDisease", @"Alzheimer's Disease,alzheimer's disease,alzheimer's Disease,Alzheimer'sdisease,alzheimer'sdisease,alzheimer'sDisease", @" Alzheimer's disease", "Alzheimer's should be capitalized", "True, False, True"));
@@ -864,10 +865,10 @@ namespace WordAddIn1
         public void SymbolShouldBePreceededByDigitis()
         {
 
-            string[] numericSymbolsPreceededByNumber = { " percent", " %", " cent", " years old", " degrees Fahrenheit", " degrees Celsius", "°F", "°C", "-\"", "," };
+            string[] numericSymbolsPreceededByNumber = { " percent", " %", " cent", " degrees Fahrenheit", " degrees Celsius", "°F", "°C", "-\"", "," };
             string[] numbers = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
             //SymbolsPreecedByNumber = Split("%,%,¢, years old,°F,°C,°F,°C,-", ",")
-            string[] symbolsPreceededByNumber = { "%", "%", "¢", " years old", "°F", "°C", "°F", "°C", "-\"", "," };
+            string[] symbolsPreceededByNumber = { "%", "%", "¢", "°F", "°C", "°F", "°C", "-\"", "," };
             string[] numbersDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 
