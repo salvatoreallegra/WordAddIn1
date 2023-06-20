@@ -8,11 +8,11 @@ namespace WordAddIn1
 {
     public partial class CMERibbon
     {
-        private MyUserControl myUserControl1;
+        private CMEMainUserControl myUserControl1;
         private Microsoft.Office.Tools.CustomTaskPane myCustomTaskPane;
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
-            myUserControl1 = new MyUserControl();
+            myUserControl1 = new CMEMainUserControl();
             myUserControl1.Width = 500;
             myCustomTaskPane = Globals.ThisAddIn.CustomTaskPanes.Add(myUserControl1, "Compliance Made Easy");
             myCustomTaskPane.Width = 500;

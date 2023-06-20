@@ -179,17 +179,17 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="MyUserControl.cs">
+    <Compile Include="CMEMainUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MyUserControl.Designer.cs">
-      <DependentUpon>MyUserControl.cs</DependentUpon>
+    <Compile Include="CMEMainUserControl.Designer.cs">
+      <DependentUpon>CMEMainUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="MyUserControl.resx">
-      <DependentUpon>MyUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="CMEMainUserControl.resx">
+      <DependentUpon>CMEMainUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

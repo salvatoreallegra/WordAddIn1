@@ -1,6 +1,6 @@
 ﻿namespace WordAddIn1
 {
-    partial class MyUserControl
+    partial class CMEMainUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyUserControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CMEMainUserControl));
             this.btnCorrectDocument = new System.Windows.Forms.Button();
             this.lblCompliance = new System.Windows.Forms.Label();
             this.picMainImage = new System.Windows.Forms.PictureBox();

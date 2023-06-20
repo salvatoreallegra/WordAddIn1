@@ -14,12 +14,12 @@ using System.Reflection;
 
 namespace WordAddIn1
 {
-    public partial class MyUserControl : UserControl
+    public partial class CMEMainUserControl : UserControl
     {
 
         /*int numberOfWords = 0;
         int progressIncrement = 0;*/
-        public MyUserControl()
+        public CMEMainUserControl()
         {
             InitializeComponent();
         }

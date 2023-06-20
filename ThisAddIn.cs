@@ -17,7 +17,7 @@ namespace WordAddIn1
         private int numberCounter = 0;
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-
+           
         }
 
 
