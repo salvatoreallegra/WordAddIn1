@@ -269,7 +269,7 @@ namespace WordAddIn1
          * ***********************/
         public void processSentences()
         {
-            int j = 0;
+            
 
             string[] wordsZeroThrough9 = new string[] {"zero","one","two","three","four","five","six","seven","eight","nine"};
 

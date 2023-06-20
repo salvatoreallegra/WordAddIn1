@@ -1,14 +1,14 @@
 ﻿
 namespace WordAddIn1
 {
-    partial class Ribbon1 : Microsoft.Office.Tools.Ribbon.RibbonBase
+    partial class CMERibbon : Microsoft.Office.Tools.Ribbon.RibbonBase
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        public Ribbon1()
+        public CMERibbon()
             : base(Globals.Factory.GetRibbonFactory())
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace WordAddIn1
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CMERibbon));
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.toggleButton1 = this.Factory.CreateRibbonToggleButton();
@@ -65,9 +65,9 @@ namespace WordAddIn1
             this.toggleButton1.Tag = "";
             this.toggleButton1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.toggleButton1_Click);
             // 
-            // Ribbon1
+            // CMERibbon
             // 
-            this.Name = "Ribbon1";
+            this.Name = "CMERibbon";
             this.RibbonType = "Microsoft.Word.Document";
             this.Tabs.Add(this.tab1);
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.Ribbon1_Load);
@@ -88,9 +88,9 @@ namespace WordAddIn1
 
     partial class ThisRibbonCollection
     {
-        internal Ribbon1 Ribbon1
+        internal CMERibbon Ribbon1
         {
-            get { return this.GetRibbon<Ribbon1>(); }
+            get { return this.GetRibbon<CMERibbon>(); }
         }
     }
 }

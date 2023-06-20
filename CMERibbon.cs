@@ -6,7 +6,7 @@ using System.Text;
 
 namespace WordAddIn1
 {
-    public partial class Ribbon1
+    public partial class CMERibbon
     {
         private MyUserControl myUserControl1;
         private Microsoft.Office.Tools.CustomTaskPane myCustomTaskPane;
