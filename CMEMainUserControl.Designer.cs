@@ -111,7 +111,7 @@
             this.lblProcessingUpdates.Size = new System.Drawing.Size(0, 20);
             this.lblProcessingUpdates.TabIndex = 5;
             // 
-            // MyUserControl
+            // CMEMainUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -122,7 +122,7 @@
             this.Controls.Add(this.picMainImage);
             this.Controls.Add(this.lblCompliance);
             this.Controls.Add(this.btnCorrectDocument);
-            this.Name = "MyUserControl";
+            this.Name = "CMEMainUserControl";
             this.Size = new System.Drawing.Size(494, 590);
             ((System.ComponentModel.ISupportInitialize)(this.picMainImage)).EndInit();
             this.ResumeLayout(false);

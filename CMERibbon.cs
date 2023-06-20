@@ -23,6 +23,7 @@ namespace WordAddIn1
 
         private void toggleButton1_Click(object sender, RibbonControlEventArgs e)
         {
+            
             myCustomTaskPane.Visible = ((RibbonToggleButton)sender).Checked;
         }
 
