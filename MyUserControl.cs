@@ -129,10 +129,10 @@ namespace WordAddIn1
              * 
              * 
              * *****************************/
-            string[] emailPermutations = new string[] { "[eE]-mail", "Email", "[Ee]-mail", "Email" };
+            string[] emailPermutations = new string[] { "Email", "[Ee]-mail", "[eE]-Mail" };
             foreach(var email in emailPermutations)
             {
-                Globals.ThisAddIn.ReplaceWithCommentsNonStyleArray(email, "email", "howdy");
+                Globals.ThisAddIn.ReplaceWithCommentsNonStyleArray(email, "email", "email should not be capitalized nor have a hyphen");
             }
 
           

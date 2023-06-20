@@ -629,7 +629,7 @@ namespace WordAddIn1
                 wordRange.Find.ClearFormatting();
                
                 // Next Find
-                wordRange.Find.Execute(FindText: TextToFind, MatchCase: false, MatchWildcards: true);
+                wordRange.Find.Execute(FindText: TextToFind, MatchCase:false, MatchWildcards: true);
             }
 
         }
@@ -708,7 +708,11 @@ namespace WordAddIn1
 
         }
 
-
+        /*************************************
+         * cannot use matchcase and wildcards together
+         * 
+         * 
+         * ***************************************/
         public void CommentWithoutReplace(string WordToComment, string message)
         {
             Word.Document document = this.Application.ActiveDocument;
@@ -718,6 +722,7 @@ namespace WordAddIn1
             rng.Find.Forward = true;
             rng.Find.MatchWildcards = true;  //This was just added 5/3/2022, may need to remove
             rng.Find.Text = WordToComment;
+            
 
             rng.Find.Execute(
                 ref missing, ref missing, ref missing, ref missing, ref missing,
@@ -727,6 +732,7 @@ namespace WordAddIn1
             while (rng.Find.Found)
             {
                 rng.Find.MatchWildcards = true;   //This was just added, may need to delete 5/3/2023
+                
                 rng.Find.Execute(
                     ref missing, ref missing, ref missing, ref missing, ref missing,
                     ref missing, ref missing, ref missing, ref missing, ref missing,
@@ -816,12 +822,13 @@ namespace WordAddIn1
 
         public void FormatDate()
         {
-            string[] monthsArray = new string[] { "January", "February", "March", "April", "May", "June", "July",
-            "August", "September", "October","November", "December"};
+            string[] monthsArray = new string[] { "[Jj]anuary", "[Ff]ebruary", "[Mm]arch", "[Aa]pril", "[Mm]ay", "[Jj]une", "[Jj]uly",
+            "[Aa]ugust", "[Ss]eptember", "[Oo]ctober","[Nn]ovember", "[Dd]ecember"};
 
             foreach (var x in monthsArray)
             {
                 CommentWithoutReplace("[A-Z,a-z][th, st, nd, rd] of " + x, "the date should be written as DD(st/nd/rd/th) of " + x + " (e.g. 11th of November)");
+                CommentWithoutReplace("[A-Z,a-z][th, st, nd, rd] " + x, "the date should be written as DD(st/nd/rd/th) of " + x + " (e.g. 11th of November)");
                 CommentWithoutReplace(x + " [0-9]{1,2}[A-Za-z]{2}", "the date should be written as " + x + " DD (e.g May 1)");
 
             }
@@ -856,7 +863,8 @@ namespace WordAddIn1
 
                 ReplaceWithCommentsNonStyleArray("$" + numbers[i], "$" + digitsArray[i], "$ signs should be written as digits");
                 //replace_with_comments num(i) + " dollars", "$" + digit(i), " dollar amounts should be written as digits", False
-                ReplaceWithCommentsNonStyleArray(numbers[i] + " dollars", "$" + digitsArray[i], "$ signs should be written as digits");
+                //ReplaceWithCommentsNonStyleArray(numbers[i] + " dollars", "$" + digitsArray[i], "$ signs should be written as digits");
+                ReplaceWithCommentsNonStyleArray("[0 - 9]{1,15} dollars", "$" + digitsArray[i], "$ signs should be written as digits");
 
             }
 
