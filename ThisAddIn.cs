@@ -484,12 +484,12 @@ namespace WordAddIn1
 
            // styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "veteran", "veteran", "Veteran", "Veteran(s) should be capitalized", "true, false, false"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Department-Wide|[dD]epartment [wW]ide|department-[wW]ide", "Department-Wide,[dD]epartment [wW]ide,department-[wW]ide", " Department-wide", "Department-wide should be capitalized and have a hyphen", "False, True, False"));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(3, @"\bnation\b", "nation", "Nation", "Nation should be capitalized", "True, False, True"));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(5, @"\bnation\b", "nation", "Nation", "Nation should be capitalized", "True, False, True"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "congress", "congress", "Congress", "Congress / Congressional should be capitalized", "True, False, False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "[0-9]{10}|[(][1-9]{3}[)][1-9]{3}-[1-9]{4}|[(][1-9]{3}[)]-[1-9]{3}-[1-9]{4}|[1-9]{3}.[1-9]{3}.[1-9]{4}", "[0-9]{10},[(][1-9]{3}[)][1-9]{3}-[1-9]{4},[(][1-9]{3}[)]-[1-9]{3}-[1-9]{4},[1-9]{3}.[1-9]{3}.[1-9]{4}", null, "phone number should be in the format XXX-XXX-XXXX", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "service member|[sS]ervice Member", "service member,[sS]ervice Member", " Service member", "Service member(s) should be capitalized", "False, True, False"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "members of congress|Members of congress|members of Congress", "members of congress,Members of congress,members of Congress", " Members of Congress", "Members of Congress should be capitalized", "True, False, True"));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "coworkers|Coworkers|Co workers|co-workers|co workers", "coworkers,Coworkers,Co workers,co-workers,co workers", " Co-workers", " Co-workers should be capitalized", "True, False, True"));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "coworkers|Coworkers|Co workers|co-workers|co workers|Co-Workers|co-Workers|co Workers", "coworkers,Coworkers,Co workers,co-workers,co workers,Co-Workers,co-Workers,co Workers", " Co-workers", " Co-workers should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Internet", "Internet", null, "internet should not be capitalized", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Fiscal [yY]ear|[fF]iscal Year", "Fiscal [yY]ear", null, "fiscal year should not be capitalized.", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Intranet", "Intranet", null, "intranet should not be capitalized", null));
@@ -497,18 +497,18 @@ namespace WordAddIn1
             // styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Web", "<Web>", null, "web should not be capitalized", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Armed forces|armed [fF]orces", "armed [fF]orces,Armed forces", " Armed Forces", "Armed Forces should be capitalized", "False, True, False"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "[eE]-mail|Email", "[Ee]-mail,Email", null, "email should not be capitalized nor have a hyphen", null));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, @"Alzheimer's Disease|alzheimer's disease|alzheimer's Disease|Alzheimer'sdisease|alzheimer'sdisease|alzheimer'sDisease", @"Alzheimer's Disease,alzheimer's disease,alzheimer's Disease,Alzheimer'sdisease,alzheimer'sdisease,alzheimer'sDisease", @" Alzheimer's disease", "Alzheimer's should be capitalized", "True, False, True"));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "governmentWide|governmentwide", "governmentWide,governmentwide", " Governmentwide", "Governmentwide should be capitalized", "False, True, False"));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, @"Alzheimer's Disease|alzheimer's disease|alzheimer's Disease|Alzheimers Disease|Alzheimers disease|alzheimers disease|alzheimers Disease", @"Alzheimer's Disease,alzheimer's disease,alzheimer's Disease,Alzheimers Disease,Alzheimers disease,alzheimers disease,alzheimers Disease", @" Alzheimer's disease", "Alzheimer's should be capitalized", "True, False, True"));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "governmentWide|governmentwide|government-wide|Government-wide|Government-Wide", "governmentWide,governmentwide,government-wide,Government-wide,Government-Wide", " Governmentwide", "Governmentwide should be capitalized", "False, True, False"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Veterans integrated service network|veterans integrated service network", "Veterans integrated service network", " Veterans Integrated Service Network", " Veterans Integrated Service Network should be capitalized", "True, False, True"));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "Hepatitis [cC]|hepatitis c", "Hepatitis [cC],hepatitis c", null, "hepatitis C should not be capitalized", null));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "Hepatitis [cC]|hepatitis c|hepatitis-c|hepatitis-C", "Hepatitis [cC],hepatitis c,hepatitis-c,hepatitis-C", null, "hepatitis C should not be capitalized", null));
            // styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "Website|[wW]eb site", "Website,[wW]eb site", null, "website(s) should not be capitalized nor written as two words", null));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "health Care|Health [cC]are|[hH]ealthcare", "health Care,Health [cC]are,[hH]ealthcare", null, "health care should not be capitalized", null));
-          //  styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "Web[ -][bB]ased|web[ -]Based", "<Web[ -][bB]ased>,<web[ -]Based>", null, "web-based should not be capitalized", null));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "Posttraumatic [sS]tress [dD]isorder|posttraumatic Stress [dD]isorder|posttraumatic [sS]tress Disorder", "Posttraumatic [sS]tress [dD]isorder,posttraumatic Stress [dD]isorder,posttraumatic [sS]tress Disorder", null, "posttraumatic stress disorder should not be capitalized", null));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "health Care|Health [cC]are|[hH]ealthcare", "health Care,Health [cC]are,[hH]ealthcare", "health care", "health care should not be capitalized", "False, True, False"));
+            //styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "Web[ -][bB]ased|web[ -]Based", "<Web[ -][bB]ased>,<web[ -]Based>", null, "web-based should not be capitalized", null));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "Posttraumatic [sS]tress [dD]isorder|posttraumatic Stress [dD]isorder|posttraumatic [sS]tress Disorder|Posttraumatic-[sS]tress-[dD]isorder|posttraumatic-Stress-[dD]isorder|posttraumatic-[sS]tress-Disorder", "Posttraumatic [sS]tress [dD]isorder,posttraumatic Stress [dD]isorder,posttraumatic [sS]tress Disorder,Posttraumatic-[sS]tress-[dD]isorder,posttraumatic-Stress-[dD]isorder,posttraumatic-[sS]tress-Disorder", null, "posttraumatic stress disorder should not be capitalized", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Central office|central [oO]ffice", "Central office, central [oO]ffice", " Central Office", "Central Office should be capitalized", "False, True, False"));
-          //  styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "federal", "federal", "Federal", "Federal should be capitalized", "True, False, True"));
-          //  styleArray.Add(new Tuple<int, string, string, string, string, string>(1, @"\bfederal\b(?!\W+[gG]overnment\b)", "Federal government", "Federal Government", "Federal Government should be capitalized", "True, False, True"));
-          //  styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Veteran-Owned|[vV]eteran [oO]wned|veteran-[oO]wned", "Veteran-Owned,[vV]eteran [oO]wned,veteran-[oO]wned", " Veteran-owned", "Veteran-owned should be capitalized and have a hyphen", "True, False, True"));
+            //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "federal", "federal", "Federal", "Federal should be capitalized", "True, False, True"));
+            //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, @"\bfederal\b(?!\W+[gG]overnment\b)", "Federal government", "Federal Government", "Federal Government should be capitalized", "True, False, True"));
+            //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Veteran-Owned|[vV]eteran [oO]wned|veteran-[oO]wned", "Veteran-Owned,[vV]eteran [oO]wned,veteran-[oO]wned", " Veteran-owned", "Veteran-owned should be capitalized and have a hyphen", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, @"[eE]xecutive [oO]rder", "[eE]xecutive [oO]rder", null, "Executive Order should be capitalized when using EO number", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, @"[mM]edical [cC]enter", "[mM]edical [cC]enter", null, "Medical center should be capitalized if preceded by the formal name of the facility", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "cosigners", "cosigners", null, "Should be other signatories", null));
@@ -553,8 +553,52 @@ namespace WordAddIn1
 
             styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "  ", "  ", " ", "There were two spaces here and it's now one space.", "True"));
 
-
             return styleArray;
+        }
+
+        public void ReplaceWithCommentsWholeWord(string TextToFind, string ReplacementText, string CommentText, string settings)
+        {
+
+            //var found = false;
+            List<bool> optionValues = new List<bool>();
+            var functionsettings = settings.Split(',');
+            foreach (var x in functionsettings)
+            {
+                optionValues.Add(Convert.ToBoolean(x));
+            }
+            Microsoft.Office.Interop.Word.Range wordRange = null;
+            Word.Document document = this.Application.ActiveDocument;
+
+            wordRange = document.Content;
+            wordRange.Find.ClearFormatting();
+            wordRange.Find.ClearAllFuzzyOptions();
+            wordRange.Find.Replacement.ClearFormatting();
+            wordRange.Find.IgnoreSpace = true;
+            wordRange.Find.MatchCase = false;
+            wordRange.Find.MatchWholeWord = true;
+            wordRange.Find.MatchWildcards = false;
+            wordRange.Find.Text = TextToFind;
+            wordRange.Find.Execute();
+            Regex reg = new Regex(TextToFind);
+            while (wordRange.Find.Found)
+            {
+                Match matchedItem = reg.Match(wordRange.Text);
+                object text = "[REPLACED]: " + CommentText + " -CME";
+                if (matchedItem.Success)
+                {
+                    //wordRange.Text = ReplacementText;
+                    Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                    rng.Text = ReplacementText;
+                    document.Comments.Add(
+                    rng, ref text);
+                    wordRange.Find.ClearFormatting();
+                }
+
+
+                // Next Find
+                wordRange.Find.Execute(FindText: TextToFind, MatchCase: false, MatchWildcards: false, MatchWholeWord:true);
+            }
+
         }
 
 
@@ -568,7 +612,6 @@ namespace WordAddIn1
             var functionsettings = settings.Split(',');
             foreach (var x in functionsettings)
             {
-
                 optionValues.Add(Convert.ToBoolean(x));
             }
             Microsoft.Office.Interop.Word.Range wordRange = null;

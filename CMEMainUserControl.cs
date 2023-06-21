@@ -90,6 +90,10 @@ namespace WordAddIn1
                     case 4:
                         Globals.ThisAddIn.AddComments(x.Item2,x.Item3, x.Item4, x.Item5, x.Item6);
                         break;
+
+                    case 5:
+                        Globals.ThisAddIn.ReplaceWithCommentsWholeWord(x.Item3, x.Item4, x.Item5, x.Item6);
+                        break;
                     default:                        
                         break;
                        
