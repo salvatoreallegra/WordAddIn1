@@ -123,6 +123,56 @@ namespace WordAddIn1
         }
 
         /******************************************
+         * We are using this for the web/website etc...rule
+         * with Wildcards function for the entire app.
+         * There is no replace here, just a wildcard find
+         * and adding a comment to the found range
+         * ****************************************/
+
+        public void FindAndCommentWithWholeWord(string wildCardText, string commentMessage)
+        {
+            //do this, it only takes one step when undo
+            Microsoft.Office.Interop.Word.UndoRecord ur = this.Application.UndoRecord;
+            ur.StartCustomRecord("FindReplaceAndCommentWithWildCards");
+
+            Microsoft.Office.Interop.Word.Range wordRange = null;
+            Word.Document document = this.Application.ActiveDocument;
+            wordRange = document.Content;
+            wordRange.Find.ClearFormatting();
+            wordRange.Find.ClearAllFuzzyOptions();
+            wordRange.Find.Replacement.ClearFormatting();
+            wordRange.Find.IgnoreSpace = true;
+            wordRange.Find.MatchCase = false;
+            wordRange.Find.MatchWholeWord = true;
+            //wordRange.Find.MatchWildcards = true;
+            wordRange.Find.Text = wildCardText;
+
+            //wordRange.Find.Replacement.Text = replacementText;//that's the right way to write
+            wordRange.Find.Forward = true;
+            wordRange.Find.Wrap = WdFindWrap.wdFindStop;
+
+            //don't forget the Replace argument
+            wordRange.Find.Execute(MatchWildcards: false,MatchWholeWord:true);//Just set the argument MatchWildcards here!! like you wrote in this line : wordRange.Find.Execute(FindText: wildCardText, MatchCase: false, MatchWildcards: true);
+            while (wordRange.Find.Found)
+            {
+                object commentText = commentMessage;
+                Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                //rng.Text = replacementText;//This is wrong!! refer to above
+                document.Comments.Add(rng, ref commentText);
+                wordRange.Find.ClearFormatting();
+
+                // Next Find
+                //don't forget to reset the range wordRange
+                wordRange.SetRange(wordRange.End, wordRange.Document.Content.End);
+
+                //wordRange.Find.Execute(FindText: wildCardText, MatchCase: false, MatchWildcards: true);
+                wordRange.Find.Execute(MatchWildcards: true);
+            }
+
+            ur.EndCustomRecord();
+        }
+
+        /******************************************
         * Main Find and Comment
         * with Wildcards function for the entire app
         * that searches inside a sentence only, instead of the entire
@@ -247,7 +297,7 @@ namespace WordAddIn1
 
             //this needs come last because....
             
-            FindAndCommentWithWildCards("<Web>","web should not be capitalized");
+            FindAndCommentWithWholeWord("Web","web should not be capitalized");
 
 
 
@@ -491,7 +541,7 @@ namespace WordAddIn1
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "members of congress|Members of congress|members of Congress", "members of congress,Members of congress,members of Congress", " Members of Congress", "Members of Congress should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "coworkers|Coworkers|Co workers|co-workers|co workers|Co-Workers|co-Workers|co Workers", "coworkers,Coworkers,Co workers,co-workers,co workers,Co-Workers,co-Workers,co Workers", " Co-workers", " Co-workers should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Internet", "Internet", null, "internet should not be capitalized", null));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Fiscal [yY]ear|[fF]iscal Year", "Fiscal [yY]ear", null, "fiscal year should not be capitalized.", null));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Fiscal [yY]ear|[fF]iscal Year", "Fiscal [yY]ear,[fF]iscal Year", "fiscal year", "fiscal year should not be capitalized.", "True, False,False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Intranet", "Intranet", null, "intranet should not be capitalized", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "[A-Z,a-z]{1,15} years old", "[A-Z,a-z]{1,15} years old", null, "Ages should be preceded by a digit.", null));
             // styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Web", "<Web>", null, "web should not be capitalized", null));
