@@ -22,6 +22,7 @@ namespace WordAddIn1
         public CMEMainUserControl()
         {
             InitializeComponent();
+           
         }
                 
 
@@ -30,6 +31,7 @@ namespace WordAddIn1
             Globals.ThisAddIn.DeleteAllComments(true);
             lblProcessingUpdates.Text = "";
             cmeProgress.Value = 0;
+            
             
         }
 
@@ -151,6 +153,9 @@ namespace WordAddIn1
             Globals.ThisAddIn.replaceFederalInstances();
             Globals.ThisAddIn.replaceCongressInstances();
             Globals.ThisAddIn.commentWebInstances();
+
+
+           
           
         }
 

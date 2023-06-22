@@ -884,8 +884,7 @@ namespace WordAddIn1
                         this.Application.ActiveDocument.Comments.Add(
                             Application.ActiveDocument.Range(rng.Start, rng.End), ref text);
                     }
-                }
-               
+                }                
 
             }
             
