@@ -30,41 +30,133 @@ namespace WordAddIn1
 
         private void toggleButton1_Click(object sender, RibbonControlEventArgs e)
         {
+            /*Basic Process of Find and Replace/Comment from the Hacker Competition/VBA/Marjorie
+            * First step is process document function, this will return a list of tuples,
+            * the params of process document are....It searches the whole document and returns
+            * ONLY what needs to be processed.   ProcessArray calls build search array, it builds
+            * the tuple of the things we are looking for, this is where you add more search criteria
+            * .  Process array takes 
+            * 
+            *  P
+            */
+            /*cmeTimer.Enabled = true;
+            Word.Range rng = Globals.ThisAddIn.Application.ActiveDocument.Content;
+            rng.Select();
             
-            myCustomTaskPane.Visible = ((RibbonToggleButton)sender).Checked;
+            numberOfWords = Globals.ThisAddIn.Application.ActiveDocument.Words.Count;*/
+
+            if (Globals.ThisAddIn.Application.ActiveDocument.Revisions.Count >= 1)
+            {
+                Globals.ThisAddIn.Application.ActiveDocument.Revisions.AcceptAll();
+            }
+
+            Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = false;
+
+
+            Globals.ThisAddIn.DeleteAllComments(false);
+
+
+            //lblProcessingUpdates.Text = "";
+
+            //cmeTimer.Start;
+            //cmeTimer.Enabled = true;
+            //cmeProgress.Value = 0;
+
+            int progressIncrement = 0;
+
+            var returnValue = Globals.ThisAddIn.ProcessDocument();
+            foreach (var x in returnValue)
+            {
+                progressIncrement = 80 / returnValue.Count;
+                //cmeProgress.Value += progressIncrement;
+
+
+                switch (x.Item1)
+                {
+                    case 1:
+                        Globals.ThisAddIn.apply_changes_to_word_permutations(x.Item3, x.Item4, x.Item5, x.Item6);
+                        break;
+                    case 2:
+                        Globals.ThisAddIn.comment_changes_to_word_permutations(x.Item2, x.Item3, x.Item4, x.Item5, x.Item6);
+                        break;
+                    case 3:
+                        Globals.ThisAddIn.ReplaceWithComments(x.Item3, x.Item4, x.Item5, x.Item6);
+                        break;
+                    case 4:
+                        Globals.ThisAddIn.AddComments(x.Item2, x.Item3, x.Item4, x.Item5, x.Item6);
+                        break;
+
+                    case 5:
+                        Globals.ThisAddIn.ReplaceWithCommentsWholeWord(x.Item3, x.Item4, x.Item5, x.Item6);
+                        break;
+                    default:
+                        break;
+
+                }
+
+            }
+
+           /* int remainingProgress = 100 - cmeProgress.Value;
+            if (remainingProgress != 80)
+            {
+                remainingProgress = 80;
+            }
+*/
+
+            Globals.ThisAddIn.FormatDate();
+
+           // cmeProgress.Value = cmeProgress.Value + 5;
+            Globals.ThisAddIn.FindAndReplaceSpacesAroundHyphens();
+            //Globals.ThisAddIn.FindAndReplaceWildcardPlayGround("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3/\\1/\\2", "Replaced with U.K. Date Format");
+
+            //Globals.ThisAddIn.FormatNumbersUnder10();
+
+            //cmeProgress.Value = cmeProgress.Value + 5;
+
+
+            Globals.ThisAddIn.DollarSymbolFollowedByDigits();
+
+
+            //cmeProgress.Value = 100;
+            //lblProcessingUpdates.Text = "100% complete";
+            //
+            //Globals.ThisAddIn.FindReplaceAndCommentWithWildCards("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3/\\1/\\2", "Replaced with U.K. Date Format");
+
+            /*****************************************************************************
+             * Replace with Comments on Email Permutations, We can uncomment the va code just 
+             * to comment without replace
+             * 
+             * 
+             * *****************************/
+            string[] emailPermutations = new string[] { "Email", "[Ee]-mail", "[eE]-Mail" };
+            foreach (var email in emailPermutations)
+            {
+                Globals.ThisAddIn.ReplaceWithCommentsNonStyleArray(email, "email", "email should not be capitalized nor have a hyphen");
+            }
+
+
+
+            /********************************
+             * This function call does the
+             * numbers under 10 style rule
+             * *****************************/
+            Globals.ThisAddIn.processSentences();
+
+            Globals.ThisAddIn.replaceVeteranInstances();
+            Globals.ThisAddIn.replaceFederalInstances();
+            Globals.ThisAddIn.replaceCongressInstances();
+            Globals.ThisAddIn.commentWebInstances();
+
+
+
+            //myCustomTaskPane.Visible = ((RibbonToggleButton)sender).Checked;
         }
 
-        private void btnLoadComments_Click(object sender, RibbonControlEventArgs e)
+        private void btnClearComments_Click(object sender, RibbonControlEventArgs e)
         {
-            var formComments = new Form();
-            formComments.Show();
+            Globals.ThisAddIn.DeleteAllComments(true);
+            
         }
-
-        /*  private void btnProcessComments_Click(object sender, RibbonControlEventArgs e)
-          {
-
-              var comments = Globals.ThisAddIn.Application.ActiveDocument.Comments;
-              for(int i = 1; i <= comments.Count; i++)
-              {*/
-
-        /* RibbonDropDownItem item = this.Factory.CreateRibbonDropDownItem();
-
-         item.Label = comments[i].Range.Text;
-         commentsDropDown.Items.Add(item);*/
-        //MessageBox.Show(comments[i].Range.Text);
-        // }
-
-        /*foreach ( var comment in comments)
-        {
-
-            RibbonDropDownItem item = this.Factory.CreateRibbonDropDownItem();
-
-            item.Label = comment.ToString();
-            dropDown1.Items.Add(item);
-        }*/
-        //  }
-
-
     }
 }
 
