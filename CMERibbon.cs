@@ -154,8 +154,26 @@ namespace WordAddIn1
 
         private void btnClearComments_Click(object sender, RibbonControlEventArgs e)
         {
-            Globals.ThisAddIn.DeleteAllComments(true);
-            
+            if (Globals.ThisAddIn.Application.ActiveDocument.Comments.Count != 0)
+            {
+                Globals.ThisAddIn.Application.ActiveDocument.DeleteAllComments();
+              //  if (showMessageBox)
+                //{
+                    // ShowAllComments();
+                    MessageBox.Show("Clearing All Comments");
+              //  }
+            }
+            else
+            {
+               // if (showMessageBox)
+              //  {
+                    MessageBox.Show("There are No Comments to Delete");
+              //  }
+
+            }
+
+            //Globals.ThisAddIn.DeleteAllComments(true);
+
         }
     }
 }

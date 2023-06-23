@@ -54,7 +54,7 @@ namespace WordAddIn1
             // 
             this.group1.Items.Add(this.toggleButton1);
             this.group1.Items.Add(this.btnClearComments);
-            this.group1.Label = "CME Task Pane Functions";
+            this.group1.Label = "CME Main Functions";
             this.group1.Name = "group1";
             // 
             // toggleButton1
