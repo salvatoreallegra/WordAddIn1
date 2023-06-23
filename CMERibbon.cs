@@ -160,7 +160,7 @@ namespace WordAddIn1
               //  if (showMessageBox)
                 //{
                     // ShowAllComments();
-                    MessageBox.Show("Clearing All Comments");
+                    MessageBox.Show("Clearing All Comments ");
               //  }
             }
             else
