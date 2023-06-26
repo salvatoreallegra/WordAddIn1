@@ -19,9 +19,7 @@ namespace WordAddIn1
             myUserControl1.Width = 500;
             myCustomTaskPane = Globals.ThisAddIn.CustomTaskPanes.Add(myUserControl1, "Compliance Made Easy");
             myCustomTaskPane.Width = 500;
-            myCustomTaskPane.Visible = false;
-
-           
+            myCustomTaskPane.Visible = false;          
 
             
         }
@@ -44,6 +42,9 @@ namespace WordAddIn1
             rng.Select();
             
             numberOfWords = Globals.ThisAddIn.Application.ActiveDocument.Words.Count;*/
+
+            formProgress form = new formProgress();
+            form.Show();
 
             if (Globals.ThisAddIn.Application.ActiveDocument.Revisions.Count >= 1)
             {
@@ -147,7 +148,7 @@ namespace WordAddIn1
             Globals.ThisAddIn.replaceCongressInstances();
             Globals.ThisAddIn.commentWebInstances();
 
-
+            form.Close();
 
             //myCustomTaskPane.Visible = ((RibbonToggleButton)sender).Checked;
         }

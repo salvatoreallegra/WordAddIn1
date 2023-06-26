@@ -37,6 +37,8 @@ namespace WordAddIn1
 
         private void btnCorrectDocument_Click(object sender, EventArgs e)
         {
+            
+            
             /*Basic Process of Find and Replace/Comment from the Hacker Competition/VBA/Marjorie
              * First step is process document function, this will return a list of tuples,
              * the params of process document are....It searches the whole document and returns

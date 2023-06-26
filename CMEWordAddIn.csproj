@@ -191,6 +191,12 @@
     <Compile Include="formComments.Designer.cs">
       <DependentUpon>formComments.cs</DependentUpon>
     </Compile>
+    <Compile Include="formProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formProgress.Designer.cs">
+      <DependentUpon>formProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -199,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formComments.resx">
       <DependentUpon>formComments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProgress.resx">
+      <DependentUpon>formProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
