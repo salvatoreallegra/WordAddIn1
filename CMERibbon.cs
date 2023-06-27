@@ -49,7 +49,7 @@ namespace WordAddIn1
 
             
             
-                cmeProgress.Value = 100;
+                
             
             
                 //TextBox t = Application.OpenForms["Form1"].Controls["textBox1"] as TextBox;
@@ -114,13 +114,13 @@ namespace WordAddIn1
 
             Globals.ThisAddIn.FormatDate();
 
-           // cmeProgress.Value = cmeProgress.Value + 5;
+            cmeProgress.Value = cmeProgress.Value + 5;
             Globals.ThisAddIn.FindAndReplaceSpacesAroundHyphens();
             //Globals.ThisAddIn.FindAndReplaceWildcardPlayGround("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3/\\1/\\2", "Replaced with U.K. Date Format");
 
             //Globals.ThisAddIn.FormatNumbersUnder10();
 
-            //cmeProgress.Value = cmeProgress.Value + 5;
+            cmeProgress.Value = cmeProgress.Value + 5;
 
 
             Globals.ThisAddIn.DollarSymbolFollowedByDigits();
@@ -143,20 +143,32 @@ namespace WordAddIn1
                 Globals.ThisAddIn.ReplaceWithCommentsNonStyleArray(email, "email", "email should not be capitalized nor have a hyphen");
             }
 
-
+            cmeProgress.Value += 10;
 
             /********************************
              * This function call does the
              * numbers under 10 style rule
              * *****************************/
             Globals.ThisAddIn.processSentences();
+            cmeProgress.Value += 10;
+
 
             Globals.ThisAddIn.replaceVeteranInstances();
-            Globals.ThisAddIn.replaceFederalInstances();
-            Globals.ThisAddIn.replaceCongressInstances();
-            Globals.ThisAddIn.commentWebInstances();
+            cmeProgress.Value += 10;
 
-            //form.Close();
+            Globals.ThisAddIn.replaceFederalInstances();
+            cmeProgress.Value += 10;
+
+            Globals.ThisAddIn.replaceCongressInstances();
+            cmeProgress.Value += 10;
+
+            Globals.ThisAddIn.commentWebInstances();
+            cmeProgress.Value += 10;
+
+
+            form.Close();
+
+            MessageBox.Show("Processing Complete");
 
             //myCustomTaskPane.Visible = ((RibbonToggleButton)sender).Checked;
         }
