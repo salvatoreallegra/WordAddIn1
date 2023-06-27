@@ -69,6 +69,7 @@ namespace WordAddIn1
             // 
             // btnClearComments
             // 
+            this.btnClearComments.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.btnClearComments.Image = ((System.Drawing.Image)(resources.GetObject("btnClearComments.Image")));
             this.btnClearComments.Label = "Clear Comments";
             this.btnClearComments.Name = "btnClearComments";
