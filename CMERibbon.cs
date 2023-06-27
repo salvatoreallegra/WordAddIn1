@@ -45,6 +45,14 @@ namespace WordAddIn1
 
             formProgress form = new formProgress();
             form.Show();
+            ProgressBar cmeProgress = (ProgressBar)Application.OpenForms["formProgress"].Controls["cmeProgress"];
+
+            
+            
+                cmeProgress.Value = 100;
+            
+            
+                //TextBox t = Application.OpenForms["Form1"].Controls["textBox1"] as TextBox;
 
             if (Globals.ThisAddIn.Application.ActiveDocument.Revisions.Count >= 1)
             {
@@ -148,7 +156,7 @@ namespace WordAddIn1
             Globals.ThisAddIn.replaceCongressInstances();
             Globals.ThisAddIn.commentWebInstances();
 
-            form.Close();
+            //form.Close();
 
             //myCustomTaskPane.Visible = ((RibbonToggleButton)sender).Checked;
         }

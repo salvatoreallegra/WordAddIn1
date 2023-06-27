@@ -185,12 +185,6 @@
     <Compile Include="CMEMainUserControl.Designer.cs">
       <DependentUpon>CMEMainUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="formComments.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="formComments.Designer.cs">
-      <DependentUpon>formComments.cs</DependentUpon>
-    </Compile>
     <Compile Include="formProgress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,9 +196,6 @@
     </Compile>
     <EmbeddedResource Include="CMEMainUserControl.resx">
       <DependentUpon>CMEMainUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formComments.resx">
-      <DependentUpon>formComments.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formProgress.resx">
       <DependentUpon>formProgress.cs</DependentUpon>

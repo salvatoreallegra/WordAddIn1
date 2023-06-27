@@ -30,29 +30,43 @@ namespace WordAddIn1
         private void InitializeComponent()
         {
             this.cmeProgress = new System.Windows.Forms.ProgressBar();
+            this.txtProcessing = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmeProgress
             // 
-            this.cmeProgress.Location = new System.Drawing.Point(313, 165);
+            this.cmeProgress.Location = new System.Drawing.Point(29, 100);
             this.cmeProgress.Name = "cmeProgress";
-            this.cmeProgress.Size = new System.Drawing.Size(100, 23);
+            this.cmeProgress.Size = new System.Drawing.Size(219, 23);
             this.cmeProgress.TabIndex = 0;
+            // 
+            // txtProcessing
+            // 
+            this.txtProcessing.AutoSize = true;
+            this.txtProcessing.Location = new System.Drawing.Point(29, 55);
+            this.txtProcessing.Name = "txtProcessing";
+            this.txtProcessing.Size = new System.Drawing.Size(213, 13);
+            this.txtProcessing.TabIndex = 1;
+            this.txtProcessing.Text = "Processing Document, Please Be Patient....";
             // 
             // formProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(284, 161);
+            this.Controls.Add(this.txtProcessing);
             this.Controls.Add(this.cmeProgress);
             this.Name = "formProgress";
-            this.Text = "formProgress";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "CME Progress";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.ProgressBar cmeProgress;
+        private System.Windows.Forms.Label txtProcessing;
     }
 }
