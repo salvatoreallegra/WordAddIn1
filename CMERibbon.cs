@@ -168,7 +168,7 @@ namespace WordAddIn1
 
             form.Close();
 
-            MessageBox.Show("Processing Complete");
+            MessageBox.Show("Document Processing Complete");
 
             //myCustomTaskPane.Visible = ((RibbonToggleButton)sender).Checked;
         }
