@@ -71,12 +71,12 @@ namespace WordAddIn1
             //cmeTimer.Enabled = true;
             //cmeProgress.Value = 0;
 
-            int progressIncrement = 0;
+            //int progressIncrement = 0;
 
             var returnValue = Globals.ThisAddIn.ProcessDocument();
             foreach (var x in returnValue)
             {
-                progressIncrement = 80 / returnValue.Count;
+               // progressIncrement = 80 / returnValue.Count;
                 //cmeProgress.Value += progressIncrement;
 
 
@@ -114,7 +114,7 @@ namespace WordAddIn1
 
             Globals.ThisAddIn.FormatDate();
 
-            cmeProgress.Value = cmeProgress.Value + 5;
+            cmeProgress.Value = cmeProgress.Value += 40;
             Globals.ThisAddIn.FindAndReplaceSpacesAroundHyphens();
             //Globals.ThisAddIn.FindAndReplaceWildcardPlayGround("([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})", "\\3/\\1/\\2", "Replaced with U.K. Date Format");
 
@@ -163,7 +163,7 @@ namespace WordAddIn1
             cmeProgress.Value += 10;
 
             Globals.ThisAddIn.commentWebInstances();
-            cmeProgress.Value += 10;
+            cmeProgress.Value += 5;
 
 
             form.Close();

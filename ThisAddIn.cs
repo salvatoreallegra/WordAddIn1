@@ -330,6 +330,8 @@ namespace WordAddIn1
             Microsoft.Office.Interop.Word.Range wordRange = null;
             Microsoft.Office.Interop.Word.Range wordRange1 = null;
             Microsoft.Office.Interop.Word.Range wordRange2 = null;
+            Range sentenceString = null;
+
             Word.Document document = this.Application.ActiveDocument;
             var sentenceCount = document.Sentences.Count;
 
@@ -342,9 +344,17 @@ namespace WordAddIn1
                  spelledOutWordsUnder10 = false;
 
                 wordRange = this.Application.ActiveDocument.Sentences[i];
+
+                //We need to save the sentence to here because the word range will change and it will
+                //only comment one number, but we want to comment the entire sentence
+                
+
                 wordRange1 = this.Application.ActiveDocument.Sentences[i];
                 wordRange2 = this.Application.ActiveDocument.Sentences[i];
-                string sentenceString = wordRange.Text;
+
+                sentenceString = this.Application.ActiveDocument.Sentences[i];
+
+
                 //MessageBox.Show(sentenceString);
 
                 wordRange.Find.Text = "<[0-9]{1}>";
@@ -392,7 +402,7 @@ namespace WordAddIn1
                 if (nineAndLower == true && tenAndHigher == false)
                 {
                     object text = "Digits need to be spelled out - cme";
-                    Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                    Word.Range rng = this.Application.ActiveDocument.Range(sentenceString.Start,sentenceString.End);
                     //rng.Text = ReplacementText;
                     document.Comments.Add(
                     rng, ref text);
@@ -400,7 +410,8 @@ namespace WordAddIn1
                 if(spelledOutWordsUnder10 == true && tenAndHigher == true)
                 {
                     object text = "Digits shouldn't be spelled out if there are numbers > 9 - cme";
-                    Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                    //Word.Range rng = this.Application.ActiveDocument.Range(wordRange.Start, wordRange.End);
+                    Word.Range rng = this.Application.ActiveDocument.Range(sentenceString.Start, sentenceString.End);
                     //rng.Text = ReplacementText;
                     document.Comments.Add(
                     rng, ref text);
