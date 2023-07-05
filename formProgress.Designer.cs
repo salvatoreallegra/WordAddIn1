@@ -34,7 +34,7 @@ namespace WordAddIn1
             // 
             // cmeProgress
             // 
-            this.cmeProgress.Location = new System.Drawing.Point(30, 60);
+            this.cmeProgress.Location = new System.Drawing.Point(50, 66);
             this.cmeProgress.Name = "cmeProgress";
             this.cmeProgress.Size = new System.Drawing.Size(219, 23);
             this.cmeProgress.TabIndex = 0;
@@ -43,7 +43,7 @@ namespace WordAddIn1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 161);
+            this.ClientSize = new System.Drawing.Size(334, 161);
             this.Controls.Add(this.cmeProgress);
             this.Name = "formProgress";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
