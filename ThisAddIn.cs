@@ -303,6 +303,32 @@ namespace WordAddIn1
 
         }
 
+        public void commentCentralOffice()
+        {
+            //Central office| central[oO]ffice", "Central office, central[oO]ffice
+
+            string[] textToFind = new string[] { "Central Office", "central[oO]ffice","Central office","central [oO]ffice" };
+            foreach (var text in textToFind)
+            {
+                FindAndCommentWithWildCards(text, "Only capitalized if it's referring to the VA");
+            }
+
+            
+        }
+
+        public void commentCoWorkers()
+        {
+            
+            //coworkers|Coworkers|Co workers|co-workers|co workers|Co-Workers|co-Workers|co Workers", "coworkers,Coworkers,Co workers,co-workers,co workers,Co-Workers,co-Workers,co Workers", 
+            string[] textToFind = new string[] { "coworkers", "Coworkers", "Co workers", "co-workers","co workers", "Co-Workers","co-Workers"};
+            foreach (var text in textToFind)
+            {
+                FindAndCommentWithWildCards(text, "Only capitalized if it's referring to the VA");
+            }
+
+
+        }
+
 
 
 
@@ -550,7 +576,7 @@ namespace WordAddIn1
             styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "[0-9]{10}|[(][1-9]{3}[)][1-9]{3}-[1-9]{4}|[(][1-9]{3}[)]-[1-9]{3}-[1-9]{4}|[1-9]{3}.[1-9]{3}.[1-9]{4}", "[0-9]{10},[(][1-9]{3}[)][1-9]{3}-[1-9]{4},[(][1-9]{3}[)]-[1-9]{3}-[1-9]{4},[1-9]{3}.[1-9]{3}.[1-9]{4}", null, "phone number should be in the format XXX-XXX-XXXX", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "service member|[sS]ervice Member", "service member,[sS]ervice Member", " Service member", "Service member(s) should be capitalized", "False, True, False"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "members of congress|Members of congress|members of Congress", "members of congress,Members of congress,members of Congress", " Members of Congress", "Members of Congress should be capitalized", "True, False, True"));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "coworkers|Coworkers|Co workers|co-workers|co workers|Co-Workers|co-Workers|co Workers", "coworkers,Coworkers,Co workers,co-workers,co workers,Co-Workers,co-Workers,co Workers", " Co-workers", " Co-workers should be capitalized", "True, False, True"));
+            //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "coworkers|Coworkers|Co workers|co-workers|co workers|Co-Workers|co-Workers|co Workers", "coworkers,Coworkers,Co workers,co-workers,co workers,Co-Workers,co-Workers,co Workers", " Co-workers", " Co-workers should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Internet", "Internet", null, "internet should not be capitalized", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Fiscal [yY]ear|[fF]iscal Year", "Fiscal [yY]ear,[fF]iscal Year", "fiscal year", "fiscal year should not be capitalized.", "True, False,False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Intranet", "Intranet", null, "intranet should not be capitalized", null));
@@ -566,7 +592,8 @@ namespace WordAddIn1
             styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "health Care|Health [cC]are|[hH]ealthcare", "health Care,Health [cC]are,[hH]ealthcare", "health care", "health care should not be capitalized", "False, True, False"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "Web[ -][bB]ased|web[ -]Based", "<Web[ -][bB]ased>,<web[ -]Based>", null, "web-based should not be capitalized", null));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "Posttraumatic [sS]tress [dD]isorder|posttraumatic Stress [dD]isorder|posttraumatic [sS]tress Disorder|Posttraumatic-[sS]tress-[dD]isorder|posttraumatic-Stress-[dD]isorder|posttraumatic-[sS]tress-Disorder", "Posttraumatic [sS]tress [dD]isorder,posttraumatic Stress [dD]isorder,posttraumatic [sS]tress Disorder,Posttraumatic-[sS]tress-[dD]isorder,posttraumatic-Stress-[dD]isorder,posttraumatic-[sS]tress-Disorder", null, "posttraumatic stress disorder should not be capitalized", null));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Central office|central [oO]ffice", "Central office, central [oO]ffice", " Central Office", "Central Office should be capitalized", "False, True, False"));
+            // styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Central office|central [oO]ffice", "Central office, central [oO]ffice", " Central Office", "Central Office should be capitalized", "False, True, False"));
+            //styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Central office|central [oO]ffice", "Central office, central [oO]ffice", null, "Only capitalized if it's referring to the VA", null));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "federal", "federal", "Federal", "Federal should be capitalized", "True, False, True"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, @"\bfederal\b(?!\W+[gG]overnment\b)", "Federal government", "Federal Government", "Federal Government should be capitalized", "True, False, True"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "Veteran-Owned|[vV]eteran [oO]wned|veteran-[oO]wned", "Veteran-Owned,[vV]eteran [oO]wned,veteran-[oO]wned", " Veteran-owned", "Veteran-owned should be capitalized and have a hyphen", "True, False, True"));
