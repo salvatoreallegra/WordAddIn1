@@ -282,7 +282,7 @@ namespace WordAddIn1
 
             //comment_changes_to_word_permutations("Web[ -][bB]ased|<web[ -]Based>|<web[ -]based>", "<Web[ -][bB]ased>,<web[ -]Based>,<web[ -]based>", "", "web-based should not be capitalized", "true,false,true");
 
-            string[] textToFind = new string[] { "Website", "[wW]eb site" };
+            string[] textToFind = new string[] { "Website", "[wW]eb site","web-site","Web-site" };
             foreach (var text in textToFind)
             {
                 FindAndCommentWithWildCards(text, "website(s) should not be capitalized nor written as two words");
@@ -586,7 +586,7 @@ namespace WordAddIn1
             styleArray.Add(new Tuple<int, string, string, string, string, string>(5, @"\bnation\b", "nation", "Nation", "Nation should be capitalized", "True, False, True"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(3, "congress", "congress", "Congress", "Congress / Congressional should be capitalized", "True, False, False"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(2, "[0-9]{10}|[(][1-9]{3}[)][1-9]{3}-[1-9]{4}|[(][1-9]{3}[)]-[1-9]{3}-[1-9]{4}|[1-9]{3}.[1-9]{3}.[1-9]{4}", "[0-9]{10},[(][1-9]{3}[)][1-9]{3}-[1-9]{4},[(][1-9]{3}[)]-[1-9]{3}-[1-9]{4},[1-9]{3}.[1-9]{3}.[1-9]{4}", null, "phone number should be in the format XXX-XXX-XXXX", null));
-            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "service member|[sS]ervice Member", "service member,[sS]ervice Member", " Service member", "Service member(s) should be capitalized", "False, True, False"));
+            styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "service member|[sS]ervice Member|service-member|Service-member", "service member,service-member,Service-member,[sS]ervice Member", " Service member", "Service member(s) should be capitalized", "False, True, False"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "members of congress|Members of congress|members of Congress", "members of congress,Members of congress,members of Congress", " Members of Congress", "Members of Congress should be capitalized", "True, False, True"));
             //styleArray.Add(new Tuple<int, string, string, string, string, string>(1, "coworkers|Coworkers|Co workers|co-workers|co workers|Co-Workers|co-Workers|co Workers", "coworkers,Coworkers,Co workers,co-workers,co workers,Co-Workers,co-Workers,co Workers", " Co-workers", " Co-workers should be capitalized", "True, False, True"));
             styleArray.Add(new Tuple<int, string, string, string, string, string>(4, "Internet", "Internet", null, "internet should not be capitalized", null));
