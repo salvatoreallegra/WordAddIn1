@@ -328,6 +328,18 @@ namespace WordAddIn1
 
 
         }
+        public void commentGovernment()
+        {
+
+            //coworkers|Coworkers|Co workers|co-workers|co workers|Co-Workers|co-Workers|co Workers", "coworkers,Coworkers,Co workers,co-workers,co workers,Co-Workers,co-Workers,co Workers", 
+            string[] textToFind = new string[] { "government", "Government"};
+            foreach (var text in textToFind)
+            {
+                FindAndCommentWithWildCards(text, "Only capitalized if it's referring to the VA");
+            }
+
+
+        }
 
 
 

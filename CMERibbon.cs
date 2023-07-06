@@ -165,6 +165,7 @@ namespace WordAddIn1
             Globals.ThisAddIn.commentWebInstances();
             Globals.ThisAddIn.commentCentralOffice();
             Globals.ThisAddIn.commentCoWorkers();
+            Globals.ThisAddIn.commentGovernment();
             cmeProgress.Value += 5;
 
 
